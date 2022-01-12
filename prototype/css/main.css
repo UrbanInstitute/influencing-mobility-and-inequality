@@ -1,0 +1,30 @@
+#tmp{
+    position: absolute;
+    top: 100px;
+}
+#graphic{
+    position: absolute;
+    left: 180px;
+}
+
+
+body, svg{
+    font-family: "Lato";
+}
+.tick text{
+    font-size: 14px;
+    font-family: "Lato";
+}
+.x.axis .tick line{
+    opacity: 0;
+}
+.x.axis .tick text{
+    /*font-size: 14px;*/
+    font-weight: bold;
+}
+.dot{
+    pointer-events: none;
+}
+.arc{
+    pointer-events: none;
+}

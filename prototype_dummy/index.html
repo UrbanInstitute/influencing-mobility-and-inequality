@@ -1,0 +1,348 @@
+<html>
+<body>
+<div id = "chart"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script>
+
+var blue = "#1696d2"
+var white = "#fff"
+var yellow = "#fdbf11"
+var green = "#55b748"
+
+function getQueryString(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+var RACE, SEX;
+
+d3.csv("dummyData.csv")
+.then(function(allData){
+    RACE = getQueryString("race") == "" ? "all" : getQueryString("race")
+    SEX = getQueryString("sex") == "" ? "all" : getQueryString("sex")
+    data = allData.filter(function(d){
+        if(getQueryString("sex") != ""){
+            if(getQueryString("race") != ""){
+                return (d.race == getQueryString("race") && d.sex == getQueryString("sex"))
+            }else{
+                return d.sex == getQueryString("sex")
+            }
+
+        }else{
+            if(getQueryString("race") != ""){
+                return d.race == getQueryString("race")
+            }else{
+                return true
+            }
+        }
+        // d.sex =="male"
+    })
+    // console.log(data, allData)
+    d3.csv("means.csv")
+    .then(function(means){ 
+    drawGraphic(data, allData, means)
+    })
+
+})
+var before, after;
+
+
+
+function drawGraphic(data, allData, means){
+    console.log(means)
+    before = d3.group(data, d => d.binBefore)
+    after = d3.group(data, d => d.binAfter)
+
+
+ba = d3.group(allData, d => d.binBefore)
+aa = d3.group(allData, d => d.binAfter)
+    // console.log(after.size)
+
+var fMaxA;
+bMaxA = d3.max(d3.map(ba, function(d){ return d[1].length}))
+aMaxA = d3.max(d3.map(aa, function(d){ return d[1].length}))
+fMaxA = d3.max([bMaxA, aMaxA])
+
+console.log(ba, bMaxA)
+
+
+var fMax;
+bMax = d3.max(d3.map(before, function(d){ return d[1].length}))
+aMax = d3.max(d3.map(after, function(d){ return d[1].length}))
+fMax = d3.max([bMax, aMax])
+
+console.log(fMaxA, fMax)
+
+var margin = {top: 20, right: 160, bottom: 35, left: 30};
+
+var width = window.innerWidth - margin.left - margin.right,
+    height = window.innerHeight - margin.top - margin.bottom;
+
+var R = height/(2*fMax)
+// var R = 10
+
+
+var svg = d3.select("#chart")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// console.log(before, after)
+
+
+// Set x, y and colors
+var x = d3.scaleLinear()
+  .domain([0,aa.size])
+  .range([0,width])
+  // .rangeRoundBands([10, width-10], 0.02);
+
+var y = d3.scaleLinear()
+  .domain([0, fMaxA])
+  .range([height, 0]);
+
+// var colors = ["b33040", "#d25c4d", "#f2b447", "#d9d574"];
+
+
+// Define and draw axes
+var yAxis = d3.axisLeft()
+  .scale(y)
+
+
+var xAxis = d3.axisBottom()
+  .scale(x)
+
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis);
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+
+// Create groups for each series, rects for each segment 
+var groups = svg.selectAll("g.bin")
+  .data(before)
+  .enter().append("g")
+  .attr("class", "bin")
+  .attr("transform", d => "translate(" + x(d[0]) + ",0)" )
+
+// console.log(groups.nodes())
+
+
+
+
+
+var dots = groups.selectAll(".dot")
+    .data(d => d[1])
+    .enter()
+    .append("circle")
+    .attr("class", "dot")
+    .attr("class",function(d){
+        return "dot " + d.race + " " + d.sex
+    })
+    .attr("r", R)
+    .attr("cy", (d,i) => (height-i*2*R))
+    .attr("fill", function(d){
+        console.log(d)
+        if(d.sex == "female") return white
+        else{
+            if(d.race == "white") return blue
+            if(d.race == "black") return yellow
+            if(d.race == "hispanic") return green
+        }
+    })
+    .attr("stroke", function(d){
+
+            if(d.race == "white") return blue
+            if(d.race == "black") return yellow
+            if(d.race == "hispanic") return green
+        
+    })
+
+
+
+// Create groups for each series, rects for each segment 
+var groupsA = svg.selectAll("g.bin.after")
+  .data(after)
+  .enter().append("g")
+  .attr("class", "bin")
+  .attr("transform", d => "translate(" + (x(d[0])) + ",0)" )
+
+// console.log(groups.nodes())
+
+
+var dotsA = groupsA.selectAll(".dotA")
+    .data(d => d[1])
+    .enter()
+    .append("circle")
+    .attr("class",function(d){
+        return "dotA " + d.race + " " + d.sex
+    })
+    .attr("r", R)
+    .attr("cy", (d,i) => (height-i*2*R))
+    .attr("fill", function(d){
+        console.log(d)
+        if(d.sex == "female") return white
+        else{
+            if(d.race == "white") return blue
+            if(d.race == "black") return yellow
+            if(d.race == "hispanic") return green
+        }
+    })
+    .attr("stroke", function(d){
+
+            if(d.race == "white") return blue
+            if(d.race == "black") return yellow
+            if(d.race == "hispanic") return green
+        
+    })
+    .style("opacity",0)
+
+
+
+var linesBefore = svg.selectAll(".meanLine.before")
+    .data(means.filter(d=> d.int == "before"))
+    .enter()
+    .append("line")
+    .attr("class",function(d){
+        return "meanLine before " + d.race + " " + d.sex
+    })
+    .attr("x1", d => x(+d.bin))
+    .attr("x2", d => x(+d.bin))
+    .attr("y1", 0)
+    .attr("y2", height)
+    .style("stroke", function(d){
+        return (d.race == RACE && d.sex == SEX) ? "black" : "none"
+    })
+
+
+var linesAfter = svg.selectAll(".meanLine.after")
+    .data(means.filter(d=> d.int == "after"))
+    .enter()
+    .append("line")
+    .attr("class",function(d){
+        return "meanLine after " + d.race + " " + d.sex
+    })
+    .attr("x1", d => x(+d.bin))
+    .attr("x2", d => x(+d.bin))
+    .attr("y1", 0)
+    .attr("y2", height)
+    .style("stroke", function(d){
+        return (d.race == RACE && d.sex == SEX) ? "red" : "none"
+    })
+
+
+
+
+
+// d3.select("body")
+// .on("click", function(){
+    // d3.selectAll(".dot")
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",0)
+    // d3.selectAll(".dotA")
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+
+
+function loop() {
+    var count = 0;
+     
+    setInterval(function() {
+        if(count%2 == 0){
+            d3.selectAll(".dot")
+            // .transition()
+            // .duration(1000)
+            .style("opacity",0)
+            d3.selectAll(".dotA")
+            // .transition()
+            // .duration(1000)
+            .style("opacity",1)
+        }else{
+          d3.selectAll(".dot")
+            // .transition()
+            // .duration(1000)
+            .style("opacity",1)
+            d3.selectAll(".dotA")
+            // .transition()
+            // .duration(1000)
+            .style("opacity",0)  
+        }
+
+        count += 1;
+
+    }, 2500);
+
+}
+
+if(getQueryString("loop") != ""){
+    loop();
+}
+
+d3.select("body")
+.on("click", function(){
+    groups.selectAll(".dot.black")
+        .transition()
+        .duration(2000)
+        .delay(function(d,i){
+            return i*20
+        })
+        .attr("cy", function(d,i){
+            console.log(i)
+            // .attr("cy", (d,i) => (height-i*2*R))
+            return height-i*2*R
+        })
+
+    groups.selectAll(".dot:not(.black)")
+        .transition()
+        .duration(1000)
+        .style("opacity",0)
+
+})
+
+
+
+// })
+
+
+// var rect = groups.selectAll("rect")
+//   .data(function(d) { return d; })
+//   .enter()
+//   .append("rect")
+//   .attr("x", function(d) { return x(d.x); })
+//   .attr("y", function(d) { return y(d.y0 + d.y); })
+//   .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+//   .attr("width", x.rangeBand())
+//   .on("mouseover", function() { tooltip.style("display", null); })
+//   .on("mouseout", function() { tooltip.style("display", "none"); })
+//   .on("mousemove", function(d) {
+//     var xPosition = d3.mouse(this)[0] - 15;
+//     var yPosition = d3.mouse(this)[1] - 25;
+//     tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+//     tooltip.select("text").text(d.y);
+//   });
+
+
+}
+
+function buildHist(){
+
+
+
+
+
+
+}
+
+</script>
+</body>
+</html>

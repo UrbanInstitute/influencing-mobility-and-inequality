@@ -1,0 +1,15 @@
+int,race,sex,bin
+before,all,all,21
+after,all,all,26
+before,white,male,35
+after,white,male,41
+before,black,male,6
+after,black,male,9
+before,hispanic,male,22
+after,hispanic,male,27
+before,white,female,19
+after,white,female,22
+before,black,female,17
+after,black,female,20
+before,hispanic,female,12
+after,hispanic,female,16
