@@ -3,7 +3,7 @@ import math
 import pprint
 
 binWidth = 50000
-upperBound = 1000000
+upperBound = 2000000
 lowerBound = binWidth
 
 cr = csv.reader(open("data/source/source_kb.csv"))
