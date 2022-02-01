@@ -1,9 +1,9 @@
 function initHistogram(){
 ///////////////////////////////////////////////////
 const BIN_WIDTH = 50000;
-const UPPER_BOUND = 2000000;
+const UPPER_BOUND = 1000000;
 
-const DOT_R = 1;
+const DOT_R = 2;
 const DOT_PAD = .1;
 const MAX_DOTS_IN_GROUP = 80;
 const TOTAL_DOTS = 1501;
@@ -35,7 +35,7 @@ function getChartWidth(){
 
 }
 function getChartHeight(){
-    return window.innerHeight;
+    return 800;
 }
 function getChartMargins(){
     return {"top" : 20, "bottom" : 80, "left": 100, "right" : 0}
@@ -205,7 +205,7 @@ function buildScales(data){
         .domain([maxBin, 1])
 
     xAxis = d3.axisBottom(z).tickSizeOuter(0).tickSizeInner(6);
-    yAxis = d3.axisLeft(y).ticks(h / 20)
+    yAxis = d3.axisLeft(y).ticks(2 + h / 40)
     .tickSizeInner(-w)
     .tickFormat(function(d){
         // return d
