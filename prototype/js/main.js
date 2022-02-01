@@ -1,10 +1,10 @@
 function initHistogram(){
 ///////////////////////////////////////////////////
-const BIN_WIDTH = 100000;
+const BIN_WIDTH = 50000;
 const UPPER_BOUND = 2000000;
 
-const DOT_R = 2;
-const DOT_PAD = 1;
+const DOT_R = 1;
+const DOT_PAD = .1;
 const MAX_DOTS_IN_GROUP = 80;
 const TOTAL_DOTS = 1501;
 const DOT_COLS = 5;
@@ -74,7 +74,7 @@ function showIntervention(topic, data){
             // console.log(i)
             // if(d.earnings != d[topic]) delayI += 1;
             // console.log(delayI)
-            return (d.earnings == d[topic]) ? LONG_DURATION  : QUICK_DURATION 
+            return (d.earnings == d[topic]) ? LONG_DURATION*2  : QUICK_DURATION 
         })
         .duration(function(d){
             return (d.earnings == d[topic]) ? 2*QUICK_DURATION : LONG_DURATION
@@ -205,7 +205,7 @@ function buildScales(data){
         .domain([maxBin, 1])
 
     xAxis = d3.axisBottom(z).tickSizeOuter(0).tickSizeInner(6);
-    yAxis = d3.axisLeft(y).ticks(h / 40)
+    yAxis = d3.axisLeft(y).ticks(h / 20)
     .tickSizeInner(-w)
     .tickFormat(function(d){
         // return d
@@ -290,6 +290,7 @@ function highlightBin(d, a, b){
 function mouseoutBin(){
     d3.selectAll(".dot").style("opacity",1)
     d3.selectAll(".arc").style("opacity",1)
+    d3.selectAll(".tick text").style("opacity",1)
 }
 
 function getDotPos(topic, datum, data){

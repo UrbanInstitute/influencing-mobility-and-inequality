@@ -2,7 +2,7 @@ import csv
 import math
 import pprint
 
-binWidth = 100000
+binWidth = 50000
 upperBound = 2000000
 lowerBound = binWidth
 

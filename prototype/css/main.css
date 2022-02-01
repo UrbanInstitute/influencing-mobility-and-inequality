@@ -18,6 +18,9 @@ body, svg{
 .x.axis .tick line{
     opacity: 0;
 }
+.y.axis .tick text{
+    pointer-events: none;
+}
 .x.axis .tick text{
     /*font-size: 14px;*/
     font-weight: bold;
