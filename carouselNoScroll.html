@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    *{
+      /*opacity: 0;*/
+    }
+    #selectScenarioContainer{
+      /*opacity: 1 !important;*/
+    }
+#selectScenarioLeft{
+  animation: none !important;
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}
+
+#selectScenarioRight{
+  animation: none !important;
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}
+  </style>
+<meta charset="utf-8"/>
+  <title>How to Change a Life</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0, minimum-scale=1">
+
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/urban.css"/>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900,900italic" rel="stylesheet" type="text/css">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@urbaninstitute">
+  <meta name="twitter:creator" content="@urbaninstitute">
+  <meta name="twitter:title" content="How Segregated Are Schools in Your District?">
+  <meta name="twitter:description" content="Some segregation measures look only at a school's racial composition and not at how it compares with its district. Learn more about a better measure.">
+  <meta name="twitter:image" content="https://apps.urban.org/features/school-segregation-index/images/social.jpg">
+  <meta property="og:title" content="How Segregated Are Schools in Your District?" />
+  <meta property="og:description" content="Some segregation measures look only at a school's racial composition and not at how it compares with its district. Learn more about a better measure." />
+  <meta property="og:image" content="https://apps.urban.org/features/school-segregation-index/images/social.jpg" />
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:url" content="https://urbn.is/2zUJjCf">
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "headline": "How Segregated Are Schools in Your District?",
+  "url": "https://apps.urban.org/features/school-segregation-index",
+  "thumbnailUrl": "https://apps.urban.org/features/school-segregation-index/images/social.jpg",
+  "dateCreated": "2020-06-20T04:00:00.000Z",
+  "articleSection": "Interactive Feature",
+  "creator": ["Tomas Monarrez","Carina Chien","David Hinson","Brian Kisida","JoElla Carman","Emily Peiffer","Matthew Chingos","Ben Chartoff"],
+  "keywords": ["Education and Training"]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MKBD2W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MKBD2W');</script>
+<!-- End Google Tag Manager -->
+
+<div id = "isMobile"></div>
+<div id = "isPhone"></div>
+<div id = "isShort"></div>
+<div id = "sectionIndex" data-index="0"></div>
+<div id = "activeDistrict"></div>
+<div id = "activeLevel"></div>
+<div id = "activeSchool"></div>
+<div id = "stickySchool"></div>
+<div id = "introDataContainer"></div>
+<div id = "exploreDataContainer"></div>
+<div id = "twoDotDataContainer"></div>
+
+
+
+
+
+
+
+<div class="container">
+  <div id='graphic'>
+
+    <div id = "selectScenarioContainer">
+      <div id = "selectScenarioLeft">
+        <div class = "scenarioCardContainer race">
+          <div class = "scenarioSelectButton race">Structural Racism</div>
+        </div>
+        <div class = "scenarioCardContainer justice">
+          <div class = "scenarioSelectButton justice">Criminal Justice</div>
+        </div>
+        <div class = "scenarioCardContainer job_quality">
+          <div class = "scenarioSelectButton job_quality">Job Quality</div>
+        </div>
+        <div class = "scenarioCardContainer comm">
+          <div class = "scenarioSelectButton comm">Integrated Student Supports</div>
+        </div>
+        <div class = "scenarioCardContainer race">
+          <div class = "scenarioSelectButton race">Structural Racism</div>
+        </div>
+        <div class = "scenarioCardContainer justice">
+          <div class = "scenarioSelectButton justice">Criminal Justice</div>
+        </div>
+        <div class = "scenarioCardContainer job_quality">
+          <div class = "scenarioSelectButton job_quality">Job Quality</div>
+        </div>
+        <div class = "scenarioCardContainer comm">
+          <div class = "scenarioSelectButton comm">Integrated Student Supports</div>
+        </div>
+      </div>
+      <div id = "selectScenarioRight">
+        <div class = "scenarioCardContainer hs">
+          <div class = "scenarioSelectButton hs">High School Diploma</div>
+        </div>
+        <div class = "scenarioCardContainer aa">
+          <div class = "scenarioSelectButton aa">Associate’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer ba">
+          <div class = "scenarioSelectButton ba">Bachelor’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer job_training">
+          <div class = "scenarioSelectButton comm">Job Training</div>
+        </div>
+        <div class = "scenarioCardContainer hs">
+          <div class = "scenarioSelectButton hs">High School Diploma</div>
+        </div>
+        <div class = "scenarioCardContainer aa">
+          <div class = "scenarioSelectButton aa">Associate’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer ba">
+          <div class = "scenarioSelectButton ba">Bachelor’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer job_training">
+          <div class = "scenarioSelectButton comm">Job Training</div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="endText loadHide">
+
+</div>
+
+</div>
+
+
+   
+<script src="lib/es6-promise.min.js"></script>
+<script src="lib/es6-promise.auto.min.js"></script>
+<script src="lib/fetch.min.js"></script>
+
+<script src="lib/d3-dispatch.v1.min.js"></script>
+<script src="lib/jquery-2.2.1.min.js"></script>
+<script src="lib/jquery-ui.1.12.1.min.js"></script>
+<script src="lib/mapbox-gl.1.7.0.js"></script>
+<script src="lib/d3.5.15.0.min.js"></script>
+<script src="lib/d3-voronoi.min.js"></script>
+<script src="https://unpkg.com/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
+<!-- <script src="js/globals.js"></script>
+<script src="js/getters.js"></script>
+<script src="js/events.js"></script>
+<script src="js/scroller.js"></script>
+<script src="js/sections.js"></script> -->
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () { 
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m) 
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+    ga('create', 'UA-57529944-1', 'auto'); 
+    ga('send', 'pageview');
+</script>
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <span id="parsely-cfg" data-parsely-site="urban.org"></span>
+</div>
+<script>
+    (function(s, p, d) {
+      var h=d.location.protocol, i=p+"-"+s,
+          e=d.getElementById(i), r=d.getElementById(p+"-root"),
+          u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+          :"static."+p+".com";
+      if (e) return;
+      e = d.createElement(s); e.id = i; e.async = true;
+      e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+    })("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
+
+
+</body>
+</html>

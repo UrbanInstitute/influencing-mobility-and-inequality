@@ -154,7 +154,7 @@ body{
 
 #selectScenarioLeft {
   animation: carouselUp 20s linear infinite;
-  width: 300px);
+  width: 300px;
   display: inline-block;
 }
 #selectScenarioLeft:hover{
@@ -165,7 +165,7 @@ body{
 }
 #selectScenarioRight {
   animation: carouselDown 20s linear infinite;
-  width: 300px);
+  width: 300px;
   display: inline-block;
   margin-left: 50px;
 }
