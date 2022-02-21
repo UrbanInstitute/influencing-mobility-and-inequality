@@ -1,0 +1,683 @@
+body{
+  font-family: "Lato";
+}
+
+
+
+
+
+
+/****************************************************/
+/***********  HEADER IMAGE AND TEXT    **************/
+/****************************************************/
+#headerGif{
+    width: 400px;
+    margin: 0 auto;
+    display: block;
+    margin-top: calc(50vh - 310px);
+}
+#headerTitle{
+  width: 960px;
+  margin: 0 auto;
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+#headerSub{
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    margin: 0 auto;
+    width: 370px;
+    text-align: center;
+    margin-top: 14px;
+}
+#headerDate{
+  color: white;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 20px;
+}
+#downArrowContainer{
+    position: absolute;
+    bottom: 59px;
+    animation: bob 5s infinite;
+    left: calc(50% - 36px);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14px;
+    /* z-index: 100; */
+    color: black;
+    font-weight: 400;
+}
+#socialContainer{
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 21px;
+}
+.socialShare{
+    width: 24px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+#social-email{
+  margin-right: 0px;
+}
+#downArrowContainer img{
+    height: 142px;
+    left: 34px;
+    position: relative;
+}
+#downArrowContainer div{
+  margin-top: 10px;
+}
+@keyframes bob {
+  0% {
+    bottom: 59px;
+  }
+  50% {
+    bottom: 39px;
+  }
+  100%{
+    bottom: 59px;
+  }
+}
+
+
+
+
+
+/****************************************************/
+/**************  INTRO SLIDES    ********************/
+/****************************************************/
+
+/************* PERSON AND PATHS *************/
+#person{
+    width: 439px;
+    position: absolute;
+    z-index: -1;
+    top: 100px;
+}
+.pathImg{
+  position: absolute;
+  z-index: -1;
+  top: 212px;
+  width: 700px;
+  opacity: 0;
+  left: -99px;
+}
+
+/************* FULL WIDTH TEXT **************/
+
+.step.giantStep{
+    opacity: 1;
+    width: 982px;
+    font-size: 48px;
+    color: #696969;
+    line-height: 60px !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+/****************************************************/
+/********** SELECT A SCENARIO SCREEN ****************/
+/****************************************************/
+#selectScenarioContainer{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 9999999999;
+}
+.scenarioCardContainer{
+  width: 300px;
+  border-bottom: 9px solid #fdbf11;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 35px;
+}
+@keyframes carouselUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(calc(-285px*4))}
+}
+@keyframes carouselDown {
+  100% { transform: translateY(0); }
+  0% { transform: translateY(calc(-285px*4))}
+}
+
+#selectScenarioLeft {
+  animation: carouselUp 20s linear infinite;
+  width: 300px);
+  display: inline-block;
+}
+#selectScenarioLeft:hover{
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}
+#selectScenarioRight {
+  animation: carouselDown 20s linear infinite;
+  width: 300px);
+  display: inline-block;
+  margin-left: 50px;
+}
+#selectScenarioRight:hover{
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}
+
+.scenarioCardContainer.race{
+  height: 250px;
+  background-image: url('../images/scenarios/race.jpg')
+}
+.scenarioCardContainer.race:hover{
+  background-image: url('../images/scenarios/rollovers/race_hover.jpg')
+}
+.scenarioCardContainer.justice{
+  height: 250px;
+  background-image: url('../images/scenarios/justice.jpg')
+}
+.scenarioCardContainer.justice:hover{
+  background-image: url('../images/scenarios/rollovers/justice_hover.jpg')
+}
+.scenarioCardContainer.job_quality{
+  height: 250px;
+  background-image: url('../images/scenarios/job_quality.jpg')
+}
+.scenarioCardContainer.job_quality:hover{
+  background-image: url('../images/scenarios/rollovers/job_quality_hover.jpg')
+}
+.scenarioCardContainer.comm{
+  height: 250px;
+  background-image: url('../images/scenarios/comm.jpg')
+}
+.scenarioCardContainer.comm:hover{
+  background-image: url('../images/scenarios/rollovers/comm_hover.jpg')
+}
+.scenarioCardContainer.aa{
+  height: 250px;
+  background-image: url('../images/scenarios/aa.jpg')
+}
+.scenarioCardContainer.aa:hover{
+  background-image: url('../images/scenarios/rollovers/aa_hover.jpg')
+}
+.scenarioCardContainer.ba{
+  height: 250px;
+  background-image: url('../images/scenarios/ba.jpg')
+}
+.scenarioCardContainer.ba:hover{
+  background-image: url('../images/scenarios/rollovers/ba_hover.jpg')
+}
+.scenarioCardContainer.hs{
+  height: 250px;
+  background-image: url('../images/scenarios/hs.jpg')
+}
+.scenarioCardContainer.hs:hover{
+  background-image: url('../images/scenarios/rollovers/hs_hover.jpg')
+}
+.scenarioCardContainer.job_training{
+  height: 250px;
+  background-image: url('../images/scenarios/job_training.jpg')
+}
+.scenarioCardContainer.job_training:hover{
+  background-image: url('../images/scenarios/rollovers/job_training_hover.jpg')
+}
+.scenarioSelectButton{
+  background: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  width: fit-content;
+  border: 2px solid black;
+  position: absolute;
+  bottom: 32px;
+  right: 13px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+.container {
+  width: 1180px;
+  margin: 0 auto;
+  /* makes up for negative margin at top and removal of 80px padding*/
+  padding-bottom: 60px;
+}
+#topTitle{
+  border-bottom: 1px solid #d2d2d2;
+  font-size: 40px;
+  font-weight: bold;
+  /*margin-top: 100px;*/
+  padding-bottom: 55px;
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#topText, #bottomContent, .endText {
+  margin-top: 180px;
+  /*background: #fff;*/
+  color:#353535;
+  margin-bottom: 60px;
+  padding: 0px 110px 40px 110px;
+  position: relative;
+  font-size: 19px;
+  font-weight:400;
+  z-index: 1000;
+}
+#loadingGif{
+  margin-top: 40px;
+}
+#loadingGif img{
+  margin: 0 auto;
+  display: block;
+  width: 60px;
+}
+#loadingText{
+  display: block;
+  margin: 0 auto;
+  width: 47px;
+  font-style: italic;
+  color: #696969;
+  margin-top: 16px;
+  font-size: 14px;
+}
+.endText {
+  margin: 0 auto;
+  padding: 80px 80px 230px 80px;
+  width: 1180px;
+}
+
+/*.endText:after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 25%;
+  left: 37.5%;
+  bottom: 130px;
+  border-bottom: 1px solid #d2d2d2;
+}*/
+
+#bottomTitle{
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+#bottomContent{
+  width: 1150px;
+    margin: 0 auto;
+    padding: 0px;
+    padding-top: 30px;
+    border-top: 1px solid #d2d2d2;
+}
+#topHR{
+  width: 130px;
+  height: 6px;
+  background-color: #1696d2;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+
+p{
+  line-height:1.6;
+  margin-bottom:15px !important;
+}
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  top: 0px;
+  z-index: 90;
+  padding-bottom: 20px;
+  pointer-events: auto;
+  margin-left: 40px;
+}
+.dummy.step{
+  min-height: 10px;
+  height: 10px;
+}
+.step {
+  margin-bottom: 10vh;
+  min-height: 80vh;
+  font-family: "Lato";
+  font-size: 18px;
+  line-height: 23px;
+  color: #000;
+}
+.giantStep{
+  margin-bottom: 30vh;
+}
+.smallStep{
+  /*margin-bottom: 400px;*/
+}
+.title{
+  font-size:18px;
+   margin-top:40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.subtitle{
+  margin-top: -8px;
+  font-size: 17px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+#extra-space {
+  height: 0px;
+}
+
+#narrativeVizContainer {
+  display: inline-block;
+  z-index: 1;
+  margin-left: 0;
+  position: relative;
+  /*top: 730px;*/
+  float: right;
+}
+#narrativeVizContainer svg{
+  cursor: pointer;
+}
+#narrativeVizContainer svg.nonInteractive{
+  cursor: auto;
+}
+#narrativeVizContainer.posFixed{
+  position: fixed;
+  top: 20px;
+  /*want more space between words and chart, but i think changing this made your chart jump-sorry*/
+  padding-left: 60px;
+}
+#narrativeVizContainer.posRelTop{
+  position: absolute;
+  float: right;
+  padding-left: 60px;
+    top: calc(100vh - 140px) !important;
+    /*left: -29px !important;*/
+}
+
+#narrativeVizContainer.posRelBottom{
+  position: relative;
+  float: inherit;
+  padding-left: 0px;
+  bottom: -511px;
+  left: 6px !important;
+}
+#narrativeVizContainer.posRelBottomSingleCol{
+  position: absolute;
+  float: inherit;
+  padding-left: 10px;
+}
+#narrativeVizContainer.posRelTopSingleCol{
+   position: absolute;
+  float: inherit;
+  padding-left: 10px;
+}
+
+
+
+footer{
+  display: block;
+    float: left;
+    width: 100%;
+}
+footer p{
+  clear: both;
+}
+.footerButton{
+  margin-bottom: 30px;
+}
+.readResearchButton{
+  margin-right: 10px;
+}
+
+
+.explore.medianTextG{
+  display: none;
+}
+
+
+
+/********header (below urban menu)**********/
+#header-pinned{
+  height: calc(100% - 160px)
+}
+
+.headerimage{
+  /*position: relative;*/
+  overflow: hidden;
+  width: 100%;
+  background: #062635;
+  height: 100%;
+  z-index:9999999999999;
+
+}
+
+.headerwrapper{
+  /*padding-top:120px;*/
+  height: calc(100% - 160px);
+}
+
+
+
+.div-title-block
+{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width:90%;
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.4em;
+  font-size: 2.3em;
+  margin: auto;
+}
+
+
+
+@media (max-width: 2000px) {
+
+}
+@media (max-width: 1200px){
+  .container{
+    margin-left: 10px;
+  }
+  #narrativeSchoolSelectorContainer{
+    width: 100%;
+  }
+}
+@media (max-height: 665px), (max-width: 1170px){
+  .container{
+    margin-left: auto;
+    width: 100%;
+  }
+  #isMobile{
+    display: block;
+  }
+  #topText, #bottomContent, .endText{
+    font-size: 18px;
+  }
+#extra-space {
+  height: 680px;
+  z-index: -1;
+}
+  #sections{
+    display: inherit;
+    width: 400px;
+    margin: 0 auto;
+  }
+  .step {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: rgb(136, 136, 136) 4px 4px 16px;
+    padding: 30px;
+    z-index: 99;
+    min-height: 100px;
+    margin-bottom: 800px;
+  }
+  .lastStep, .firstStep{
+    opacity: 0 !important;
+  }
+  #bottomContent, #exploreBarContentWrapper {
+    width: calc(100% - 40px) !important;
+    padding: 20px !important;
+  }
+  .step.lastStep{
+    margin-bottom: 0px;
+  }
+
+  #narrativeVizContainer{
+    /*position: fixed;*/
+    /*top: 20px;*/
+  }
+
+  #narrativeVizContainer.posFixed{
+    padding-left: 20px;
+  }
+
+
+}
+
+@media (max-width: 991px) {
+
+   /*.headerwrapper{padding-top:125px;}*/
+
+}
+
+@media(max-width: 975px){
+
+}
+
+
+@media (max-width: 930px){
+/*  .headerimage {
+    height: 350px !important;
+  }
+*/
+  #topText, #bottomContent{
+    /*margin-top: -60px;*/
+  }
+}
+
+@media (max-height: 880px){
+  #isShort{
+    display: block;
+  }
+  #narrativeVizContainer.posRelBottom{
+    bottom: -511px;
+    left: 6px !important;
+  }
+
+
+/*  .scatterButton{
+    bottom: 80px;
+  }*/
+}
+
+
+@media  (max-width: 768px){
+  #isPhone{
+    display: block;
+  }
+  #mobileButtonContainer{
+    /*display: none;*/
+    bottom: -10px;
+    left: 0px;
+  }
+
+  #narrativeVizContainer.posFixed{
+    left: 0px !important;
+  }
+  #narrativeChooseSchoolContainer{
+    display: none !important;
+  }
+  #topText{
+    padding: 0px;
+  }
+
+.endText{
+    padding-top: 0px;
+    margin-top: -1330px;
+}
+#extra-space{
+  height: 0px;
+}
+
+
+}
+
+
+@media (max-width: 768px){
+  .step {
+    margin-bottom: 1200px;
+  }
+  #topTitle {
+    font-size: 24px;
+  }
+  .endText{
+    /*padding: 10px;*/
+    margin-top: -710px;
+  }
+}
+
+@media (max-width: 500px){
+
+  #topText, #bottomContent, .endText{
+    margin-top: 0px;
+    padding: 0px;
+  }
+  #sections{
+    width: 300px;
+    /*left: -20px;*/
+  }
+}
+
+@media (max-width: 600px){
+  #topTitle { padding-bottom: 20px; }
+}
+@media (max-width: 600px) {
+   .div-title-block {
+    font-size: 1.6em !important;
+   }
+}
+@media  (max-width: 480px) {
+  .full-width-col { font-size:18px;}
+   .container {margin-bottom: 40px; padding:0px 4px;}
+   /*.headerwrapper{padding-top:80px;}*/
+   h1 { font-size:24px;}
+
+}
+
+@media (max-width: 350px){
+  #sections{
+    /*width: 300px;*/
+    left: -20px;
+    /*pointer-events: none;*/
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

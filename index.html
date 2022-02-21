@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+  <title>How to Change a Life</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0, minimum-scale=1">
+
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/urban.css"/>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900,900italic" rel="stylesheet" type="text/css">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@urbaninstitute">
+  <meta name="twitter:creator" content="@urbaninstitute">
+  <meta name="twitter:title" content="How Segregated Are Schools in Your District?">
+  <meta name="twitter:description" content="Some segregation measures look only at a school's racial composition and not at how it compares with its district. Learn more about a better measure.">
+  <meta name="twitter:image" content="https://apps.urban.org/features/school-segregation-index/images/social.jpg">
+  <meta property="og:title" content="How Segregated Are Schools in Your District?" />
+  <meta property="og:description" content="Some segregation measures look only at a school's racial composition and not at how it compares with its district. Learn more about a better measure." />
+  <meta property="og:image" content="https://apps.urban.org/features/school-segregation-index/images/social.jpg" />
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:url" content="https://urbn.is/2zUJjCf">
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "headline": "How Segregated Are Schools in Your District?",
+  "url": "https://apps.urban.org/features/school-segregation-index",
+  "thumbnailUrl": "https://apps.urban.org/features/school-segregation-index/images/social.jpg",
+  "dateCreated": "2020-06-20T04:00:00.000Z",
+  "articleSection": "Interactive Feature",
+  "creator": ["Tomas Monarrez","Carina Chien","David Hinson","Brian Kisida","JoElla Carman","Emily Peiffer","Matthew Chingos","Ben Chartoff"],
+  "keywords": ["Education and Training"]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MKBD2W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MKBD2W');</script>
+<!-- End Google Tag Manager -->
+
+<div id = "isMobile"></div>
+<div id = "isPhone"></div>
+<div id = "isShort"></div>
+<div id = "sectionIndex" data-index="0"></div>
+<div id = "activeDistrict"></div>
+<div id = "activeLevel"></div>
+<div id = "activeSchool"></div>
+<div id = "stickySchool"></div>
+<div id = "introDataContainer"></div>
+<div id = "exploreDataContainer"></div>
+<div id = "twoDotDataContainer"></div>
+
+
+
+<!-- START HEADER -->
+<div id="header-pinned" class="no-touch">
+
+<div class="headerimage">
+  <div class="wrapper headerwrapper">
+    <img id = "headerGif" src = "images/header.gif">
+    <div id = "headerTitle">How to Change a Life</div>
+    <div id = "headerSub">Exploring how barriers and social interventions influence mobility and inequality</div>
+    <div id = "headerDate">March XX, 2022</div>
+    <div id = "socialContainer">
+      <a><img class = "socialShare" id = "social-twitter" src = "images/twitter.png"></a>
+      <a><img class = "socialShare" id = "social-fb" src = "images/fb.png"></a>
+      <a><img class = "socialShare" id = "social-reddit" src = "images/reddit.png"></a>
+      <a><img class = "socialShare" id = "social-email" src = "images/email.png"></a>
+    </div>
+    <div id = "downArrowContainer">
+      <img src = "images/downArrow.png">
+      <div>Scroll to start</div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- END HEADER -->
+
+
+
+<div class="container">
+  <div id='graphic'>
+    <div id = "topText">
+      </div>
+
+    <div id="sections" class="loadHide">
+      <section class="step">
+        <p>
+        Across a lifetime, we encounter crossroads moments that affect the trajectory of our lives. 
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        Whether we continue our education or whether we take one job over another—these can be critical moments that set us on an upward or downward path of economic mobility.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        The options available to people at these crossroads moments and the decisions they make—or that are made for them—are influenced by many things, such as where they live, how much money they have, and what structural barriers they face.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        But what if interventions at these crossroads moments could make a difference early on? What if those differences could change a person’s path?
+        </p>
+      </section>
+      <section class="step giantStep">
+        <p>
+        What if those interventions reached hundreds of thousands of people?
+        </p>
+      </section>
+      <section class="step">
+
+        <p>
+        We aimed to answer those questions with the Social Genome Model, a microsimulation tool that can project how changes in adolescence and early adulthood can influence well-being later in life.
+        </p>
+      </section>
+      <section class="step">
+        <p>
+        We used this model to explore multiple scenarios to see how different early experiences and circumstances might affect lifetime earnings and income disparities between Black, Hispanic, and White people. (We do not have enough data to estimate changes for other races and ethnicities.)
+        </p>
+      </section>
+      <section class = "step">
+        We looked at the effects overall and, for most scenarios, the effects on people whose crossroads moments would be meaningfully altered, setting them on a radically different path. 
+      </section>
+      <section class = "pickScenario step">
+        <h2>What if&hellip;</h2>
+        <p>What would happen if we could undo the damage of structural racism, reform the criminal justice system, or ensure everyone had good jobs?</p>
+        <p>What if more people could attend high-quality schools, earn degrees, or get job training?</p>
+        <p>We explored what those changes might mean for economic mobility and inequality.</p>
+        <select id = "pickTopic">
+          <option selected disabled>PICK A TOPIC TO DIVE IN</option>
+          <option value = "race">Structural Racism</option>
+          <option value = "justice">Criminal Justice</option>
+          <option value = "job_quality">Job Quality</option>
+          <option value = "comm">Integrated Student Supports</option>
+          <option value = "hs">High School Diploma</option>
+          <option value = "aa">Associate’s Degree</option>
+          <option value = "ba">Bachelor’s Degree</option>
+          <option value = "job_training">Job Training</option>
+        </select>
+      <div id = "orRead">Or <a>read the full report</a></div>
+      </section>
+      <section class="step lastStep">
+      </section>
+
+<!--       <section class="step lastStep">
+        <p>
+
+        </p>
+      </section> -->
+      <!-- <div id = "extra-space"></div> -->
+    </div>
+    <div id = "selectScenarioContainer">
+      <div id = "selectScenarioLeft">
+        <div class = "scenarioCardContainer race">
+          <div class = "scenarioSelectButton race">Structural Racism</div>
+        </div>
+        <div class = "scenarioCardContainer justice">
+          <div class = "scenarioSelectButton justice">Criminal Justice</div>
+        </div>
+        <div class = "scenarioCardContainer job_quality">
+          <div class = "scenarioSelectButton job_quality">Job Quality</div>
+        </div>
+        <div class = "scenarioCardContainer comm">
+          <div class = "scenarioSelectButton comm">Integrated Student Supports</div>
+        </div>
+        <div class = "scenarioCardContainer race">
+          <div class = "scenarioSelectButton race">Structural Racism</div>
+        </div>
+        <div class = "scenarioCardContainer justice">
+          <div class = "scenarioSelectButton justice">Criminal Justice</div>
+        </div>
+        <div class = "scenarioCardContainer job_quality">
+          <div class = "scenarioSelectButton job_quality">Job Quality</div>
+        </div>
+        <div class = "scenarioCardContainer comm">
+          <div class = "scenarioSelectButton comm">Integrated Student Supports</div>
+        </div>
+      </div>
+      <div id = "selectScenarioRight">
+        <div class = "scenarioCardContainer hs">
+          <div class = "scenarioSelectButton hs">High School Diploma</div>
+        </div>
+        <div class = "scenarioCardContainer aa">
+          <div class = "scenarioSelectButton aa">Associate’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer ba">
+          <div class = "scenarioSelectButton ba">Bachelor’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer job_training">
+          <div class = "scenarioSelectButton comm">Job Training</div>
+        </div>
+        <div class = "scenarioCardContainer hs">
+          <div class = "scenarioSelectButton hs">High School Diploma</div>
+        </div>
+        <div class = "scenarioCardContainer aa">
+          <div class = "scenarioSelectButton aa">Associate’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer ba">
+          <div class = "scenarioSelectButton ba">Bachelor’s Degree</div>
+        </div>
+        <div class = "scenarioCardContainer job_training">
+          <div class = "scenarioSelectButton comm">Job Training</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="narrativeVizContainer" class = "loadHide">
+      <img id = "person" class = "stepPerson" src = "images/person.png">
+      <img class = "pathImg pathGrey stepPerson" src = "images/pathGrey.png">
+      <img class = "pathImg pathBlue stepPerson" src = "images/pathBlue.png">
+      <img class = "pathImg pathYellow stepPerson" src = "images/pathYellow.png">
+    </div>
+
+
+  </div>
+</div>
+
+<div class="endText loadHide">
+  <p>
+  Of course, neighborhoods are often severely racially segregated, which drives a large part of school segregation patterns. But <a href = "https://www.urban.org/features/segregated-neighborhoods-segregated-schools" target = "_blank">residential segregation doesn’t explain everything</a>. In many cases, the racial composition of students who attend schools in the area around a given school is vastly different from that school’s enrollment. Among the five schools within one mile of Tamarack (including Tamarack), 89 percent of middle school students are Black or Hispanic.
+  </p>
+  <p>
+  That difference shows that transportation isn’t the only barrier for integration efforts. School attendance boundaries, as well as other factors like tuition, entrance exams, school choice policies, and parent preferences also contribute to segregation.
+  </p>
+  <p>
+  To drive greater change, local policymakers concerned about segregation can use this improved measure to target desegregation efforts at schools where changes would have the biggest impact on the district, and to identify structural factors that may impede integration.
+  </p>
+</div>
+
+</div>
+
+
+    <footer>
+
+     <div class="content">
+
+
+                    <h4>About the Data</h4>
+                    <a href = "https://www.urban.org/research/publication/when-school-segregated-making-sense-segregation-65-years-after-brown-v-board-education" target = "_blank">
+                      <div class = "footerButton readResearchButton">Read the report</div>
+                    </a>
+                    <a href = "https://datacatalog.urban.org/dataset/index-school-contribution-racial-segregation-us-school-districts" target = "_blank">
+                      <div class = "footerButton readResearchButton">Download the data</div>
+                    </a>
+                    <p>
+                      Enrollment data by race or ethnicity for US schools comes from the National Center for Education Statistics’ 2017&ndash;18 Common Core of Data School Universe Survey and the Private School Survey. Common Core data report enrollment counts by grade, but the Private School Survey data do not. For private schools, we thus assume that the distribution of racial groups is equal across all grades in the school. Our analysis uses the same racial and ethnic terms as those in the Common Core of Data, including the term “Hispanic” to refer to Hispanic or Latinx students.
+                    </p>
+                    <p>
+                      We argue that desegregation efforts should focus where inequities in student achievement have been documented. Evidence shows that, on average, structural factors have led Black and Hispanic students to <a href = "https://nces.ed.gov/pubsearch/pubsinfo.asp?pubid=2019038" target = "_blank">persistently score lower on standardized examinations</a> than white and Asian students. Thus, we measure school segregation as the separation of Black and Hispanic students from white and Asian students (and the relatively small share of students from other racial or ethnic groups). Because of this choice, the SCI should not be used to determine whether schools that predominantly enroll students from other groups (e.g., American Indian or Alaska Native) are segregated.
+                    </p>
+                    <p>
+                      We recognize the limitations of grouping Black and Hispanic students together, as these students have different experiences in education systems. We also recognize the limitations of grouping white and Asian students together, as data aggregation for subpopulations of Asian students can obscure disparities among people from different ethnic groups. We include students from other groups (e.g., Native Hawaiian or Pacific Islander, American Indian or Alaska Native, and two or more races) with the white and Asian groups to simplify calculations, but we recognize the limitations of this choice as well.
+                    </p>
+                    <p>
+                      To focus only on districts that have enough schools and students to have a chance for integration, we don’t include districts that have fewer than two public schools serving the same grade, enroll fewer than 200 students, or are less than 5 percent Black or Hispanic. For our school-level designations, elementary school includes kindergarten through 5th grade, middle school includes grades 6–8, and high school includes grades 9&ndash;12.
+                    </p>
+                    <p>
+                      To group schools into districts, we use data on geographic school district boundaries from the 2017&ndash;18 release of the National Center for Education Statistics’ Education Demographic and Geographic Estimates. To find neighboring schools, we draw a one-mile radius around each school and define school neighborhood composition as the Black or Hispanic share of students attending schools serving the same grades within this radius, including the students in the school of interest. These neighboring schools can cross district boundaries but not state boundaries. For schools with no same-grade neighboring schools within one mile, our algorithm expands the search radius progressively by one mile until a neighboring school is found or 15 miles are reached with no neighbors, at which point we say the school has no neighbors. See <a href = "https://www.urban.org/research/publication/when-school-segregated-making-sense-segregation-65-years-after-brown-v-board-education" target = "_blank">our report</a> for more information about SCI at the neighborhood level.
+                    </p>
+                    <p>
+                    The SCI is defined within school systems, so comparisons across systems should account for differences in demographics, size, and other factors. The SCI value changes when considering different systems, which, in addition to districts (as described above), can be counties or metropolitan areas.
+                    </p>
+                    <p>
+                      This index does not demonstrate causal relationships and should not be used to assign blame to individual schools or types of schools. If one school significantly contributes to segregation, closing it or modifying its assignment system will not necessarily better integrate the system because those students might sort into other schools in ways that exacerbate segregation.
+                    </p>
+                    <h4>Project credits</h4>
+                    <div class="urbanstatement">This feature was funded by the Walton Family Foundation. We are grateful to them and to all our funders, who make it possible for Urban to advance its mission. The views expressed are those of the authors and should not be attributed to the Urban Institute, its trustees, or its funders. Funders do not determine research findings or the insights and recommendations of our experts. More information on our funding principles is available <a href = "https://www.urban.org/support" target = "_blank">here</a>. Read our terms of service <a href = "https://www.urban.org/terms-service" target = "_blank">here</a>.</div>
+
+                    <h3 class="job">Research</h3>
+                    <a href = "https://www.urban.org/author/tomas-monarrez" target = "_blank">Tomas Monarrez</a>, <a href = "https://truman.missouri.edu/truman-school/people/kisida" target = "_blank">Brian Kisida</a>, <a href = "https://www.urban.org/author/matthew-chingos" target = "_blank">Matthew Chingos</a>, and <a href = "https://www.urban.org/author/carina-chien" target = "_blank">Carina Chien</a>
+
+                    <h3 class="job">Design</h3>
+                    JoElla Carman
+
+                    <h3 class="job">Development</h3>
+                    Ben Chartoff
+
+                    <h3 class="job">Editing</h3>
+                    David Hinson
+
+                    <h3 class="job">Writing</h3>
+                    Emily Peiffer
+
+
+
+                    <div class="credits"> <a href="" target="_blank">View this project on GitHub.</a></div>
+
+
+    </div>
+  </footer>
+
+
+<script src="lib/es6-promise.min.js"></script>
+<script src="lib/es6-promise.auto.min.js"></script>
+<script src="lib/fetch.min.js"></script>
+
+<script src="lib/d3-dispatch.v1.min.js"></script>
+<script src="lib/jquery-2.2.1.min.js"></script>
+<script src="lib/jquery-ui.1.12.1.min.js"></script>
+<script src="lib/mapbox-gl.1.7.0.js"></script>
+<script src="lib/d3.5.15.0.min.js"></script>
+<script src="lib/d3-voronoi.min.js"></script>
+<script src="https://unpkg.com/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
+<script src="js/globals.js"></script>
+<script src="js/getters.js"></script>
+<script src="js/events.js"></script>
+<script src="js/scroller.js"></script>
+<script src="js/sections.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () { 
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m) 
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+    ga('create', 'UA-57529944-1', 'auto'); 
+    ga('send', 'pageview');
+</script>
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <span id="parsely-cfg" data-parsely-site="urban.org"></span>
+</div>
+<script>
+    (function(s, p, d) {
+      var h=d.location.protocol, i=p+"-"+s,
+          e=d.getElementById(i), r=d.getElementById(p+"-root"),
+          u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+          :"static."+p+".com";
+      if (e) return;
+      e = d.createElement(s); e.id = i; e.async = true;
+      e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+    })("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
+
+
+</body>
+</html>
