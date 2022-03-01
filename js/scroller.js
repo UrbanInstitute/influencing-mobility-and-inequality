@@ -151,7 +151,7 @@ let FIXED = false;
             .classed("posFixed", false)
             .style("top", "-1270px")
           d3.select("#sections")
-            .style("z-index",90)
+            .style("z-index",2)
         }else{
           if(!FIXED){
             FIXED = true;
@@ -166,7 +166,7 @@ let FIXED = false;
           .classed("posFixed", true)
           .style("top", "30px")  
         d3.select("#sections")
-          .style("z-index",90)
+          .style("z-index",2)
         }
       }else{
         d3.select("#narrativeVizContainer")
@@ -177,7 +177,7 @@ let FIXED = false;
           .classed("posFixed", false)  
           .style("top", "inherit")
         d3.select("#sections")
-          .style("z-index",90)
+          .style("z-index",2)
       }    
     }else{
       if(d3.select(".lastStep").node().getBoundingClientRect().bottom <= 124){
@@ -203,7 +203,7 @@ let FIXED = false;
               return (d3.select(".headerimage").node().getBoundingClientRect().height + d3.select("#topText").node().getBoundingClientRect().height +30) + "px"
             }) 
           d3.select("#sections")
-            .style("z-index",90)
+            .style("z-index",2)
         }else{
           d3.select("#narrativeVizContainer")
             .classed("posRelBottomSingleCol", false)
@@ -213,7 +213,7 @@ let FIXED = false;
             .classed("posFixed", true)
             .style("top", "30px")  
           d3.select("#sections")
-            .style("z-index",90)
+            .style("z-index",2)
         }
       }    
     }

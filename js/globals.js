@@ -52,8 +52,17 @@ function getInternetExplorerVersion(){
 }
 
 
-const INTRO_DUR_TWODOT = 300
+const INTRO_DUR_TWODOT = 500
 const INTRO_DEL_TWODOT = 0
+const SWARM_DOT_R = 3;
+const SWARM_DOT_DUR = 400
+const RESET_DURATION = 200;
+const X_BEZIER_CONST = .5
+const Y_BEZIER_CONST = -.2
+const X_BEZIER_CONST_INTRO = .3
+const Y_BEZIER_CONST_INTRO = -.2
+
+
 
 
 var PHONE_VIS_WIDTH = 230;
@@ -95,5 +104,5 @@ if ( IS_PHONE() ){ svgHeight = PHONE_VIS_HEIGHT }
 else if ( IS_SHORT() ){ svgHeight = SHORT_VIS_HEIGHT }
 else{ svgHeight = VIS_HEIGHT}
 
-var introMargin = ( IS_PHONE() ) ? PHONE_MARGIN : MARGIN;
-var exploreMargin = { top: 0, left: 20, bottom: 0, right: 90 };
+// var introMargin = ( IS_PHONE() ) ? PHONE_MARGIN : MARGIN;
+// var exploreMargin = { top: 0, left: 20, bottom: 0, right: 90 };

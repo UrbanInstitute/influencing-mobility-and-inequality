@@ -5,13 +5,13 @@ function getSize(){
   else return "desktop"
 }
 function getIntroChartWidth(section){
-  var w = 500,
+  var w = window.innerWidth - 560,
       margins = getIntroChartMargins(section),
     width = w - margins.left - margins.right;
   return width
 }
 function getIntroChartHeight(section, index){
-  var baseH = 500,
+  var baseH = window.innerHeight,
     margins = getIntroChartMargins(section),
   
     height = baseH - margins.top - margins.bottom;
@@ -20,10 +20,13 @@ function getIntroChartHeight(section, index){
 function getIntroChartMargins(section){
   var size = getSize()
   var mb = (section == "explore") ? 60 : 33;
-  var margin = {top: 20, right: 20, bottom: mb, left: 40}
+  var margin = {top: 20, right: (window.innerWidth - 1000)*.5, bottom: mb, left: 40}
 
   return margin;  
 }
+
+
+
 function getExploreChartWidth(section){
   var w = 900,
       margins = getExploreChartMargins(section),
@@ -52,7 +55,7 @@ function getIntroX(){
       margins = getIntroChartMargins()
 
   var x = d3.scaleLinear()
-    .range([margins.left, w])
+    .range([margins.left, w-margins.right])
     .domain([0,4])
 
   return x
@@ -69,6 +72,16 @@ function getIntroY(){
   return y
 
 }
+
+function getActiveScenario(){
+  if(d3.select(".overlayContainer.active").node() == null) return false
+  else return d3.select(".overlayContainer.active").attr("data-scenario")
+}
+function getActiveCardNum(){
+  if(d3.select(".overlayNavContainer.active").node() == null) return 1
+  else return d3.select(".overlayNavContainer.active").attr("data-card")
+}
+
 
 function getExploreData(){
   return d3.select("#exploreDataContainer").datum()

@@ -93,9 +93,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <!-- END HEADER -->
 
-
+  <div id = "chapterLabelContainer">
+    <div id = "chapterHeader">Section 1</div>
+    <div id = "chapterLabel">INTRODUCTION</div>
+  </div>
+  <div id = "scrollNavContainer">
+    <div id = "scrollNavBar"></div>
+    <div class = "scrollNavEl active" id="sn1">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn2">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn3">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn4">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn5">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn6">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn7">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn8">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn9">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn10">
+      <div class = "scrollNavDot"></div>
+    </div>
+    <div class = "scrollNavEl" id="sn11">
+      <div class = "scrollNavDot"></div>
+    </div>
+  </div>
 
 <div class="container">
+
   <div id='graphic'>
     <div id = "topText">
       </div>
@@ -129,13 +169,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <section class="step">
 
         <p>
-        We aimed to answer those questions with the Social Genome Model, a microsimulation tool that can project how changes in adolescence and early adulthood can influence well-being later in life.
+        We aimed to answer those questions with the <a href = "" target = "_blank">Social Genome Model</a>, a microsimulation tool that can project how changes in adolescence and early adulthood can influence well-being later in life.
         </p>
       </section>
       <section class="step">
         <p>
-        We used this model to explore multiple scenarios to see how different early experiences and circumstances might affect lifetime earnings and income disparities between Black, Hispanic, and White people. (We do not have enough data to estimate changes for other races and ethnicities.)
+        We used this model to explore multiple scenarios to see how different early experiences and circumstances might affect <span id = "liftetimeEarningsInline">lifetime earnings<span class = "generalTT lifetimeInline">Lifetime earnings are discounted present values in 2018 dollars.</span></span> and income disparities between Black, Hispanic, and <span id = "whiteInline">White<span class = "generalTT whiteInline">For this project, we use “White” to refer to people who are not Black or Hispanic. About 93.4 percent of this group identify as White, 3.3 percent identify as Asian or Pacific Islander, 2.4 percent identify as more than one race, and 0.9 percent identify as Native American. We do not have enough data to estimate changes separately for the individual races in this category.</span></span> people.
+
         </p>
+
+
       </section>
       <section class = "step">
         We looked at the effects overall and, for most scenarios, the effects on people whose crossroads moments would be meaningfully altered, setting them on a radically different path. 
@@ -225,6 +268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div id="narrativeVizContainer" class = "loadHide">
       <img id = "person" class = "stepPerson" src = "images/person.png">
+      <img id = "upArrowInt" class = "step0" src = "images/upArrowInt.png">
       <img class = "pathImg pathGrey stepPerson" src = "images/pathGrey.png">
       <img class = "pathImg pathBlue stepPerson" src = "images/pathBlue.png">
       <img class = "pathImg pathYellow stepPerson" src = "images/pathYellow.png">
@@ -235,14 +279,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 
 <div class="endText loadHide">
-  <p>
-  Of course, neighborhoods are often severely racially segregated, which drives a large part of school segregation patterns. But <a href = "https://www.urban.org/features/segregated-neighborhoods-segregated-schools" target = "_blank">residential segregation doesn’t explain everything</a>. In many cases, the racial composition of students who attend schools in the area around a given school is vastly different from that school’s enrollment. Among the five schools within one mile of Tamarack (including Tamarack), 89 percent of middle school students are Black or Hispanic.
-  </p>
-  <p>
-  That difference shows that transportation isn’t the only barrier for integration efforts. School attendance boundaries, as well as other factors like tuition, entrance exams, school choice policies, and parent preferences also contribute to segregation.
-  </p>
-  <p>
-  To drive greater change, local policymakers concerned about segregation can use this improved measure to target desegregation efforts at schools where changes would have the biggest impact on the district, and to identify structural factors that may impede integration.
+  <h2>
+  What do all these scenarios tell us? 
+  </h2>
+  <p>They tell us that the cost of structural racism is high, particularly for Black people; interventions early in life can pay off; and progress is possible.</p>
+  <p>We urge readers not to compare interventions because they differ in scale and scope and the costs are not precise. Also, no single intervention is a silver bullet, just as no single crossroads moment consistently puts people on a path to better economic mobility.</p>
+  <p>But because early interventions ripple through a person’s lifetime, even modest improvements can be meaningful. And combining several approaches could lead to substantial and life-changing differences. What if the country was bold enough to try?</p>
+
   </p>
 </div>
 
@@ -254,42 +297,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      <div class="content">
 
 
-                    <h4>About the Data</h4>
-                    <a href = "https://www.urban.org/research/publication/when-school-segregated-making-sense-segregation-65-years-after-brown-v-board-education" target = "_blank">
-                      <div class = "footerButton readResearchButton">Read the report</div>
-                    </a>
-                    <a href = "https://datacatalog.urban.org/dataset/index-school-contribution-racial-segregation-us-school-districts" target = "_blank">
-                      <div class = "footerButton readResearchButton">Download the data</div>
-                    </a>
+                    <h4>About</h4>
                     <p>
-                      Enrollment data by race or ethnicity for US schools comes from the National Center for Education Statistics’ 2017&ndash;18 Common Core of Data School Universe Survey and the Private School Survey. Common Core data report enrollment counts by grade, but the Private School Survey data do not. For private schools, we thus assume that the distribution of racial groups is equal across all grades in the school. Our analysis uses the same racial and ethnic terms as those in the Common Core of Data, including the term “Hispanic” to refer to Hispanic or Latinx students.
+                      The <a href = "" target = "_blank">Social Genome Project</a> uses the Social Genome Model to explore how policies, programs, and practices focused on young people affect adult outcomes, such as lifetime earnings.
+                    </p>
+                    <p>The Social Genome Model provides a framework and tool for assessing the long-term effects of social interventions. Structured around developmentally significant periods early in a person’s life, the model can trace the effects of social interventions on outcomes like school performance, educational attainment, and adult earnings. These virtual experiments, or “scenarios,” can provide estimates of the long-term benefits of policies and actions earlier in life as well as the costs of inaction.</p>
+                    <p>
+                      Because there is no large, nationally representative, longitudinal dataset tracking a relatively recent cohort of children from birth to adulthood, this version of the Social Genome Model is built on a matched panel of individuals we constructed by statistically matching data from the Early Childhood Longitudinal Survey, Kindergarten Cohort (ECLS-K) and the National Longitudinal Survey of Youth 1997 Cohort (NLSY97). The ECLS-K provides data for the prekindergarten, early elementary, and middle childhood life stages, and the NLSY97 provides data for the early adolescence, adolescence, transition-to-adulthood, and adulthood life stages. For circumstances at birth, we use retrospective information gathered in both datasets. For details about how we constructed and validated the matched panel, see <a><em>Understanding and Quantifying Crossroads Moments: How Context and Decisions Can Affect Economic Mobility and Racial and Ethnic Disparities</em></a>.
                     </p>
                     <p>
-                      We argue that desegregation efforts should focus where inequities in student achievement have been documented. Evidence shows that, on average, structural factors have led Black and Hispanic students to <a href = "https://nces.ed.gov/pubsearch/pubsinfo.asp?pubid=2019038" target = "_blank">persistently score lower on standardized examinations</a> than white and Asian students. Thus, we measure school segregation as the separation of Black and Hispanic students from white and Asian students (and the relatively small share of students from other racial or ethnic groups). Because of this choice, the SCI should not be used to determine whether schools that predominantly enroll students from other groups (e.g., American Indian or Alaska Native) are segregated.
-                    </p>
-                    <p>
-                      We recognize the limitations of grouping Black and Hispanic students together, as these students have different experiences in education systems. We also recognize the limitations of grouping white and Asian students together, as data aggregation for subpopulations of Asian students can obscure disparities among people from different ethnic groups. We include students from other groups (e.g., Native Hawaiian or Pacific Islander, American Indian or Alaska Native, and two or more races) with the white and Asian groups to simplify calculations, but we recognize the limitations of this choice as well.
-                    </p>
-                    <p>
-                      To focus only on districts that have enough schools and students to have a chance for integration, we don’t include districts that have fewer than two public schools serving the same grade, enroll fewer than 200 students, or are less than 5 percent Black or Hispanic. For our school-level designations, elementary school includes kindergarten through 5th grade, middle school includes grades 6–8, and high school includes grades 9&ndash;12.
-                    </p>
-                    <p>
-                      To group schools into districts, we use data on geographic school district boundaries from the 2017&ndash;18 release of the National Center for Education Statistics’ Education Demographic and Geographic Estimates. To find neighboring schools, we draw a one-mile radius around each school and define school neighborhood composition as the Black or Hispanic share of students attending schools serving the same grades within this radius, including the students in the school of interest. These neighboring schools can cross district boundaries but not state boundaries. For schools with no same-grade neighboring schools within one mile, our algorithm expands the search radius progressively by one mile until a neighboring school is found or 15 miles are reached with no neighbors, at which point we say the school has no neighbors. See <a href = "https://www.urban.org/research/publication/when-school-segregated-making-sense-segregation-65-years-after-brown-v-board-education" target = "_blank">our report</a> for more information about SCI at the neighborhood level.
-                    </p>
-                    <p>
-                    The SCI is defined within school systems, so comparisons across systems should account for differences in demographics, size, and other factors. The SCI value changes when considering different systems, which, in addition to districts (as described above), can be counties or metropolitan areas.
-                    </p>
-                    <p>
-                      This index does not demonstrate causal relationships and should not be used to assign blame to individual schools or types of schools. If one school significantly contributes to segregation, closing it or modifying its assignment system will not necessarily better integrate the system because those students might sort into other schools in ways that exacerbate segregation.
-                    </p>
+                    We use “Hispanic” to refer to people of Latino or Hispanic origin because it is the classification used in the NLSY97 and the ECLS-K. We recognize this term may not be the preferred identifier for many, and we remain committed to using inclusive language whenever possible.
+                  </p>
                     <h4>Project credits</h4>
-                    <div class="urbanstatement">This feature was funded by the Walton Family Foundation. We are grateful to them and to all our funders, who make it possible for Urban to advance its mission. The views expressed are those of the authors and should not be attributed to the Urban Institute, its trustees, or its funders. Funders do not determine research findings or the insights and recommendations of our experts. More information on our funding principles is available <a href = "https://www.urban.org/support" target = "_blank">here</a>. Read our terms of service <a href = "https://www.urban.org/terms-service" target = "_blank">here</a>.</div>
+                    <div class="urbanstatement">This feature was funded by the Bill & Melinda Gates Foundation. The Social Genome Model was developed with funding from the Gates Foundation and the Chan Zuckerberg Initiative. We are grateful to them and to all our funders, who make it possible for Urban to advance its mission. The views expressed are those of the authors and should not be attributed to the Urban Institute, its trustees, or its funders. Funders do not determine research findings or the insights and recommendations of our experts. More information on our funding principles is available <a href = "https://www.urban.org/support" target = "_blank">here</a>. Read our terms of service <a href = "https://www.urban.org/terms-service" target = "_blank">here</a>.</div>
+
+                    <div class = "urbanstatement">We also thank Eduardo Bonilla-Silva, Rucker Johnson, Hazel Markus, Isabel Sawhill, Sandra Susan Smith, and Aaron Sojourner for their reviews and comments.</div>
 
                     <h3 class="job">Research</h3>
-                    <a href = "https://www.urban.org/author/tomas-monarrez" target = "_blank">Tomas Monarrez</a>, <a href = "https://truman.missouri.edu/truman-school/people/kisida" target = "_blank">Brian Kisida</a>, <a href = "https://www.urban.org/author/matthew-chingos" target = "_blank">Matthew Chingos</a>, and <a href = "https://www.urban.org/author/carina-chien" target = "_blank">Carina Chien</a>
+                    <a href = "" target = "_blank">Gregory Acs</a> (Urban Institute), <a href = "" target = "_blank">Kristin Blagg</a> (Urban Institute), <a href = "" target = "_blank">Steven Martin</a> (Urban Institute), <a href = "" target = "_blank">Alison McClay</a> (Child Trends), <a href = "" target = "_blank">Kristin Anderson Moore</a> (Child Trends), <a href = "" target = "_blank">Gabriel Piña</a> (Child Trends), <a href = "" target = "_blank">Vanessa Sacks</a> (Child Trends), <a href = "" target = "_blank">Kevin Werner</a> (Urban Institute)
 
                     <h3 class="job">Design</h3>
-                    JoElla Carman
+                    Christina Baird 
 
                     <h3 class="job">Development</h3>
                     Ben Chartoff
@@ -298,15 +326,439 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     David Hinson
 
                     <h3 class="job">Writing</h3>
-                    Emily Peiffer
-
-
+                    Serena Lei
 
                     <div class="credits"> <a href="" target="_blank">View this project on GitHub.</a></div>
+                    <img id = "temp_logos" src = "images/TEMP_logos.png">
 
 
     </div>
   </footer>
+
+
+<div id = "allOverlays">
+  <div id = "overlayImage"></div>
+  <div id = "overlayImageTmp"></div>
+
+<!-- ************ justice ************ -->
+  <div class = "overlayContainer justice" data-scenario = "justice">
+    <div class = "overlayCard justice card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;we reduced harmful interactions between young Black men and police?</div>
+    </div>
+    <div class = "overlayCard justice card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>Evidence has consistently found that Black men are subject to more frequent and negative police attention and more police violence than people of other races and ethnicities.</p>
+        <p>Beyond the risk of death or injury, interactions with police—including arrests and convictions—can also lead to lower school attendance and lower test scores among Black youth and can harm their mental health.</p>
+        <p>What if those harmful effects could be reversed?</p>
+      </div>
+    </div>
+    <div class = "overlayCard justice card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>In this scenario, we don’t model specific police reforms. Instead, we model the potential effects of reform by reducing the share of Black men and youth convicted of a crime to the levels of White men and youth.</p>
+        <p>We also reduced absenteeism, raised test scores, and improved mental health among Black youth as if they had not been subject to aggressive policing.</p>
+      </div>
+    </div>
+    <div class = "overlayCard justice cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>These changes increase lifetime earnings by about $25,000, on average, for all Black men.</p>
+        <p>For the roughly 10 percent of Black men who had a conviction erased as a result of this simulation, the effects were much larger, increasing lifetime earnings by over $86,000 and increasing the likelihood of earning high school diplomas or bachelor’s degrees.</p>
+      </div>
+    </div>
+    <div class = "overlayCard justice cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard justice card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>These changes slightly reduce the Black-White earnings gap among all men: the average Black man’s lifetime earnings increase from 39 percent of the average White man’s lifetime earnings to 42 percent.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+
+<!-- ************ job_quality ************ -->
+  <div class = "overlayContainer job_quality" data-scenario = "job_quality">
+    <div class = "overlayCard job_quality card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;we could provide young people with better-quality jobs?</div>
+    </div>
+    <div class = "overlayCard job_quality card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>A good job in young adulthood can lead to higher wages and better economic security in the future.</p>
+        <p>And though a good job is defined by many things, we focus here on pay and benefits (such as health insurance, retirement plans, and paid days off), which can have positive effects on physical and mental health and help young people build more stable lives.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_quality card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>For this scenario, we looked at people making up to $30,000 at age 24. We also narrowed the pool to exclude anyone who attains a bachelor’s degree in adulthood because their lower wages could be temporary while they are earning a postsecondary degree.</p>
+        <p>We then increased their pay and benefits and modeled the effects of better mental and physical health.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_quality cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>On average, for workers whose job quality improved, lifetime earnings rise by $52,000, with larger increases for White people than for Black and Hispanic people.</p>
+        <p>The cost of increasing pay and benefits came to roughly $9,480 per worker.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_quality cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard job_quality card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>Although these improvements are more likely to affect Black and Hispanic people, they aren’t enough to close the earnings gap with White people.</p>
+        <p>In other words, structural inequities for low-wage workers can’t be fully offset by improving job quality for all races and ethnicities.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+  <!-- ************ comm ************ -->
+  <div class = "overlayContainer comm" data-scenario = "comm">
+    <div class = "overlayCard comm card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;we could improve academic success through an integrated strategy supporting students’ development and well-being?</div>
+    </div>
+    <div class = "overlayCard comm card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>If a student is hungry or sick or doesn’t feel safe at home or in school, their ability to learn and grow will be hindered. Recognizing that academic success hinges on more than academics, an approach to education known as integrated student supports addresses students’ physical and mental health, safety, and well-being.</p>
+        <p>By partnering with community organizations, these schools integrate teaching, health and social services, and other supports for students and their families.</p>
+        <p>What if more students could benefit from these schools?</p>
+      </div>
+    </div>
+    <div class = "overlayCard comm card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>We modeled common improvements seen at integrated student support schools, including higher test scores, fewer absences, greater participation in after-school activities, fewer gangs, and no suspensions.</p>
+        <p>Because these schools mostly serve students with low incomes, we looked at students whose family income was 200 percent of the federal poverty level or lower. And we modeled enrollment from early adolescence.</p>
+      </div>
+    </div>
+    <div class = "overlayCard comm cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>Students attending these schools would see their lifetime earnings rise by more than $37,000, with larger increases for men than for women and larger increases for Black men (about $45,000) and White men (about $52,000) than for Hispanic men (about $27,000).</p>
+        <p>The cost? Programs vary, but one study estimated that about six years of integrated student supports from kindergarten through fifth grade would total $5,410 per student for all six years.</p>
+      </div>
+    </div>
+    <div class = "overlayCard comm cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard comm card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>All students from families with low incomes, regardless of race or ethnicity, would benefit from integrated student supports. Because all students benefit, we see little overall change in racial and ethnic disparities in lifetime earnings.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+  <!-- ************ hs ************ -->
+  <div class = "overlayContainer hs" data-scenario = "hs">
+    <div class = "overlayCard hs card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;more people earned high school diplomas?</div>
+    </div>
+    <div class = "overlayCard hs card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>Graduating high school is a pivotal crossroads moment. A high school diploma is often a requirement for entry-level jobs, training opportunities, and higher education. Yet around 15 percent of students don’t graduate within four years.</p>
+        <p>What if more people had high school diplomas?</p>
+      </div>
+    </div>
+    <div class = "overlayCard hs card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>We modeled what would happen if all students attended four years of Small Schools of Choice high schools, which we estimate increases on-time graduation by 5 percentage points. </p>
+        <p>These small high schools, created in New York, emphasize academic rigor, personalized teacher-student relationships, and relevance to the working world.</p>
+      </div>
+    </div>
+    <div class = "overlayCard hs cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>For all students, the intervention increases lifetime earnings by about $15,000, which far outweighs the $625 spent per student per year.</p>
+        <p>For students who would not have earned a diploma without the intervention, lifetime income increases by about $271,000.</p>
+        <p>Income increases are larger for Hispanic and Black students than for White students, driven almost entirely by gains for men.</p>
+      </div>
+    </div>
+    <div class = "overlayCard hs cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard hs card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>The effects on earnings gaps by race and ethnicity are small, slightly improving lifetime earnings parity between Black people and White people and between Hispanic people and White people.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+  <!-- ************ aa ************ -->
+  <div class = "overlayContainer aa" data-scenario = "aa">
+    <div class = "overlayCard aa card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;more people enrolled in associate’s programs earned degrees?</div>
+    </div>
+    <div class = "overlayCard aa card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>Associate’s degrees can be a springboard to a better career or to a bachelor’s degree, but many students who enroll never earn a degree.</p>
+        <p>Students from low-income families, Black and Hispanic students, and those who work before seeking higher education are more likely to enroll in associate’s programs than students from higher-income families and White students, making degree attainment important for reducing inequality.</p>
+      </div>
+    </div>
+    <div class = "overlayCard aa card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>We modeled what would happen if all students enrolled in an associate’s program benefited from the Accelerated Study in Associate Programs intervention, which offers academic and financial supports to students with low incomes in New York City and Ohio community colleges.</p>
+        <p>Based on evaluations of that intervention, we set a target completion rate of 50 percent. To hit that target, we increased overall degree attainment by 4.6 percentage points.</p>
+      </div>
+    </div>
+    <div class = "overlayCard aa cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>For the overall population, the increase in lifetime earnings is about $8,600, and Black and Hispanic people had slightly higher average increases.</p>
+        <p>For students who would not have earned a degree without the intervention, lifetime income increases by $175,000, driven largely by gains for men. This intervention would cost $9,000 to $14,000 per student.</p>
+      </div>
+    </div>
+    <div class = "overlayCard aa cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard aa card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>This intervention is transformative for students who would not have earned a degree otherwise, but because that’s a small group, we don’t see big changes to overall lifetime income parity.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+  <!-- ************ ba ************ -->
+  <div class = "overlayContainer ba" data-scenario = "ba">
+    <div class = "overlayCard ba card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;more people had bachelor’s degrees?</div>
+    </div>
+    <div class = "overlayCard ba card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>People with bachelor’s degrees earn, on average, about $30,000 more per year than people with only a high school diploma, even after accounting for the rising cost of college.</p>
+        <p>But in a phenomenon called “undermatching,” talented students with low incomes don’t apply to selective schools, even if they’re likely to be admitted. Selective schools tend to have higher graduation rates, so students who attend less selective schools may be less likely to graduate.</p>
+      </div>
+    </div>
+    <div class = "overlayCard ba card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>We modeled what would happen if high-achieving, low-income students had more information about the costs and benefits of college and guaranteed financial aid. In our scenario, those interventions would allow these students to enroll and attain bachelor’s degrees at the same rate as their middle- and high-income peers.</p>
+        <p>The cost of providing more information is low. And many of these students are already eligible for substantial financial aid but may not know it. Guaranteed support might change their choices.</p>
+      </div>
+    </div>
+    <div class = "overlayCard ba cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>For those who go on to earn bachelor’s degrees, lifetime earnings increase by about $422,000 (a 71 percent increase), with particularly large increases for Black men (a $740,000 increase) and Hispanic men (a $672,000 increase).</p>
+      </div>
+    </div>
+    <div class = "overlayCard ba cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard ba card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>This intervention is transformative for students who would not have earned a degree otherwise, but because that’s a small group, we don’t see big changes to overall lifetime income parity.</p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+  <!-- ************ job_training ************ -->
+  <div class = "overlayContainer job_training" data-scenario = "job_training">
+    <div class = "overlayCard job_training card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;more young adults participated in job training programs?</div>
+    </div>
+    <div class = "overlayCard job_training card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>Many young people leave high school without the technical skills or training they need for a job. If they don’t attend college, they could benefit from participating in a job training program, which can equip them with job skills, match them to employers, and provide other support services.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_training card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>We picked six rigorously evaluated job training programs designed for young adults and modeled their effects. Participants saw an average 17 percent increase in income.</p>
+        <p>To simulate the effects of these job training programs, we increased income by 17 percent at age 24 for people who had no more than a high school diploma.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_training cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>For program participants, lifetime income rose by about $21,000, with larger increases for White people than for Black and Hispanic people. The average cost per participant is $19,600.</p>
+        <p>Men had larger increases in lifetime earnings than women. Black women saw the smallest increases, and White men had the highest increases.</p>
+      </div>
+    </div>
+    <div class = "overlayCard job_training cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard job_training card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>Although a larger share of Black and Hispanic people received and benefited from job training programs, White participants benefited more from the 17 percent earnings increase because their average starting income was higher. </p>
+      </div>
+    </div>
+  </div>
+  <!-- ******************************** -->
+
+
+  <div class = "overlayContainer race" data-scenario = "race">
+    <div class = "overlayCard race card1">
+      <h1>What if&hellip;</h1>
+      <div class = "card1Subhead">&hellip;we could eliminate the damaging effects of structural racism?</div>
+    </div>
+    <div class = "overlayCard race card2">
+      <div class = "overlayTextContainer">
+        <h2>Why this matters</h2>
+        <p>Policies, practices, and norms that have created and maintained deep racial and ethnic inequities are barriers to upward mobility for many.</p>
+        <p>Research finds that Black and Hispanic children are more likely than White children to be enrolled in underresourced schools, to be exposed to environmental pollutants, and to be exposed to violence and traumatic experiences and events. These and other challenges can have long-term consequences on their well-being.</p>
+      </div>
+    </div>
+    <div class = "overlayCard race card3">
+      <div class = "overlayTextContainer">
+        <h2>How we did it</h2>
+        <p>What if society treated Black and Hispanic children the same way it treats White children? What if, from birth, they had the same experiences in school, at home, and in their communities?</p>
+        <p>Historical inequities such as segregation and discrimination shape children’s circumstances at birth. Our simulations do not change the circumstances into which children are born; rather, we use circumstances at birth as a starting point and see how much better off Black and Hispanic children would be if, throughout childhood, adolescence, and young adulthood, they were treated like their White peers.</p>
+      </div>
+    </div>
+    <div class = "overlayCard race cardChart card4">
+      <div class = "overlayTextContainer">
+        <h2>What we found</h2>
+        <p>These changes increase the share of Black and Hispanic people with associate’s and bachelor’s degrees. Projected lifetime earnings rise by more than 60 percent (more than $250,000) for Black people and by 25 percent (almost $130,000) for Hispanic people. </p>
+      </div>
+    </div>
+    <div class = "overlayCard race cardChart card5">
+      <div class = "overlayChartTextContainer">
+        <h2>Illustrating the change in lifetime earnings</h2>
+        <p>To illustrate our results, we use a sample of individuals in the Social Genome Model. Each dot represents a person, but not all people are represented in this illustration.</p>
+        <div class = "yaxisLabelContainer">
+          <div class = "yaxisLabel">Lifetime earnings</div>
+          <div class = "yaxisTt generalTT">Lifetime earnings are discounted present values in 2018 dollars.</div>
+        </div>
+      </div>
+    </div>
+    <div class = "overlayCard race card6">
+      <div class = "overlayTextContainer">
+        <h2>How this affects inequality</h2>
+        <p>When it comes to narrowing income inequality, these changes are transformative for Black men, who would earn 91 cents in lifetime earnings for every dollar earned by White men—a significant jump from the 39 cents for every dollar earned now.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div id = "fixedChartContainer"></div>
+
+
+  <div id = "overlayNavBar" class = "overlayEl overlayHide">
+    <div id = "overlayNavTrack"></div>
+
+    <div class = "overlayNavContainer card1" data-card="1">
+      <div class = "overlayNavDot"></div>
+    </div>
+    <div class = "overlayNavContainer card2" data-card="2">
+      <div class = "overlayNavDot"></div>
+    </div>
+    <div class = "overlayNavContainer card3" data-card="3">
+      <div class = "overlayNavDot"></div>
+    </div>
+    <div class = "overlayNavContainer card4" data-card="4">
+      <div class = "overlayNavDot"></div>
+    </div>
+    <div class = "overlayNavContainer card5" data-card="5">
+      <div class = "overlayNavDot"></div>
+    </div>
+    <div class = "overlayNavContainer card6" data-card="6">
+      <div class = "overlayNavDot"></div>
+    </div>
+  </div>
+
+  <div id = "closeOverlay" class = "overlayEl">
+    <div id = "closerOverlayBg"></div>
+    <img id = "closeOverlayImg" src = "images/closeOverlay.png">
+    <!-- <img id = "closeOverlayHoverImg" src = "images/closeOverlayHover.png"> -->
+  </div>
+  <div id = "leftNav" class = "overlayNavArrow">
+    <div class = "navArrowBg"></div>
+    <img src = "images/navArrow.png">
+  </div>
+  <div id = "rightNav" class = "overlayNavArrow">
+    <div class = "navArrowBg"></div>
+    <img src = "images/navArrow.png">
+  </div>
+  <select class = "overlayEl foo">
+          <option value = "race">Structural Racism</option>
+          <option value = "justice">Criminal Justice</option>
+          <option value = "job_quality">Job Quality</option>
+          <option value = "comm">Integrated Student Supports</option>
+          <option value = "hs">High School Diploma</option>
+          <option value = "aa">Associate’s Degree</option>
+          <option value = "ba">Bachelor’s Degree</option>
+          <option value = "job_training">Job Training</option>
+
+  </select>
+
+  <div class = "overlayEl whiteTt">
+  We use “White” to refer to people who are not Black or Hispanic. About 93.4 percent of this group identify as White, 3.3 percent identify as Asian or Pacific Islander, 2.4 percent identify as more than one race, and 0.9 percent identify as Native American. Because of sample size constraints, we cannot estimate simulations separately for the individual races in this category. </div>
+
+</div>
 
 
 <script src="lib/es6-promise.min.js"></script>
@@ -322,6 +774,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://unpkg.com/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
 <script src="js/globals.js"></script>
 <script src="js/getters.js"></script>
+<script src="js/explore.js"></script>
 <script src="js/events.js"></script>
 <script src="js/scroller.js"></script>
 <script src="js/sections.js"></script>

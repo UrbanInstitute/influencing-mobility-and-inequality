@@ -304,13 +304,13 @@ h2 div{
 
 footer {
   position: relative;
-    background-color: #f1f2f2;
+    background-color: #fff;
     margin-top: 100px;
     padding-bottom: 25px;
     bottom: 0;
    overflow: hidden;
      height:auto;
-     z-index: 10000;
+     z-index: 5;
 
 }
 

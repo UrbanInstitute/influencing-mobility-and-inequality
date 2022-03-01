@@ -43,14 +43,14 @@ body{
     margin-top: 20px;
 }
 #downArrowContainer{
-    position: absolute;
-    bottom: 59px;
+position: absolute;
+    top: 580px;
     animation: bob 5s infinite;
     left: calc(50% - 36px);
     font-weight: 300;
     font-style: italic;
     font-size: 14px;
-    /* z-index: 100; */
+    z-index: 100;
     color: black;
     font-weight: 400;
 }
@@ -75,7 +75,7 @@ body{
 #downArrowContainer div{
   margin-top: 10px;
 }
-@keyframes bob {
+@keyframes bobIntervention {
   0% {
     bottom: 59px;
   }
@@ -86,11 +86,72 @@ body{
     bottom: 59px;
   }
 }
+@keyframes bob {
+  0% {
+    top: 580px;
+  }
+  50% {
+    top: 600px;
+  }
+  100%{
+    top: 580px;
+  }
+}
 
-
-
-
-
+/****************************************************/
+/***************  INTRO NAV    **********************/
+/****************************************************/
+#chapterLabelContainer{
+    position: fixed;
+    padding-top: 55px;
+    padding-left: 63px;
+    padding-bottom: 10px;
+    background: white;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: calc(50vw - 100px);
+    opacity: 1;
+}
+#chapterHeader{
+  font-size: 14px;
+  font-style: italic;
+}
+#scrollNavContainer{
+  position: fixed;
+  width: 40px;
+  height: 77vh;
+  top: 11.5vh;
+  left: 43px;
+  z-index: 10;
+}
+#scrollNavBar{
+  height: calc(100% - 7vh);
+  position: absolute;
+  width: 2px;
+  background: #d2d2d2;
+  left: 20px;
+  top: 2.5vh;
+}
+.scrollNavEl{
+  height: 7vh;
+  display: block;
+  width: 40px;
+  z-index: 11;
+  cursor: pointer;
+}
+.scrollNavEl:hover .scrollNavDot, .scrollNavEl.active .scrollNavDot{
+  background: #1696d2;
+}
+.scrollNavDot{
+  width: 14px;
+  height: 14px;
+  background: #d2d2d2;
+  left: 13px;
+  position: relative;
+  top: calc(3.5vh - 7px);
+  border-radius: 100%;
+}
 /****************************************************/
 /**************  INTRO SLIDES    ********************/
 /****************************************************/
@@ -124,6 +185,23 @@ body{
 }
 
 
+/************* CHARTS **************/
+
+#introAxisLabel{
+  text-anchor: middle;
+  font-weight: bold;
+  font-size: 16px;
+  fill: #9d9d9d;
+}
+#upArrowInt{
+  width: 50px;
+  position: absolute;
+  bottom: 40px;
+  left: 165px;
+  animation: bobIntervention 2s infinite;
+  opacity: 0;
+}
+
 
 /****************************************************/
 /********** SELECT A SCENARIO SCREEN ****************/
@@ -131,8 +209,8 @@ body{
 #selectScenarioContainer{
   position: fixed;
   top: 0px;
-  right: 0px;
-  z-index: 9999999999;
+  right: -700px;
+  z-index: 6;
 }
 .scenarioCardContainer{
   width: 300px;
@@ -145,15 +223,15 @@ body{
 }
 @keyframes carouselUp {
   0% { transform: translateY(0); }
-  100% { transform: translateY(calc(-285px*4))}
+  100% { transform: translateY(calc(-1000px - 35px*4))}
 }
 @keyframes carouselDown {
   100% { transform: translateY(0); }
-  0% { transform: translateY(calc(-285px*4))}
+  0% { transform: translateY(calc(-1050px - 35px*4))}
 }
 
 #selectScenarioLeft {
-  animation: carouselUp 20s linear infinite;
+  animation: carouselUp 45s linear infinite;
   width: 300px;
   display: inline-block;
 }
@@ -164,7 +242,7 @@ body{
   animation-play-state:paused;
 }
 #selectScenarioRight {
-  animation: carouselDown 20s linear infinite;
+  animation: carouselDown 45s linear infinite;
   width: 300px;
   display: inline-block;
   margin-left: 50px;
@@ -178,59 +256,59 @@ body{
 
 .scenarioCardContainer.race{
   height: 250px;
-  background-image: url('../images/scenarios/race.jpg')
+  background-image: url('../images/scenarios/thumbs/race.jpg')
 }
 .scenarioCardContainer.race:hover{
-  background-image: url('../images/scenarios/rollovers/race_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/race_hover.jpg')
 }
 .scenarioCardContainer.justice{
-  height: 250px;
-  background-image: url('../images/scenarios/justice.jpg')
+  height: 300px;
+  background-image: url('../images/scenarios/thumbs/justice.jpg')
 }
 .scenarioCardContainer.justice:hover{
-  background-image: url('../images/scenarios/rollovers/justice_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/justice_hover.jpg')
 }
 .scenarioCardContainer.job_quality{
-  height: 250px;
-  background-image: url('../images/scenarios/job_quality.jpg')
+  height: 200px;
+  background-image: url('../images/scenarios/thumbs/job_quality.jpg')
 }
 .scenarioCardContainer.job_quality:hover{
-  background-image: url('../images/scenarios/rollovers/job_quality_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/job_quality_hover.jpg')
 }
 .scenarioCardContainer.comm{
   height: 250px;
-  background-image: url('../images/scenarios/comm.jpg')
+  background-image: url('../images/scenarios/thumbs/comm.jpg')
 }
 .scenarioCardContainer.comm:hover{
-  background-image: url('../images/scenarios/rollovers/comm_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/comm_hover.jpg')
 }
 .scenarioCardContainer.aa{
-  height: 250px;
-  background-image: url('../images/scenarios/aa.jpg')
+  height: 200px;
+  background-image: url('../images/scenarios/thumbs/aa.jpg')
 }
 .scenarioCardContainer.aa:hover{
-  background-image: url('../images/scenarios/rollovers/aa_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/aa_hover.jpg')
 }
 .scenarioCardContainer.ba{
   height: 250px;
-  background-image: url('../images/scenarios/ba.jpg')
+  background-image: url('../images/scenarios/thumbs/ba.jpg')
 }
 .scenarioCardContainer.ba:hover{
-  background-image: url('../images/scenarios/rollovers/ba_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/ba_hover.jpg')
 }
 .scenarioCardContainer.hs{
   height: 250px;
-  background-image: url('../images/scenarios/hs.jpg')
+  background-image: url('../images/scenarios/thumbs/hs.jpg')
 }
 .scenarioCardContainer.hs:hover{
-  background-image: url('../images/scenarios/rollovers/hs_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/hs_hover.jpg')
 }
 .scenarioCardContainer.job_training{
-  height: 250px;
-  background-image: url('../images/scenarios/job_training.jpg')
+  height: 350px;
+  background-image: url('../images/scenarios/thumbs/job_training.jpg')
 }
 .scenarioCardContainer.job_training:hover{
-  background-image: url('../images/scenarios/rollovers/job_training_hover.jpg')
+  background-image: url('../images/scenarios/thumbs/rollovers/job_training_hover.jpg')
 }
 .scenarioSelectButton{
   background: white;
@@ -245,7 +323,397 @@ body{
   right: 13px;
   cursor: pointer;
 }
+.scenarioSelectButton.comm{
+  max-width: 234px;
+  text-align: right;
+}
+/****************************************************/
+/*************** SCENARIO OVERLAY *******************/
+/****************************************************/
+#allOverlays{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 20;
+}
+#overlayImage, #overlayImageTmp{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  display: none;
+}
+.overlayContainer{
+  position: absolute;
+  width: 100vw;
+  opacity: 0;
+  display: none;
+}
+.overlayCard{
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+  float: left;
+  background: rgba(255,255,255,.9);
+}
+.overlayCard.card1{
+  background: rgba(0,0,0,.65);
+}
+.overlayCard.card2{
+  left: 100vw;
+}
+.overlayCard.card3{
+  left: 200vw;
+  
+}
+.overlayCard.card4{
+  left: 300vw;
+}
+.overlayCard.card5{
+  left: 400vw;
+}
+.overlayCard.card6{
+  left: 500vw;
+}
+.overlayCard h1{
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  margin-top: 25vh;
+  margin-bottom: 75px;
+  font-size: 64px;
+  font-weight: 700;
+}
+.card1Subhead{
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  width: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+.overlayEl{
+  opacity: 0;
+}
+#overlayNavBar{
+  width: 580px;
+  position: fixed;
+  bottom: 15px;
+  height: 50px;
+  left: calc(50% - 290px);
+  z-index: 23;
+}
+#overlayNavBar.inverted .overlayNavContainer .overlayNavDot{
+  background: #ffffff;
+}
+.overlayNavContainer{
+  width: 116px;
+  height: 50px;
+  position: absolute;
+  cursor: pointer;
+  top: -5px;
+}
+.overlayNavContainer.card1{
+  left: -58px;
+}
+.overlayNavContainer.card2{
+  left: 58px;
+}
+.overlayNavContainer.card3{
+  left: 174px;
+}
+.overlayNavContainer.card4{
+  left: 290px;
+}
+.overlayNavContainer.card5{
+  left: 406px;
+}
+.overlayNavContainer.card6{
+  left: 522px;
+}
+.overlayNavContainer .overlayNavDot{
+  position: relative;
+  width: 16px;
+  height: 16px;
+  left: 58px;
+  top: 17px;
+  border-radius: 100%;
+  border: 2px solid #696969;
+  background: #9d9d9d;
+}
+.overlayNavContainer.active .overlayNavDot{
+  background: #fdbf11 !important;
+  border-color: #000 !important;
+}
+.overlayNavContainer:hover .overlayNavDot{
+  background: #fdbf11 !important;
+}
+#overlayNavTrack{
+  background: #d2d2d2;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 30px;
+}
+#leftNav{
+  pointer-events: none;
+  position: fixed;
+  left: 0px;
+  top: calc(50vh - 53px);
+  cursor: pointer;
+  z-index: 23;
+}
+#rightNav{
+  pointer-events: none;
+  position: fixed;
+  right: 85px;
+  top: calc(50vh - 53px);
+  cursor: pointer;
+  z-index: 23;
+}
+.overlayNavArrow img{
+  height: 85px;
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  opacity: 0;
+}
+#rightNav img{
+  transform: rotate(180deg);
+  left: 22px;
+}
+.overlayNavArrow div{
+  background: #fdbf11;
+  width: 85px;
+  height: 106px;
+  opacity: 0;
+  position: absolute;
+}
+.overlayNavArrow:hover div{
+  opacity: 1 !important;
+}
+#closeOverlay{
+  opacity: 1; 
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  width: 48px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 23;
+}
+#closeOverlayImg{
+  width: 24px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+/*#closeOverlayHoverImg{
+  width: 24px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: none;
+}*/
+#closerOverlayBg{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: 2px solid #d2d2d2;
+  border-radius: 100%;
+}
+#closeOverlay.inverted #closerOverlayBg{
+  background: #f5f5f5;
+}
+#closeOverlay:hover #closerOverlayBg{
+  background: #fdbf11;
+  border: 2px solid #000000;
+}
+/*#closeOverlay:hover #closeOverlayImg{
+  display: none;
+}*/
+/*#closeOverlay:hover #closeOverlayHoverImg{
+  display: block;
+}*/
+.overlayTextContainer{
+  width: 707px;
+  position: absolute;
+  top: 200px;
+  left: calc(50vw - 358.5px);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32.5px;
+}
+.overlayTextContainer h2, .endText h2{
+  font-weight: 700;
+  font-size: 36px;
+  color: #000;
+}
+.overlayChartTextContainer{
+  position: absolute;
+  left: 98px;
+  top: 30px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.overlayChartTextContainer h2{
+  color: black;
+  font-weight: 700;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
 
+/****************************************************/
+/*************** SCENARIO CHART *********************/
+/****************************************************/
+
+#fixedChartContainer{
+  position: fixed;
+  z-index: 22;
+  left: 100vw;
+  top: 180px;
+}
+#fixedChartContainer svg text{
+  font-family: Lato;
+  font-size: 14px;
+}
+.overlayChartTextContainer p{
+  /*display: none;*/
+  font-size: 16px;
+  width: 100%;
+  font-weight: 400;
+  font-style: italic;
+}
+.foo{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.yaxisLabelContainer{
+  position: relative;
+}
+.yaxisLabel{
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  top: 15px;
+  border-bottom: 5px solid #a2d4ec;
+  cursor: pointer;
+}
+.yaxisLabel:hover{
+  border-bottom: 5px solid #1696d2;
+}
+.yaxisTt.generalTT{
+  display: none;
+  left: 140px;
+  top: -15px;
+}
+.generalTT {
+  position: absolute;
+  background: #696969;
+  font-size: 16px;
+  width: 180px;
+  z-index: 100;
+  font-weight: normal;
+  font-style: italic;
+  padding: 13px;
+  pointer-events: none;
+  color: white;
+}
+.generalTT:after {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(210, 210, 210, 0);
+  border-right-color: #696969;
+  border-width: 12px;
+  margin-top: -12px;
+}
+.whiteTt{
+    display: none;
+    position: fixed;
+    bottom: 120px;
+    width: 380px;
+    left: 200px;
+    z-index: 100;
+    /* height: 100px; */
+    background: #696969;
+    color: white;
+    font-size: 14px;
+    font-style: italic;
+    padding: 13px;
+    pointer-events: none;
+}
+.whiteTt:after {
+  top: 100%;
+  left: 20%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(210, 210, 210, 0);
+  border-top-color: #696969;
+  border-width: 12px;
+  margin-left: -12px;
+}
+.whiteTt.women:after{
+  left: 80%;
+}
+
+#liftetimeEarningsInline, #whiteInline{
+  position: relative;
+  border-bottom: 5px solid #a2d4ec;
+  cursor: pointer;
+}
+#liftetimeEarningsInline:hover, #whiteInline:hover{
+  border-bottom: 5px solid #1696d2;
+}
+.generalTT.lifetimeInline{
+  top: -38px;
+  position: absolute;
+  left: 143px;
+  display: none;
+}
+.generalTT.whiteInline{
+  position: absolute;
+  display: none;
+  width: 440px;
+  left: 62px;
+  top: -75px;
+}
+
+/****************************************************/
+/*************** BOTTOM CONTENT *********************/
+/****************************************************/
+.endText h2{
+  margin-bottom: 20px;
+}
+.endText{
+  width: 715px !important;
+  padding: 0 !important;
+  margin-bottom: 35vh !important;
+}
+.step.lastStep{
+  min-height: 20vh;
+}
+#temp_logos{
+  width: 698px;
+  margin-top: 40px;
+  margin-left: -4px;
+}
 
 
 
@@ -278,7 +746,7 @@ body{
   position: relative;
   font-size: 19px;
   font-weight:400;
-  z-index: 1000;
+  z-index: 4;
 }
 #loadingGif{
   margin-top: 40px;
@@ -342,7 +810,7 @@ p{
   display: inline-block;
   width: 400px;
   top: 0px;
-  z-index: 90;
+  z-index: 2;
   padding-bottom: 20px;
   pointer-events: auto;
   margin-left: 40px;
@@ -453,7 +921,9 @@ footer p{
 
 /********header (below urban menu)**********/
 #header-pinned{
-  height: calc(100% - 160px)
+  height: calc(100% - 160px);
+  position: relative;
+  z-index: 13;
 }
 
 .headerimage{
@@ -462,7 +932,7 @@ footer p{
   width: 100%;
   background: #062635;
   height: 100%;
-  z-index:9999999999999;
+  z-index:13;
 
 }
 
@@ -524,7 +994,7 @@ footer p{
     background: rgba(255, 255, 255, 0.9);
     box-shadow: rgb(136, 136, 136) 4px 4px 16px;
     padding: 30px;
-    z-index: 99;
+    z-index: 3;
     min-height: 100px;
     margin-bottom: 800px;
   }

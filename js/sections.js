@@ -6,6 +6,7 @@
 * using reusable charts pattern:
 * http://bost.ocks.org/mike/chart/
 */
+var activeIndex = 0;
 var scrollVis = function () {
   // constants to define the size
   // and margins of the vis area.
@@ -18,7 +19,7 @@ var scrollVis = function () {
   // quickly, we want to call all the
   // activate functions that they pass.
   var lastIndex = -1;
-  var activeIndex = 0;
+  // var activeIndex = 0;
 
 
   // main svg used for visualization
@@ -57,6 +58,8 @@ var scrollVis = function () {
       // create svg and give it a width and height
       svg = d3.select(this).append('svg')
       // @v4 use merge to combine enter and existing selection
+      var introMargin = getIntroChartMargins();
+      var exploreMargin = getIntroChartMargins();
       // svg = svg.merge(svgE);
 
       svg.attr('width', getIntroChartWidth("narrative") + introMargin.left + introMargin.right);
@@ -90,7 +93,8 @@ var scrollVis = function () {
       var exploreData = rawData[2]
 
       var dHigh = null,
-          dotLow = null
+          dLow = null,
+          dInt = null
 
       bindGlobalData(introData, twoDotData, exploreData);
       setupVis(introData, twoDotData, exploreData);
@@ -126,6 +130,16 @@ var scrollVis = function () {
       .attr("orient","auto")
     arrowHead.append("polygon")
       .attr("points","0 0, 6 3, 0 6")
+    
+    svg.append("g")
+      .attr("id", "introAxisLabel")
+      .attr("class", "step0")
+      .attr("transform", "translate(" + (introX(4) - 15) + "," + (getIntroChartHeight()*.5) + ") rotate(90)")
+      .append("text") 
+      .text("Lifetime earnings")
+      .attr("dy", ".35em")
+      .style("opacity",0)
+
 
 
     svg.append("circle")
@@ -150,8 +164,7 @@ var scrollVis = function () {
 
       dHigh = twoDotData[0]
       dLow = twoDotData[1]
-    // console.log(dHigh)
-
+      dInt = twoDotData[2]
 
     svg.selectAll(".introAxis")
       .data([0,1,2,3,4])
@@ -159,7 +172,7 @@ var scrollVis = function () {
       .append("line")
       .attr("class", d => "introAxis step0 ia" + d)
       .style("fill","none")
-      .style("stroke","#000")
+      .style("stroke","#9d9d9d")
       .style("stroke-width",2)
       .attr("stroke-dasharray", d=> (d==4) ? "" : 12)
       .attr("x1", d => introX(d))
@@ -167,6 +180,19 @@ var scrollVis = function () {
       .attr("y1", introY(100))
       .attr("y2", introY(100))
 
+
+    svg.selectAll(".dotInt")
+      .data([1,2,3])
+      .enter()
+      .append("circle")
+      .attr("class",d => "dotInt step0 di" + d )
+      .style("fill","#fdbf11")
+      .style("stroke","#000")
+      .style("stroke-width","4px")
+      .attr("r",13)
+      .attr("cx", introX(1) )
+      .attr("cy", introY(dInt.e1) )
+      .style("opacity",0)
 
     svg.selectAll(".dotHigh")
       .data([0,1,2,3,4])
@@ -179,6 +205,7 @@ var scrollVis = function () {
       .attr("cx", introX(0) )
       .attr("cy", introY(dHigh.e0) )
       .style("opacity",0)
+
 
     svg.selectAll(".dotLow")
       .data([0,1,2,3,4])
@@ -193,7 +220,7 @@ var scrollVis = function () {
       .style("opacity",0)
 
     svg.selectAll(".arrowHigh")
-      .data([0,1,2,3,4])
+      .data([0,1,2,3])
       .enter()
       .append("path")
       .attr("class", d => "introArrow step0 arrowHigh arrow" + d )
@@ -216,7 +243,7 @@ var scrollVis = function () {
       .attr("marker-end","url(#arrowHead)")
 
     svg.selectAll(".arrowLow")
-      .data([0,1,2,3,4])
+      .data([0,1,2,3])
       .enter()
       .append("path")
       .attr("class", d => "introArrow step0 arrowLow arrow" + d )
@@ -238,13 +265,110 @@ var scrollVis = function () {
       .style("opacity",0)
       .attr("marker-end","url(#arrowHead)")
 
+    svg.selectAll(".arrowInt")
+      .data([1,2,3])
+      .enter()
+      .append("path")
+      .attr("class", d => "introArrowInt arrowInt step0 arrow" + d )
+      .attr("d", function(d){
+        var p = pointAlongLine(
+            introX(d),
+            introX(+d + .7),
+            introY(dInt["e" + d]),
+            introY(dInt["e" + (d+1)])
+          )
+        return "M " +
+        p[0] + 
+        " " +
+        p[1]
+      })
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+      .style("opacity",0)
+      .attr("marker-end","url(#arrowHead)")
+
+
+
+    svg.selectAll(".swarmDot")
+      .data(introData)
+      .enter()
+      .append("circle")
+      .attr("class","swarmDot")
+      .attr('cx', introX(-1))
+      .attr('cy', d => introY(d.earnings0))
+      .style("fill", d => (d.dotColor == "b") ? "#1696d2" : "#fdbf11")
+      .style("stroke-width",0)
+      .style("stroke","#000000")
+      .attr("r", SWARM_DOT_R)
+
+
+var introArcEls = svg.selectAll(".swarmArc")
+    .data(introData.filter(d => d.dotColor == "yI"))
+    // .each(function(d){
+    .enter()
+    .append("path")
+  .attr("class",function(){
+// console.log(d)
+return 'swarmArc'
+})
+.attr('d', function (d) {
+var startY = introY(d.earnings4),
+endY = introY(d.earnings4Int),
+startX = introX(4) + (2*SWARM_DOT_R*d.earnings4Ind) + 10,
+endX = introX(4) + (2*SWARM_DOT_R*d.earnings4IntInd) + 10,
+distY = startY - endY
+
+return [
+'M',
+startX , startY,    
+'C',
+(startX + distY*X_BEZIER_CONST_INTRO), (startY + distY*Y_BEZIER_CONST_INTRO),
+(endX + distY*X_BEZIER_CONST_INTRO), (endY - distY*Y_BEZIER_CONST_INTRO),
+endX, endY
+]
+.join(' ');
+})
+.style("fill", "none")
+.attr("stroke", "#000000")
+.attr("stroke-width", 1)
+// .attr("marker-end","url(#arrowHead)")
+.style("opacity",0)
+// .attr("data-length",0)
+
+d3.selectAll(".swarmArc").each(function(){
+  var l = this.getTotalLength()
+
+  d3.select(this)
+  .transition()
+  .duration(0)
+  .style("stroke-dasharray", l + " " + l)
+.style("stroke-dashoffset", l)
+.attr("data-length",l)
+
+})
+
+svg.selectAll(".startArcDot")
+.data(introData.filter(d => d.dotColor == "yI"))
+.enter()
+.append("circle")
+.attr("class","startArcDot")
+.attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4Ind) + 10)
+.attr("cy", d => introY(d.earnings4))
+// .transition()
+// .duration(INTRO_DUR_TWODOT)
+// .delay(INTRO_DEL_TWODOT)
+// .style("stroke-width",0)
+// .style("stroke","#ff0000")
+.style("stroke", "none")
+.style("fill", "#fdbf11")
+.style("opacity",0)
+.attr("r", SWARM_DOT_R)
 
 
 
 
 
-
-      // .attr("height", 100)
   };
 
   function pointAlongLine(x1,x2,y1,y2){
@@ -256,7 +380,6 @@ var scrollVis = function () {
     let x3 = x1 + dist * dx
     let y3 = y1 + dist * dy
 
-console.log(x1,x2,y1,y2,dist,len)
 
     return [x3,y3]
 
@@ -274,80 +397,39 @@ console.log(x1,x2,y1,y2,dist,len)
     var introY = getIntroY()
     d3.select(".ia" + ind)
       .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",1)
+      .transition()
       .delay(function(){
         var scalar = (ind > 2) ? ind-2 : ind;
         return scalar*(2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT)
       })
       .duration(INTRO_DUR_TWODOT/2)
       .attr("y2", introY(-100))
-  }
+    if(ind == 4){
+      d3.select("#introAxisLabel text")
+        .transition()
+        .delay(function(){
+          var scalar = (ind > 2) ? ind-2 : ind;
+          return scalar*(2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT)
+        })
+        .duration(INTRO_DUR_TWODOT/2)
+        .style("opacity",1)
+    }
 
-  function drawArrow(ind){
-    var introX = getIntroX(),
+  }
+  function hideArrow(ind, isInt){
+       var introX = getIntroX(),
         introY = getIntroY()
 
     var s = 0.7
-    d3.selectAll(".introArrow.arrow" + ind)
+    var selector = (isInt) ? ".arrowInt.arrow" + ind : ".introArrow.arrow" + ind
+    d3.selectAll(selector)
       .transition()
-      .ease(d3.easeLinear)
-      .delay(function(){
-        var scalar = (ind > 1) ? ind-2 : ind;
-        return scalar*(2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT)
-      })
-      .style("opacity",1)
-      // .transition()
-      // .duration(INTRO_DUR_TWODOT)
-      // // .delay(INTRO_DEL_TWODOT)
-      // .attrTween("d", function(d){
-      //   var dat = (d3.select(this).classed("arrowHigh") ? dHigh : dLow)
-      //   var previous = d3.select(this).attr('d');
-      //   var current = "M " +
-      //   (introX(d) + 13 +5) + 
-      //   " " +
-      //   introY(dat["e" + d]) +
-      //   " L " +
-      //   (introX(+d + 0.7) - 13 - 15) + 
-      //   " " +
-      //   introY(dat["e" + d])
-      //   return d3.interpolatePath(previous, current);
-      // })
-      // .transition()
-      //   .duration(INTRO_DUR_TWODOT)
-      //   .delay(INTRO_DEL_TWODOT)
-      //   .attrTween('d', function(d){
-      //     var dat = (d3.select(this).classed("arrowHigh") ? dHigh : dLow)
-      //     var previous = d3.select(this).attr('d');
-    
-      //     console.log(d)
-          
-      //     var p = pointAlongLine(
-      //         introX(+d + 0.7) - 13 - 15,
-      //         introX(+d + 1),
-      //         introY(dat["e" + d]),
-      //         introY(dat["e" + (d+1)])
-      //       )
-
-      //     var current = "M " +
-      //     (introX(d) + 13 +5) + 
-      //     " " +
-      //     introY(dat["e" + d]) +
-      //     " L " +
-      //     (introX(+d + 0.7) - 13 - 5) + 
-      //     " " +
-      //     introY(dat["e" + d]) +
-      //     " L " +
-      //     (p[0]) + 
-      //     " " +
-      //     p[1]
-
-      //     return d3.interpolatePath(previous, current);
-      //   })
-      .transition()
-      .ease(d3.easeLinear)
-      .duration(INTRO_DUR_TWODOT)
-      // .delay(INTRO_DEL_TWODOT)
+      .duration(RESET_DURATION)
+      .style("opacity",0)
       .attrTween("d", function(d){
-        var dat = (d3.select(this).classed("arrowHigh") ? dHigh : dLow)
+        var dat = d3.select(this).classed("arrowHigh") ? dHigh : (isInt) ? dInt : dLow
         var previous = d3.select(this).attr('d');
           var p = pointAlongLine(
             introX(d),
@@ -358,11 +440,69 @@ console.log(x1,x2,y1,y2,dist,len)
         var current = "M " +
         p[0] + 
         " " +
+        p[1]
+        return d3.interpolatePath(previous, current);
+      })
+  }
+
+  function drawArrow(ind, isInt){
+    var introX = getIntroX(),
+        introY = getIntroY()
+
+    var s = 0.7
+    var selector = (isInt) ? ".arrowInt.arrow" + ind : ".introArrow.arrow" + ind
+    d3.selectAll(selector)
+      .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",0)
+      .attrTween("d", function(d){
+          var dat = (d3.select(this).classed("arrowHigh") ? dHigh : (isInt) ? dInt : dLow)
+          var previous = d3.select(this).attr('d');
+          var ind = (isInt) ? d-1 : d;
+          var y1 = (isInt && d == 1) ? dLow["e" + d] : dat["e" + ind]
+          var p = pointAlongLine(
+            introX(d),
+            introX(+d + .7),
+            introY(y1),
+            introY(dat["e" + (ind+1)])
+          )
+        var current = "M " +
+        p[0] + 
+        " " +
+        p[1]
+        return d3.interpolatePath(previous, current);
+      })
+      .transition()
+      .ease(d3.easeLinear)
+      .delay(function(){
+        var scalar = (ind > 1) ? ind-2 : ind;
+        if (isInt) return ((ind-1)*2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT + RESET_DURATION*2 + 200)
+        else return scalar*(2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT)
+      })
+      .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",1)
+      .duration(INTRO_DUR_TWODOT)
+      .style("opacity",1)
+      .attrTween("d", function(d){
+          var dat = (d3.select(this).classed("arrowHigh") ? dHigh : (isInt) ? dInt : dLow)
+          var previous = d3.select(this).attr('d');
+          var ind = (isInt) ? d-1 : d;
+          var y1 = (isInt && d == 1) ? dLow["e" + d] : dat["e" + ind]
+          var p = pointAlongLine(
+            introX(d),
+            introX(+d + .7),
+            introY(y1),
+            introY(dat["e" + (ind+1)])
+          )
+        var current = "M " +
+        p[0] + 
+        " " +
         p[1] +
         " L " +
         (introX(+d + 0.7) - 13 - 15) + 
         " " +
-        introY(dat["e" + (d+1)])
+        introY(dat["e" + (ind+1)])
         return d3.interpolatePath(previous, current);
       })
       .transition()
@@ -370,13 +510,15 @@ console.log(x1,x2,y1,y2,dist,len)
       .duration(INTRO_DUR_TWODOT)
       .delay(INTRO_DEL_TWODOT)
         .attrTween('d', function(d){
-          var dat = (d3.select(this).classed("arrowHigh") ? dHigh : dLow)
+          var dat = (d3.select(this).classed("arrowHigh") ? dHigh : (isInt) ? dInt : dLow)
           var previous = d3.select(this).attr('d');
+          var ind = (isInt) ? d-1 : d;
+          var y1 = (isInt && d == 1) ? dLow["e" + d] : dat["e" + ind]
           var p = pointAlongLine(
             introX(d),
             introX(+d + .7),
-            introY(dat["e" + d]),
-            introY(dat["e" + (d+1)])
+            introY(y1),
+            introY(dat["e" + (ind+1)])
           )
         var current = "M " +
           p[0] + 
@@ -385,11 +527,11 @@ console.log(x1,x2,y1,y2,dist,len)
           " L " +
           (introX(+d + 0.7) - 13 - 15) + 
           " " +
-          introY(dat["e" + (d+1)]) +
+          introY(dat["e" + (ind+1)]) +
           " L " +
           (introX(+d + 1) - 13 - 15) + 
           " " +
-          introY(dat["e" + (d+1)])
+          introY(dat["e" + (ind+1)])
 
 
           return d3.interpolatePath(previous, current);
@@ -416,6 +558,7 @@ console.log(x1,x2,y1,y2,dist,len)
     activateFunctions[5] = function(trigger){ interveneManyDots(introData, trigger) };
     activateFunctions[6] = function(trigger){ annotateManyDots(introData, trigger) };
     activateFunctions[7] = function(trigger){ showScenarioMenus(exploreData, trigger) };
+    activateFunctions[8] = function(trigger){ lastSection(trigger);}
     activateFunctions[9] = function(trigger){ lastSection(trigger);}
   };
 
@@ -444,6 +587,10 @@ console.log(x1,x2,y1,y2,dist,len)
   * shows: intro title
   *
   */
+
+
+
+
   function startTwoDots(twoData, trigger){
     // hideChooseSchool();
     var introX = getIntroX(),
@@ -455,6 +602,11 @@ console.log(x1,x2,y1,y2,dist,len)
       .style("opacity",0)
 
     d3.selectAll(".dotHigh")
+      .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",1)
+      .attr("cx", introX(0))
+      .attr("cy", d => introY(dHigh.e0))
       .transition()
       .ease(d3.easeLinear)
       .style("opacity",1)
@@ -479,32 +631,43 @@ console.log(x1,x2,y1,y2,dist,len)
 
     d3.selectAll(".dotLow")
       .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",1)
+      .attr("cx", introX(0))
+      .attr("cy", d => introY(dLow.e0))
+      .transition()
       .ease(d3.easeLinear)
       .style("opacity",1)
       .transition()
       .ease(d3.easeLinear)
       .duration(INTRO_DUR_TWODOT)
         .attr("cx", d => (d > 0) ? introX(.7) : introX(0))
+        .attr("cy", d => (d > 0) ? introY(dLow.e1) : introY(dLow.e0))
         .transition()
         .ease(d3.easeLinear)
         .duration(INTRO_DUR_TWODOT)
         .delay(INTRO_DEL_TWODOT)
           .attr("cx", d => (d > 0) ? introX(1) : introX(0))
-          .attr("cy", d => (d > 0) ? introY(dLow.e1) : introY(dLow.e0))
           .transition()
           .ease(d3.easeLinear)
           .duration(INTRO_DUR_TWODOT)
             .attr("cx", d => (d > 1) ? introX(1.7) : introX(d))
+            .attr("cy", d => (d > 1) ? introY(dLow.e2) : introY(dLow["e" + d]))
+
             .transition()
             .ease(d3.easeLinear)
             .duration(INTRO_DUR_TWODOT)
             .delay(INTRO_DEL_TWODOT)
               .attr("cx", d => (d > 1) ? introX(2) : introX(d))
-              .attr("cy", d => (d > 1) ? introY(dLow.e2) : introY(dLow["e" + d]))
 
 
-    drawArrow(0)
-    drawArrow(1)
+    drawArrow(0, false)
+    drawArrow(1, false)
+    hideArrow(2, false)
+    hideArrow(3, false)
+    hideArrow(1, true)
+    hideArrow(2, true)
+    hideArrow(3, true)
     drawIntroAxis(0)
     drawIntroAxis(1)
     drawIntroAxis(2)
@@ -512,12 +675,20 @@ console.log(x1,x2,y1,y2,dist,len)
 
   }
   function moveTwoDots(twoData, trigger){
-    console.log("Two dots more crossrorads -> lifetime earnings")
     var introX = getIntroX(),
         introY = getIntroY()
 
+    d3.select("#upArrowInt")
+      .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",0)
+
     d3.selectAll(".dotHigh")
       .transition()
+      .style("opacity",1)
+      .duration(RESET_DURATION)
+      .attr("cy", d => (d > 1) ? introY(dHigh.e2) : introY(dHigh["e" + d]))
+      .attr("cx", d => (d > 1) ? introX(2) : introX(d))
       .style("opacity",1)
       .transition()
       .ease(d3.easeLinear)
@@ -542,6 +713,10 @@ console.log(x1,x2,y1,y2,dist,len)
     d3.selectAll(".dotLow")
       .transition()
       .style("opacity",1)
+      .duration(RESET_DURATION)
+      .attr("cy", d => (d > 1) ? introY(dLow.e2) : introY(dLow["e" + d]))
+      .attr("cx", d => (d > 1) ? introX(2) : introX(d))
+      .transition()
       .transition()
       .ease(d3.easeLinear)
       .duration(INTRO_DUR_TWODOT)
@@ -563,40 +738,432 @@ console.log(x1,x2,y1,y2,dist,len)
             .delay(INTRO_DEL_TWODOT)
               .attr("cx", d => (d > 3) ? introX(4) + 20 : introX(d))
 
+    d3.selectAll(".dotInt")
+      .transition()
+      .duration(RESET_DURATION)
+      .attr("cy", introY(dLow["e1"]))
+      .attr("cx", introX(1))
+      .style("opacity",0)
 
-    drawArrow(2)
-    drawArrow(3)
+    d3.selectAll("#introAxisLabel")
+      .transition()
+      .style("opacity",1)
+
+    drawArrow(2, false)
+    drawArrow(3, false)
+    hideArrow(1, true)
+    hideArrow(2, true)
+    hideArrow(3, true)
     drawIntroAxis(3)
     drawIntroAxis(4)
   }
 
   function interveneTwoDots(twoData, trigger){
-    console.log("Two dots intervention")
-  }
+    var introX = getIntroX(),
+        introY = getIntroY()
 
-  function showWideText(trigger){
-    console.log("full wide text")
-    d3.selectAll(".step0")
+    d3.select("#upArrowInt")
       .transition()
+      .duration(INTRO_DUR_TWODOT)
+      .style("opacity",1)
+
+    d3.selectAll(".introAxis")
+      .transition()
+      .style("opacity",1)
+      .attr("y2", introY(-100))
+    d3.selectAll("#introAxisLabel")
+      .transition()
+      .style("opacity",1)
+
+    for(var i = 0; i < 5; i++){
+      var finalDotOpacity = (i < 2 ) ? 1 : .4
+      var finalArrowOpacity = (i < 1) ? 1 : .3
+      if(i != 4){
+        d3.select(".arrowLow.arrow" + i)
+          .transition()
+          .duration(RESET_DURATION)
+          .style("opacity",1)
+          .attrTween("d", function(d){
+            var dat = dLow;
+            var previous = d3.select(this).attr('d');
+            var p = pointAlongLine(
+              introX(d),
+              introX(+d + .7),
+              introY(dat["e" + d]),
+              introY(dat["e" + (d+1)])
+            )
+          var current = "M " +
+            p[0] + 
+            " " +
+            p[1] +
+            " L " +
+            (introX(+d + 0.7) - 13 - 15) + 
+            " " +
+            introY(dat["e" + (d+1)]) +
+            " L " +
+            (introX(+d + 1) - 13 - 15) + 
+            " " +
+            introY(dat["e" + (d+1)])   
+            return d3.interpolatePath(previous, current);
+          })
+          .transition()
+          .duration(INTRO_DUR_TWODOT)
+          .style("opacity",finalArrowOpacity)
+        d3.select(".arrowHigh.arrow" + i)
+          .transition()
+          .duration(RESET_DURATION)
+          .style("opacity",1)
+          .attrTween("d", function(d){
+            var dat = dHigh;
+            var previous = d3.select(this).attr('d');
+            var p = pointAlongLine(
+              introX(d),
+              introX(+d + .7),
+              introY(dat["e" + d]),
+              introY(dat["e" + (d+1)])
+            )
+          var current = "M " +
+            p[0] + 
+            " " +
+            p[1] +
+            " L " +
+            (introX(+d + 0.7) - 13 - 15) + 
+            " " +
+            introY(dat["e" + (d+1)]) +
+            " L " +
+            (introX(+d + 1) - 13 - 15) + 
+            " " +
+            introY(dat["e" + (d+1)])   
+            return d3.interpolatePath(previous, current);
+          })
+          .transition()
+          .duration(INTRO_DUR_TWODOT)
+          .style("opacity",1)
+        }
+        d3.select(".dotLow.dl" + i)
+          .transition()
+          .duration(RESET_DURATION)
+          .attr("cy", d => introY(dLow["e" + d]))
+          .attr("cx", d => (d > 3) ? introX(4) + 20 : introX(d))
+          .transition()
+          .duration(INTRO_DUR_TWODOT)
+          .style("opacity",finalDotOpacity)
+        d3.select(".dotHigh.dh" + i)
+          .transition()
+          .duration(RESET_DURATION)
+          .attr("cy", d => introY(dHigh["e" + d]))
+          .attr("cx", d => (d > 3) ? introX(4) + 20 : introX(d))
+          .transition()
+          .duration(INTRO_DUR_TWODOT)
+          .style("opacity",1)
+    }
+
+    d3.selectAll(".dotInt")
+      .transition()
+      .duration(RESET_DURATION)
+      .attr("cy", d => (d == 1) ? introY(dLow.e1) : introY(dInt["e" + (d-1)]))
+      .attr("cx", d => introX(d))
       .style("opacity",0)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(RESET_DURATION)
+      .delay(function(d){
+        // var scalar = (ind > 2) ? ind-2 : ind;
+        return ((d-1)*2*INTRO_DUR_TWODOT + INTRO_DEL_TWODOT + RESET_DURATION*2)
+      })
+      .style("opacity",1)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(INTRO_DUR_TWODOT)
+          .attr("cx", d => introX(+d + .5))
+          .attr("cy", d => introY(dInt["e" + d]))
+          // .style("opacity",1)
+          .transition()
+          .ease(d3.easeLinear)
+          .duration(INTRO_DUR_TWODOT)
+          .attr("cx", d => (d > 2) ? introX(4) + 20 : introX(d+1))
+          //   .attr("cx", d => (d > 3) ? introX(3.7) : introX(d))
+          //   .attr("cy", d => (d > 3) ? introY(dLow.e4) : introY(dLow["e" + d]))
+          //   .transition()
+          //   .ease(d3.easeLinear)
+          //   .duration(INTRO_DUR_TWODOT)
+          //   .delay(INTRO_DEL_TWODOT)
+          //     .attr("cx", d => (d > 3) ? introX(4) + 20 : introX(d))
+    // d3.select(".arrowLow.arrow2").transition().duration(INTRO_DUR_TWODOT).style("opacity",.3)
+    // d3.select(".arrowLow.arrow3").transition().duration(INTRO_DUR_TWODOT).style("opacity",.3)
+    // d3.select(".dotLow.dl2").transition().duration(INTRO_DUR_TWODOT).style("opacity",.4)
+    // d3.select(".dotLow.dl3").transition().duration(INTRO_DUR_TWODOT).style("opacity",.4)
+    // d3.select(".dotLow.dl4").transition().duration(INTRO_DUR_TWODOT).style("opacity",.4)
+    drawArrow(1, true)
+    drawArrow(2, true)
+    drawArrow(3, true)
+    d3.select("#chapterLabelContainer").style("background","white")
+
+  }
+  function clearAll(){
+    var introX = getIntroX(),
+    introY = getIntroY()
+    d3.selectAll(".step0")
+    .transition()
+    .style("opacity",0)
+    d3.selectAll(".swarmDot")
+    .transition()
+    .duration(0)
+    .attr("cx", introX(-1))
+    .attr("cy", d => introY(d.earnings0))
+    d3.select("#upArrowInt")
+    .transition()
+    .style("opacity",0)
+    d3.selectAll(".startArcDot")
+    .transition()
+    .duration(SWARM_DOT_DUR)
+    .style("opacity",0)
+  }
+  function showWideText(trigger){
+    clearAll();
+    d3.select("#chapterLabelContainer").style("background","none")
   }
 
   function showManyDots(introData, trigger){
-    console.log("lots dots")
+    var introX = getIntroX(),
+        introY = getIntroY()
+
+    d3.select("#upArrowInt")
+      .transition()
+      .duration(RESET_DURATION)
+      .style("opacity",0)
+
+    d3.selectAll(".introAxis")
+      .transition()
+      .style("opacity",1)
+      .attr("y2", introY(-100))
+    d3.selectAll("#introAxisLabel")
+      .transition()
+      .style("opacity",1)
+
+    d3.selectAll(".swarmDot")
+      .transition()
+      .duration(RESET_DURATION)
+      .attr("cx", introX(-1))
+      .attr("cy", d => introY(d.earnings0))
+      .style("stroke-width",0)
+      .style("stroke","#000000")
+      .attr("r",SWARM_DOT_R)
+      .transition()
+      .duration(SWARM_DOT_DUR)
+      .delay(d => d.t0)
+      // .ease(d3.easeLinear)
+            .attr("cx", introX(0))
+        .attr("cy", d => introY(d.earnings1))
+        .transition()
+        .duration(SWARM_DOT_DUR)  
+        .attr("cx", introX(1))
+        .attr("cy", d => introY(d.earnings1))
+        .transition()
+        .duration(SWARM_DOT_DUR)
+        // .ease(d3.easeLinear)
+          .attr("cx", introX(2))
+          .attr("cy", d => introY(d.earnings2))
+          .transition()
+          .duration(SWARM_DOT_DUR)
+          // .ease(d3.easeLinear)
+            .attr("cx", introX(3))
+            .attr("cy", d => introY(d.earnings3))
+            .transition()
+            .duration(SWARM_DOT_DUR*2)
+            // .ease(d3.easeLinear)
+              .attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4Ind) + 10)
+              .attr("cy", d => introY(d.earnings4))
+
+    d3.select("#chapterLabelContainer").style("background","white")
+
   }
 
   function interveneManyDots(introData, trigger){
-    console.log("intervention lots")
+    var introX = getIntroX(),
+        introY = getIntroY()
+
+d3.selectAll(".startArcDot")
+  .transition()
+  .duration(RESET_DURATION)
+  .style("opacity",0)
+
+d3.selectAll(".swarmArc").each(function(){
+  var l = d3.select(this).attr("data-length")
+
+  d3.select(this)
+  .transition()
+  .duration(RESET_DURATION)
+  .style("stroke-dasharray", l + " " + l)
+  .style("stroke-dashoffset", l)
+})
+
+
+    d3.select("#selectScenarioContainer")
+      .transition()
+      .style("right","-700px")
+
+d3.selectAll(".startArcDot")
+  .transition()
+  .duration(SWARM_DOT_DUR)
+  .style("opacity",0)
+
+    d3.selectAll(".introAxis")
+      .transition()
+      .style("opacity",1)
+      .attr("y2", introY(-100))
+    d3.selectAll("#introAxisLabel")
+      .transition()
+      .style("opacity",1)
+
+    d3.select("#upArrowInt")
+      .transition()
+      .duration(SWARM_DOT_DUR)
+      .delay(1000)
+      .style("opacity",1)
+
+    d3.selectAll(".swarmDot")
+      .transition()
+      .duration(RESET_DURATION)
+      .attr("cx", introX(-1))
+      .attr("cy", d => introY(d.earnings0))
+      .style("opacity",1)
+      .transition()
+      .duration(SWARM_DOT_DUR)
+      .delay(d => d.t0)
+      // .ease(d3.easeLinear)
+        .attr("cx", introX(0))
+        .attr("cy", d => introY(d.earnings1))
+        .transition()
+        .duration(SWARM_DOT_DUR)  
+        .attr("cx", introX(1))
+        .attr("cy", d => introY(d.earnings1))
+        .transition()
+        .duration(RESET_DURATION)
+        .style("stroke-width", d => (d.dotColor == "yI") ? 3 : 0)
+        .transition()
+        .duration(SWARM_DOT_DUR)
+        // .ease(d3.easeLinear)
+          .attr("cx", introX(2))
+          .attr("cy", d => (d.dotColor == "yI") ?  introY(d.earnings2Int) : introY(d.earnings2))
+          .transition()
+          .duration(SWARM_DOT_DUR)
+          // .ease(d3.easeLinear)
+            .attr("cx", introX(3))
+            .attr("cy", d => (d.dotColor == "yI") ?  introY(d.earnings3Int) : introY(d.earnings3))
+            .transition()
+            .duration(SWARM_DOT_DUR*2)
+            // .ease(d3.easeLinear)
+              .attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4IntInd) + 10)
+              .attr("cy", d => (d.dotColor == "yI") ?  introY(d.earnings4Int) : introY(d.earnings4))
   }
 
   function annotateManyDots(introData, trigger){
-    console.log("intervention show arrows/change")
+
+    d3.select("#selectScenarioContainer")
+      .transition()
+      .style("right","-700px")
+    
+    var introX = getIntroX(),
+        introY = getIntroY()
+
+    d3.selectAll(".introAxis")
+      .transition()
+      .style("opacity",1)
+      .attr("y2", introY(-100))
+    d3.selectAll("#introAxisLabel")
+      .transition()
+      .style("opacity",1)
+
+    d3.select("#upArrowInt")
+      .transition()
+      .style("opacity",0)
+
+    d3.selectAll(".swarmDot")
+      .transition()
+      .duration(SWARM_DOT_DUR)
+    // .ease(d3.easeLinear)
+      .attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4IntInd) + 10)
+      .attr("cy", d => (d.dotColor == "yI") ?  introY(d.earnings4Int) : introY(d.earnings4))
+      .style("stroke-width", d => (d.dotColor == "yI") ? 3 : 0)
+      // .style("fill", d => (d.dotColor == "yI") ? "#" : 0)
+      .transition()
+      // .delay()
+      .style("opacity", d => (d.dotColor == "yI") ? 1 : .1)
+d3.selectAll(".startArcDot")
+  .transition()
+  .duration(SWARM_DOT_DUR)
+  .style("opacity",1)
+
+
+d3.selectAll(".swarmArc").each(function(D,I){
+  var l = d3.select(this).attr("data-length")
+
+  d3.select(this)
+  .transition()
+  // .duration()
+.style("stroke-dashoffset", l)
+.style("opacity",1)
+.transition()
+.ease(d3.easeLinear)
+.delay(function(d,i) {  return I*10 + 1200 })
+.duration(1000)
+.style("stroke-dashoffset", 0)
+// .attrTween("stroke-dashoffset", function(d,i){
+//   // console.log(i)
+//   var arcLength = d3.select(this).attr("data-length")
+//   return customInterpolateIntro(this,arcLength)
+// })
+
+})
+
+
+
+
+
+
   }
+
+
+function customInterpolateIntro(arc, arcLength){
+    // console.log(a,b)
+    return function(t){
+        // console.log(arc, dot, t/LONG_DURATION, t)
+        // console.log(t)
+        return arcLength - t*arcLength
+
+    }
+
+}
+
+
+
   function showScenarioMenus(exploreData, trigger){
-    console.log("show scenario menus")
+
+d3.selectAll(".swarmArc").each(function(){
+  var l = this.getTotalLength()
+
+  d3.select(this)
+  .transition()
+  .duration(RESET_DURATION)
+  .style("stroke-dasharray", l + " " + l)
+  .style("stroke-dashoffset", l)
+})
+
+
+
+    var introX = getIntroX(),
+        introY = getIntroY()
+    d3.select("#selectScenarioContainer")
+      .transition()
+      .style("right","0px")
+    clearAll()
   }
 
   function lastSection(){
+    d3.select("#selectScenarioContainer")
+      .transition()
+      .style("right","-700px")
   }
 
   /**
@@ -614,18 +1181,108 @@ console.log(x1,x2,y1,y2,dist,len)
   */
   chart.activate = function (index) {
     activeIndex = index;
-    console.log(index)
-    var sign = (activeIndex - lastIndex) < 0 ? 1 : 1;
+    var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
     scrolledSections.forEach(function (i) {
-    activateFunctions[i]("scroll");
+    if(i == -1){
+      // activateFunctions[0]("scroll")
+      animatePerson()
+    }else{
+      showNavDot(i + 2)
+      activateFunctions[i]("scroll");
+    }
     });
     lastIndex = activeIndex;
   };
   return chart;
 };
 
+function showNavDot(ind){
+  if(ind >= 10){
+    if(ind == 10){
+      d3.select("#chapterHeader").text("Section 3")
+      d3.select("#chapterLabel").text("WRAP-UP")
+    }
+    if(ind == 11){
+      d3.select("#chapterHeader").text("Section 4")
+      d3.select("#chapterLabel").text("ABOUT THE PROJECT")  
+    }
+    d3.select("#chapterLabelContainer")
+      .style("width","240px")
+      .style("background","rgba(255,255,255,.7)")
+  }else{
+    if(ind == 9){
+      d3.select("#chapterHeader").text("Section 2")
+      d3.select("#chapterLabel").text("THE SCENARIOS")        
+    }else{
+      d3.select("#chapterHeader").text("Section 1")
+      d3.select("#chapterLabel").text("INTRODUCTION") 
+    }
+    d3.select("#chapterLabelContainer")
+      .style("width","calc(50vw - 100px)")
+      .style("background","white")    
+  }
+  d3.selectAll(".scrollNavEl").classed("active",false)
+  d3.select("#sn" + ind).classed("active", true)
 
+}
+function animatePerson(){
+  showNavDot(1)
+  // console.log(activeIndex)
+  d3.selectAll(".step0")
+    .transition()
+    .duration(RESET_DURATION)
+    .style("opacity",0)
+
+
+  d3.select("#personInnerCircle")
+    .transition()
+    .duration(RESET_DURATION)
+    .attr("r", 163)
+    .style("stroke-width", 3)
+    .style("opacity",1)
+    .transition()
+    .duration(1200)
+    .attr("r",11.5)
+    .style("stroke-width",25)
+  d3.select("#personOuterCircle")
+    .transition()
+    .duration(RESET_DURATION)
+    .attr("r", 166)
+    .style("stroke-width", 3)
+    .style("opacity",1)
+    .transition()
+    .duration(1200)
+      .attr("r",125)
+      .style("stroke-width", 200)
+      .transition()
+      .duration(10)
+        .style("opacity",0)
+  d3.select("#person")
+    .transition()
+    .duration(RESET_DURATION)
+    .style("opacity",1)
+    .transition()
+    .delay(1200)
+    .duration(10)
+      .style("opacity",0)
+
+  d3.select(".pathImg.pathGrey")
+    .transition()
+    .delay(1210)
+    .duration(900)
+      .style("opacity",1)
+  d3.select(".pathImg.pathBlue")
+    .transition()
+    .delay(1910)
+    .duration(900)
+      .style("opacity",1)
+  d3.select(".pathImg.pathYellow")
+    .transition()
+    .delay(2610)
+    .duration(900)
+      .style("opacity",1)
+}
 
 /**
 * display - called once data
@@ -643,7 +1300,7 @@ function display(rawData) {
   // create a new plot and
   // display it
   var plot = scrollVis();
-
+  var introMargin = getIntroChartMargins();
 
   d3.select('#narrativeVizContainer')
   .style("left", function(){
@@ -687,42 +1344,6 @@ function display(rawData) {
 
 }
 
-function animatePerson(){
-  d3.select("#personInnerCircle")
-    .transition()
-    .duration(2200)
-    .attr("r",11.5)
-    .style("stroke-width",25)
-  d3.select("#personOuterCircle")
-    .transition()
-    .duration(2200)
-      .attr("r",125)
-      .style("stroke-width", 200)
-      .transition()
-      .duration(10)
-        .style("opacity",0)
-  d3.select("#person")
-    .transition()
-    .delay(2200)
-    .duration(10)
-      .style("opacity",0)
-
-  d3.select(".pathImg.pathGrey")
-    .transition()
-    .delay(2210)
-    .duration(900)
-      .style("opacity",1)
-  d3.select(".pathImg.pathBlue")
-    .transition()
-    .delay(2910)
-    .duration(900)
-      .style("opacity",1)
-  d3.select(".pathImg.pathYellow")
-    .transition()
-    .delay(3610)
-    .duration(900)
-      .style("opacity",1)
-}
 
 const dataFiles = ["data/intro.csv", "data/twoDots.csv", "data/explore.csv"];
 const promises = [];

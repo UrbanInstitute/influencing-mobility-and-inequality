@@ -1,3 +1,6 @@
+
+
+
 function initHistogram(){
 ///////////////////////////////////////////////////
 const BIN_WIDTH = 100000;
@@ -23,11 +26,11 @@ var yAxis;
 
 const dollarAxisFormat = d3.format("$.2s")
 
-var svg = d3.select("#graphic")
+var svg = d3.select("#fixedChartContainer")
     .append("svg")
 
 function getGroupWidth(){
-    return 200;
+    return (window.innerWidth-100)/6;
 
 }
 function getChartWidth(){
@@ -35,7 +38,7 @@ function getChartWidth(){
 
 }
 function getChartHeight(){
-    return 800;
+    return window.innerHeight - 200;
 }
 function getChartMargins(){
     return {"top" : 20, "bottom" : 80, "left": 100, "right" : 0}
@@ -51,6 +54,11 @@ function setTopic(){
 
 }
 function showIntervention(topic, data){
+    d3.selectAll(".dotOrigin").remove()
+    if(topic != "earnings"){
+        topic = "earnings_" + topic
+    }
+    // console.log(topic)
     d3.selectAll(".arc").remove()
     d3.selectAll(".dot")
     .attr("class", d => `dot bin${d[topic]} bin${d.earnings}`)
@@ -59,11 +67,11 @@ function showIntervention(topic, data){
         .attr("cx", (d,i) => getDotPos("earnings", d, data).x )
         .attr("cy", (d,i) => getDotPos("earnings", d, data).y )
 
-    // var delayI = 0;
+    var delayI = 0;
     d3.selectAll(".dot")
         .style("fill", function(d,i){
             if(d.earnings != d[topic]){
-                return (+d.earnings > +d[topic]) ? "#e88e2d" : "#fdbf11"
+                return (+d.earnings < +d[topic]) ? "#1696d2" : "#000000"
             }else{
                 return "#9d9d9d"
             }
@@ -74,7 +82,7 @@ function showIntervention(topic, data){
             // console.log(i)
             // if(d.earnings != d[topic]) delayI += 1;
             // console.log(delayI)
-            return (d.earnings == d[topic]) ? LONG_DURATION*2  : QUICK_DURATION 
+            return (d.earnings == d[topic]) ? LONG_DURATION*3  : QUICK_DURATION 
         })
         .duration(function(d){
             return (d.earnings == d[topic]) ? 2*QUICK_DURATION : LONG_DURATION
@@ -115,9 +123,10 @@ function showIntervention(topic, data){
                     var startY = getDotPos("earnings", d, data).y,
                         endY = getDotPos(topic, d, data).y
                     // 
-                    return (startY > endY) ? "#fdbf11" : "#e88e2d"
+                    return (startY > endY) ? "#1696d2" : "#000000"
                 })
                 .attr("stroke-width", 1)
+
 
             // var length = arc.node().getTotalLength();
     arcHide.each(function(){
@@ -147,6 +156,10 @@ function showIntervention(topic, data){
 }
 
 function animateArc(arc, dot, d, length, g){
+    tmp = d3.select(dot).clone()
+    tmp.style("fill","none")
+        .style("stroke","#696969")
+        .attr("class","dotOrigin")
 d3.select(arc)
 //                 .style("fill", "none")
 //                 .attr("stroke", "#696969")
@@ -163,8 +176,12 @@ d3.select(arc)
             var arcLength = d3.select(this).attr("stroke-dashoffset")
             return customInterpolate(arc, dot, arcLength)
           })
-          .transition()
-          .style("opacity",.3)
+                .transition()
+                .duration(1000)
+                .delay(1000)
+                .style("opacity", .7)
+
+          // .style("opacity",.3)
 
 }
 
@@ -196,7 +213,7 @@ function buildScales(data){
     var demographics = [...new Set(data.map(d => d.demographic))]
     z = d3.scaleBand()
         .range([margin.left, w - margin.left - margin.right])
-        .domain(["White and Other Male", "White and Other Female", "Black Male","Black Female","Hispanic Male","Hispanic Female"])
+        .domain(["White men+", "White women+", "Black men","Black women","Hispanic men","Hispanic women"])
 
     x = d3.scaleLinear()
         .range([gMargin.left, gw - gMargin.left - gMargin.right])
@@ -228,6 +245,7 @@ function buildScales(data){
 function buildHistogram(data){
 
     d3.selectAll(".dot").remove()
+    d3.selectAll(".dotOrigin").remove()
 
     var gw = getGroupWidth(),
         w = getChartWidth(),
@@ -253,8 +271,8 @@ function buildHistogram(data){
             .attr("x2", w - margin.left - margin.right)
             .attr("stroke-width", 1 + (h-margin.top-margin.bottom)/(UPPER_BOUND/BIN_WIDTH) + 1)
             .attr("stroke-opacity", (d,i) => (i%2 == 1) ? 0.03 : 0))
-            .on('mouseover', (d,i) => highlightBin(d,i))
-            .on("mouseout", mouseoutBin)
+            // .on('mouseover', (d,i) => highlightBin(d,i))
+            // .on("mouseout", mouseoutBin)
 
     svg.append("g")
         .attr("class", "x axis")
@@ -276,6 +294,52 @@ function buildHistogram(data){
         .attr("cy", (d,i) => getDotPos("earnings", d, data).y )
         .attr("r", DOT_R)
         .style("fill", "#9d9d9d")
+    
+    svg.append("rect")
+        .attr("x", z("White men+") + gw/2 - 54)
+        .attr("y", h-margin.bottom + 23)
+        .attr("width", 80)
+        .attr("height", 5)
+        .attr("class", "menUnder " + getActiveScenario())
+        .style("fill", "#a2d4ec")
+    svg.append("rect")
+        .attr("x", z("White women+") + gw/2 - 62)
+        .attr("y", h-margin.bottom + 23)
+        .attr("width", 97)
+        .attr("height", 5)
+        .attr("class", "womenUnder " + getActiveScenario())
+        .style("fill", "#a2d4ec")
+
+    svg.append("rect")
+        .attr("x", margin.left)
+        .attr("y", h-margin.bottom)
+        .attr("width", gw)
+        .attr("height", 20)
+        .style("fill", "rgba(0,0,0,0)")
+        .style("cursor","pointer")
+        .on("mouseover", function(){
+            d3.select(".whiteTt").style("display", "block").classed("men", true)
+            d3.selectAll(".menUnder").style("fill","#1696d2")
+        })
+        .on("mouseout", function(){
+            d3.select(".whiteTt").style("display", "none").classed("men", false)
+            d3.selectAll(".menUnder").style("fill","#a2d4ec")
+        })
+    svg.append("rect")
+        .attr("x", margin.left + gw)
+        .attr("y", h-margin.bottom)
+        .attr("width", gw)
+        .attr("height", 20)
+        .style("fill", "rgba(0,0,0,0)")
+        .style("cursor","pointer")
+        .on("mouseover", function(){
+            d3.select(".whiteTt").style("display", "block").classed("women", true)
+            d3.selectAll(".womenUnder").style("fill","#1696d2")
+        })
+        .on("mouseout", function(){
+            d3.select(".whiteTt").style("display", "none").classed("women", false)
+            d3.selectAll(".womenUnder").style("fill","#a2d4ec")
+        })
 }
 
 function highlightBin(d, a, b){
@@ -323,24 +387,47 @@ function getDotPos(topic, datum, data){
 }
 
 function initControls(data){
-    d3.select("#tmp")
+    d3.select(".foo")
     .on("change", function(){
     // console.log(this.value)
         var topic = this.value
         showIntervention(topic, data)
     })
 }
-
+var EXPLORE_DATA;
 function init(data){
     buildScales(data)
     buildHistogram(data)
     initControls(data)
+    dispatch.on("showIntervention", function(){
+        window.setTimeout(function(){
+            showIntervention(getActiveScenario(), data)    
+        }, 1500)
+        
+    })
+    dispatch.on("resetIntervention", function(){
+        if (d3.selectAll(".arc").nodes().length != 0){
+            showIntervention("earnings", data)        
+        }
+        
+    })
 }
 
-d3.csv("data/data.csv")
+d3.csv("data/explore.csv")
     .then(init)
 ///////////////////////////////////////////////////
 }
+function buildExploreChart(scenario){
+
+}
+function animateExploreChart(scenario){
+// showIntervention(scenario, EXPLORE_DATA)
+dispatch.call("showIntervention")
+}
+function resetExploreChart(scenario){
+dispatch.call("resetIntervention")   
+}
+
 
 initHistogram()
 // function 
