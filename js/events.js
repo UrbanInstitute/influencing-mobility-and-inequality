@@ -33,7 +33,7 @@ function showScenario(scenario, cardNum, trigger){
     if(getActiveScenario() && getActiveScenario() != scenario){
         d3.select("#overlayImageTmp")
             .style("opacity",0)
-            .style("background-image", "url('../images/scenarios/" + scenario + ".jpg')")
+            .style("background-image", "url('/images/scenarios/" + scenario + ".jpg')")
             .style("display","block")
             .transition()
             .duration(2000)
