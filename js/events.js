@@ -50,7 +50,7 @@ function showScenario(scenario, cardNum, trigger){
             .style("opacity",0)
             .on("end", function(){
                 d3.select(this)
-                    .style("background-image", "url('../images/scenarios/" + scenario + ".jpg')")
+                    .style("background-image", "url('images/scenarios/" + scenario + ".jpg')")
                     .style("display","block")
                     .style("opacity",1)
                 d3.select(".pickScenario.step").node().scrollIntoView()
@@ -58,7 +58,7 @@ function showScenario(scenario, cardNum, trigger){
 
     }else{
         d3.select("#overlayImage")
-            .style("background-image", "url('../images/scenarios/" + scenario + ".jpg')")
+            .style("background-image", "url('images/scenarios/" + scenario + ".jpg')")
             .style("display","block")
             .transition()
             .duration(1400)
