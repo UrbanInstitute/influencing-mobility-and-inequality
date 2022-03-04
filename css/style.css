@@ -568,7 +568,43 @@ position: absolute;
   font-size: 36px;
   margin-bottom: 15px;
 }
-
+.overlaySelectMenu, .overlaySelectMenu:hover, .overlaySelectMenu:focus, .mainSelectMenu, .mainSelectMenu:hover, .mainSelectMenu:focus{
+  background: none;
+    border: none;
+    color: black;
+    font-family: 'Lato';
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-bottom: 3px solid #fdbf11;
+    width: fit-content !important;
+    padding: 0px;
+    padding-bottom: 7px;
+    margin-top: 27px;
+    margin-left: 20px;
+}
+.mainSelectMenu{
+margin-bottom: 30px;
+    left: -20px;
+}
+.ui-button .ui-icon{
+  background-image: url(../../images/menuDown.png) !important;
+  background-size: cover;
+  width: 29px;
+  /* height: 30px; */
+  display: inline-block;
+  background-position: 0 0;
+  margin-left: 10px;
+  top: 7px;
+}
+.overlaySelectMenu.inverted{
+    color: #fff !important;
+}
+.ui-selectmenu-text{
+  padding: 0px;
+  margin: 0px;
+  width: fit-content !important;
+}
 /****************************************************/
 /*************** SCENARIO CHART *********************/
 /****************************************************/
@@ -594,6 +630,7 @@ position: absolute;
   position: fixed;
   top: 20px;
   left: 20px;
+  display: none;
 }
 .yaxisLabelContainer{
   position: relative;

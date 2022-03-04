@@ -70,10 +70,11 @@ function showIntervention(topic, data){
     var delayI = 0;
     d3.selectAll(".dot")
         .style("fill", function(d,i){
-            if(d.earnings != d[topic]){
-                return (+d.earnings < +d[topic]) ? "#1696d2" : "#000000"
-            }else{
+            var change = +d["change_" + topic]
+            if(change == "0"){
                 return "#9d9d9d"
+            }else{
+                return (change == "1") ? "#1696d2" : "#ca5800"
             }
         })
         .transition()
@@ -123,7 +124,7 @@ function showIntervention(topic, data){
                     var startY = getDotPos("earnings", d, data).y,
                         endY = getDotPos(topic, d, data).y
                     // 
-                    return (startY > endY) ? "#1696d2" : "#000000"
+                    return (startY > endY) ? "#1696d2" : "#ca5800"
                 })
                 .attr("stroke-width", 1)
 
@@ -362,7 +363,7 @@ function mouseoutBin(){
 function getDotPos(topic, datum, data){
     var demographic = datum.demographic,
         order = +datum['order_' + topic] - 1,
-        group = +datum[topic],
+        group = +Math.floor(datum[topic]),
         groupData = data.filter(d => d.demographic == demographic),
         totalDots = groupData.filter(d => d[topic] == group).length,
         dotsInCol = Math.ceil(totalDots/DOT_COLS);
@@ -387,11 +388,93 @@ function getDotPos(topic, datum, data){
 }
 
 function initControls(data){
-    d3.select(".foo")
-    .on("change", function(){
-    // console.log(this.value)
+$("#pickTopic")
+ .selectmenu({
+  classes: {
+    "ui-selectmenu-button": "mainSelectMenu"
+  },
+        change: function( event, data ) {
+            // console.log(event, data, this.value)
         var topic = this.value
-        showIntervention(topic, data)
+        showScenario(topic, 1)
+        }
+ })
+    // .on("change", function(){
+    //     var topic = this.value
+    //     showScenario(topic, 1)
+    // })
+$("select.foo")
+
+ .selectmenu({
+  classes: {
+    "ui-selectmenu-button": "overlayEl overlaySelectMenu"
+  },
+
+        change: function( event, garb ) {
+            // console.log(event, data, this.value)
+        var topic = this.value,
+            cardNum = getActiveCardNum()
+        if(cardNum == 5){
+            showIntervention(topic, data)
+        }else{
+            showScenario(topic, getActiveCardNum())
+        }
+        }
+ })
+
+
+    // .on("change", function(){
+    // console.log(this.value)
+    //     var topic = this.value,
+    //         cardNum = getActiveCardNum()
+    //     if(cardNum == 5){
+    //         showIntervention(topic, data)
+    //     }else{
+    //         showScenario(topic, getActiveCardNum())
+    //     }
+    // })
+d3.selectAll(".scenarioCardContainer")
+    .on("click", function(){
+        var scenario = d3.select(this).attr("class").replace("scenarioCardContainer","").trim()
+        showScenario(scenario, 1)
+    })
+d3.selectAll(".overlayNavContainer")
+    .on("click", function(d){
+        var scenario = getActiveScenario(),
+            cardNum = d3.select(this).attr("data-card")
+        showScenario(scenario, cardNum, "navBar")
+    })
+d3.selectAll(".overlayNavArrow")
+    .on("click", function(){
+        var scenario = getActiveScenario(),
+            increment = (d3.select(this).attr("id") == "leftNav") ? -1 : 1;
+            cardNum = +getActiveCardNum()+increment
+        showScenario(scenario, cardNum, "navArrow")
+
+    })
+d3.select("#closeOverlay")
+    .on("click", closeOverlay)
+
+d3.selectAll(".yaxisLabelContainer")
+    .on("mouseover", function(){
+        d3.select(this).select(".yaxisTt").style("display","block")
+    })
+    .on("mouseout", function(){
+        d3.select(this).select(".yaxisTt").style("display","none")
+    })
+d3.select("#liftetimeEarningsInline")
+    .on("mouseover", function(){
+        d3.select(".generalTT.lifetimeInline").style("display","block")
+    })
+    .on("mouseout", function(){
+        d3.select(".generalTT.lifetimeInline").style("display","none")
+    })
+d3.select("#whiteInline")
+    .on("mouseover", function(){
+        d3.select(".generalTT.whiteInline").style("display","block")
+    })
+    .on("mouseout", function(){
+        d3.select(".generalTT.whiteInline").style("display","none")
     })
 }
 var EXPLORE_DATA;

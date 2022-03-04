@@ -23,6 +23,9 @@ function closeOverlay(){
 }
 function showScenario(scenario, cardNum, trigger){
     d3.select(".foo").node().value = scenario
+    $(".foo").selectmenu("refresh")
+
+
     buildExploreChart(scenario);
     if(+cardNum == 5) animateExploreChart(scenario);
     else resetExploreChart()
@@ -173,6 +176,10 @@ function showScenario(scenario, cardNum, trigger){
         .classed("inverted", function(){
             return (cardNum == 1)
         })
+    d3.selectAll(".overlayEl")
+        .classed("inverted", function(){
+            return (cardNum == 1)
+        })
     d3.select("#closeOverlay")
         .classed("inverted", function(){
             return (cardNum == 1)
@@ -187,53 +194,7 @@ function showScenario(scenario, cardNum, trigger){
 $(document).ready(function(){
     $('html').animate({scrollTop:0}, 1);
     $('body').animate({scrollTop:0}, 1);
+
 });
 
-d3.select("#pickTopic")
-    .on("change", function(){
-        var topic = this.value
-        showScenario(topic, 1)
-    })
-d3.selectAll(".scenarioCardContainer")
-    .on("click", function(){
-        var scenario = d3.select(this).attr("class").replace("scenarioCardContainer","").trim()
-        showScenario(scenario, 1)
-    })
-d3.selectAll(".overlayNavContainer")
-    .on("click", function(d){
-        var scenario = getActiveScenario(),
-            cardNum = d3.select(this).attr("data-card")
-        showScenario(scenario, cardNum, "navBar")
-    })
-d3.selectAll(".overlayNavArrow")
-    .on("click", function(){
-        var scenario = getActiveScenario(),
-            increment = (d3.select(this).attr("id") == "leftNav") ? -1 : 1;
-            cardNum = +getActiveCardNum()+increment
-        showScenario(scenario, cardNum, "navArrow")
 
-    })
-d3.select("#closeOverlay")
-    .on("click", closeOverlay)
-
-d3.selectAll(".yaxisLabelContainer")
-    .on("mouseover", function(){
-        d3.select(this).select(".yaxisTt").style("display","block")
-    })
-    .on("mouseout", function(){
-        d3.select(this).select(".yaxisTt").style("display","none")
-    })
-d3.select("#liftetimeEarningsInline")
-    .on("mouseover", function(){
-        d3.select(".generalTT.lifetimeInline").style("display","block")
-    })
-    .on("mouseout", function(){
-        d3.select(".generalTT.lifetimeInline").style("display","none")
-    })
-d3.select("#whiteInline")
-    .on("mouseover", function(){
-        d3.select(".generalTT.whiteInline").style("display","block")
-    })
-    .on("mouseout", function(){
-        d3.select(".generalTT.whiteInline").style("display","none")
-    })

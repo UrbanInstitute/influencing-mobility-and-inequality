@@ -20,6 +20,19 @@ def getBin(val):
     else:
         return int(math.ceil(float(val)/binWidth))
 
+def getChange(e, v):
+    diff = float(v) - float(e)
+    # print(diff)
+
+    if(diff > 0 and diff > 2):
+        v = "1"
+    elif(diff < 0 and diff < -2):
+        v = "-1"
+    else:
+        v = "0"
+    # print(diff, v)
+    return v
+
 topics = ["earnings","earnings_hs","earnings_ba","earnings_aa","earnings_justice", "earnings_race", "earnings_comm",'earnings_job_quality','earnings_job_training']
 r = 0;
 for row in cr:
@@ -31,7 +44,7 @@ for row in cr:
     cat = cat.replace("White and Other Female","White women+")
     cat = cat.replace("Male","men")
     cat = cat.replace("Female","women")
-    print(cat)
+    
     d["demographic"] = cat
     d["earnings"] = getBin(d["o_lifetime_earn"])
     d["earnings_hs"] = getBin(d["life_earn_HS"])
@@ -43,6 +56,20 @@ for row in cr:
     d["earnings_comm"] = getBin(d["life_earn_isscommschools"])
     d["earnings_job_quality"] = getBin(d["life_earn_jobquality"])
     d["earnings_job_training"] = getBin(d["life_earn_jobtraining"])
+
+    d["change"] = 0
+    d["change_hs"] = getChange(d["o_lifetime_earn"], d["life_earn_HS"])
+    d["change_ba"] = getChange(d["o_lifetime_earn"], d["life_earn_BA"])
+    d["change_aa"] = getChange(d["o_lifetime_earn"], d["life_earn_AA"])
+    d["change_hs"] = getChange(d["o_lifetime_earn"], d["life_earn_HS"])
+    d["change_justice"] = getChange(d["o_lifetime_earn"], d["life_earn_CJ"])
+    d["change_race"] = getChange(d["o_lifetime_earn"], d["life_earn_race"])
+    d["change_comm"] = getChange(d["o_lifetime_earn"], d["life_earn_isscommschools"])
+    d["change_job_quality"] = getChange(d["o_lifetime_earn"], d["life_earn_jobquality"])
+    d["change_job_training"] = getChange(d["o_lifetime_earn"], d["life_earn_jobtraining"])
+
+
+
     d["tmp_id"] = r
     r += 1
     # print(r)
@@ -74,12 +101,14 @@ outHead = ["demographic"]
 for t in topics:
     outHead.append(t)
     outHead.append("order_" + t)
+    outHead.append("change_" + t)
 
 cw.writerow(outHead)
 
 
 for d in data:
-    r1 = [(d[x],d["order_" + x]) for x in topics]
+    # print(d)
+    r1 = [ [d[x],d["order_" + x], d[x.replace("earnings", "change")]] for x in topics]
     r = [d["demographic"]] + [x for tup in r1 for x in tup]
     cw.writerow(r)
     # d[""]

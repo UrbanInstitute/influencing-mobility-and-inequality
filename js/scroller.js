@@ -182,20 +182,20 @@ let FIXED = false;
     }else{
       if(d3.select(".lastStep").node().getBoundingClientRect().bottom <= 124){
         d3.select("#narrativeVizContainer")
-          .classed("posRelBottomSingleCol", true)
+          .classed("posRelBottomSingleCol", false)
           .classed("posRelTopSingleCol", false)
           .classed("posRelTop", false)
           .classed("posFixed", false)
-          .style("top", function(){
-            return (d3.select(".headerimage").node().getBoundingClientRect().height + d3.select(".container").node().getBoundingClientRect().height - VIS_HEIGHT - MARGIN.top - MARGIN.bottom + 5) + "px"
-          })  
+          // .style("top", function(){
+          //   return (d3.select(".headerimage").node().getBoundingClientRect().height + d3.select(".container").node().getBoundingClientRect().height - VIS_HEIGHT - MARGIN.top - MARGIN.bottom + 5) + "px"
+          // })  
         d3.select("#sections")
           .style("z-index",-1)
       }else{
         if(d3.select(".step").node().getBoundingClientRect().top >= 62){
           d3.select("#narrativeVizContainer")
             .classed("posRelBottomSingleCol", false)
-            .classed("posRelTopSingleCol", true)
+            .classed("posRelTopSingleCol", false)
             .classed("posRelBottom", false)
             .classed("posRelTop", false)
             .classed("posFixed", false)
