@@ -146,16 +146,16 @@ let FIXED = false;
           d3.select("#narrativeVizContainer")
             .classed("posRelBottomSingleCol", false)
             .classed("posRelTopSingleCol", false)
-            .classed("posRelBottom", true)
+            .classed("posRelBottom", false)
             .classed("posRelTop", false)
-            .classed("posFixed", false)
+            .classed("posFixed", true)
             .style("top", "-1270px")
           d3.select("#sections")
             .style("z-index",2)
         }else{
           if(!FIXED){
             FIXED = true;
-            animatePerson()
+            // animatePerson()
           }
 
         d3.select("#narrativeVizContainer")
@@ -185,12 +185,17 @@ let FIXED = false;
           .classed("posRelBottomSingleCol", false)
           .classed("posRelTopSingleCol", false)
           .classed("posRelTop", false)
-          .classed("posFixed", false)
+          .classed("posFixed", true)
           // .style("top", function(){
           //   return (d3.select(".headerimage").node().getBoundingClientRect().height + d3.select(".container").node().getBoundingClientRect().height - VIS_HEIGHT - MARGIN.top - MARGIN.bottom + 5) + "px"
-          // })  
-        d3.select("#sections")
-          .style("z-index",-1)
+          // })
+        if(getSize() == "desktop"){
+          d3.select("#sections")
+            .style("z-index",-1)
+        }else{
+          d3.select("#sections")
+            .style("z-index",20)
+        }
       }else{
         if(d3.select(".step").node().getBoundingClientRect().top >= 62){
           d3.select("#narrativeVizContainer")
@@ -198,7 +203,7 @@ let FIXED = false;
             .classed("posRelTopSingleCol", false)
             .classed("posRelBottom", false)
             .classed("posRelTop", false)
-            .classed("posFixed", false)
+            .classed("posFixed", true)
             .style("top", function(){
               return (d3.select(".headerimage").node().getBoundingClientRect().height + d3.select("#topText").node().getBoundingClientRect().height +30) + "px"
             }) 
@@ -240,7 +245,9 @@ let FIXED = false;
 
 
     visPosition()
-    var pos = window.pageYOffset - containerStart  - window.innerHeight/2 + 60;
+    var pos;
+    if(getSize() == "desktop") pos = window.pageYOffset - containerStart  - window.innerHeight/2 + 60;
+    else pos = window.pageYOffset - containerStart  + window.innerHeight/2;
     fixVis();
     var sectionIndex = d3.bisect(sectionPositions, pos) ;
     // sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));

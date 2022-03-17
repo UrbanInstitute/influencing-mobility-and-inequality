@@ -141,12 +141,12 @@ var scrollVis = function () {
       .style("opacity",0)
 
 
-
+    var personcx = (getSize() == "desktop") ? 221 : getIntroChartWidth()*.5 +21
     svg.append("circle")
       .attr("id", "personInnerCircle")
       .attr("class", "stepPerson")
       .attr("r", 163)
-      .attr("cx", 221)
+      .attr("cx", personcx)
       .attr("cy", 311)
       .style("fill", "none")
       .style("stroke", "#000")
@@ -155,7 +155,7 @@ var scrollVis = function () {
       .attr("id", "personOuterCircle")
       .attr("class", "stepPerson")
       .attr("r", 166)
-      .attr("cx", 221)
+      .attr("cx", personcx)
       .attr("cy", 311)
       .style("fill", "none")
       .style("stroke", "#ffffff")
@@ -550,16 +550,17 @@ svg.selectAll(".startArcDot")
   var setupSections = function (introData,twoDotData, exploreData) {
     // activateFunctions are called each
     // time the active section changes
-    activateFunctions[0] = function(trigger){ startTwoDots(twoDotData,trigger) };
-    activateFunctions[1] = function(trigger){ moveTwoDots(twoDotData,trigger) };
-    activateFunctions[2] = function(trigger){ interveneTwoDots(twoDotData,trigger) };
-    activateFunctions[3] = function(trigger){ showWideText(trigger) };
-    activateFunctions[4] = function(trigger){ showManyDots(introData, trigger) };
-    activateFunctions[5] = function(trigger){ interveneManyDots(introData, trigger) };
-    activateFunctions[6] = function(trigger){ annotateManyDots(introData, trigger) };
-    activateFunctions[7] = function(trigger){ showScenarioMenus(exploreData, trigger) };
-    activateFunctions[8] = function(trigger){ lastSection(trigger);}
+    activateFunctions[0] = function(trigger){ animatePerson() };
+    activateFunctions[1] = function(trigger){ startTwoDots(twoDotData,trigger) };
+    activateFunctions[2] = function(trigger){ moveTwoDots(twoDotData,trigger) };
+    activateFunctions[3] = function(trigger){ interveneTwoDots(twoDotData,trigger) };
+    activateFunctions[4] = function(trigger){ showWideText(trigger) };
+    activateFunctions[5] = function(trigger){ showManyDots(introData, trigger) };
+    activateFunctions[6] = function(trigger){ interveneManyDots(introData, trigger) };
+    activateFunctions[7] = function(trigger){ annotateManyDots(introData, trigger) };
+    activateFunctions[8] = function(trigger){ showScenarioMenus(exploreData, trigger) };
     activateFunctions[9] = function(trigger){ lastSection(trigger);}
+    activateFunctions[10] = function(trigger){ lastSection(trigger);}
   };
 
   /**
@@ -677,6 +678,10 @@ svg.selectAll(".startArcDot")
   function moveTwoDots(twoData, trigger){
     var introX = getIntroX(),
         introY = getIntroY()
+    d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0)
 
     d3.select("#upArrowInt")
       .transition()
@@ -761,6 +766,10 @@ svg.selectAll(".startArcDot")
   function interveneTwoDots(twoData, trigger){
     var introX = getIntroX(),
         introY = getIntroY()
+    d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0)
 
     d3.select("#upArrowInt")
       .transition()
@@ -897,7 +906,7 @@ svg.selectAll(".startArcDot")
     drawArrow(1, true)
     drawArrow(2, true)
     drawArrow(3, true)
-    d3.select("#chapterLabelContainer").style("background","white")
+    // d3.select("#chapterLabelContainer").style("background","white")
 
   }
   function clearAll(){
@@ -918,16 +927,23 @@ svg.selectAll(".startArcDot")
     .transition()
     .duration(SWARM_DOT_DUR)
     .style("opacity",0)
+       d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0) 
   }
   function showWideText(trigger){
     clearAll();
-    d3.select("#chapterLabelContainer").style("background","none")
+    // d3.select("#chapterLabelContainer").style("background","none")
   }
 
   function showManyDots(introData, trigger){
     var introX = getIntroX(),
         introY = getIntroY()
-
+    d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0)
     d3.select("#upArrowInt")
       .transition()
       .duration(RESET_DURATION)
@@ -975,14 +991,17 @@ svg.selectAll(".startArcDot")
               .attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4Ind) + 10)
               .attr("cy", d => introY(d.earnings4))
 
-    d3.select("#chapterLabelContainer").style("background","white")
+    // d3.select("#chapterLabelContainer").style("background","white")
 
   }
 
   function interveneManyDots(introData, trigger){
     var introX = getIntroX(),
         introY = getIntroY()
-
+    d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0)
 d3.selectAll(".startArcDot")
   .transition()
   .duration(RESET_DURATION)
@@ -1059,7 +1078,10 @@ d3.selectAll(".startArcDot")
   }
 
   function annotateManyDots(introData, trigger){
-
+    d3.selectAll(".stepPerson")
+      .transition()
+      .ease(d3.easeLinear)
+      .style("opacity",0)
     d3.select("#selectScenarioContainer")
       .transition()
       .style("right","-700px")
@@ -1188,7 +1210,8 @@ d3.selectAll(".swarmArc").each(function(){
       // activateFunctions[0]("scroll")
       animatePerson()
     }else{
-      showNavDot(i + 2)
+      showNavDot(i + 1)
+      console.log(i)
       activateFunctions[i]("scroll");
     }
     });
@@ -1198,32 +1221,49 @@ d3.selectAll(".swarmArc").each(function(){
 };
 
 function showNavDot(ind){
+  var dotSel;
   if(ind >= 10){
     if(ind == 10){
       d3.select("#chapterHeader").text("Section 3")
       d3.select("#chapterLabel").text("WRAP-UP")
+      dotSel = 3
     }
     if(ind == 11){
       d3.select("#chapterHeader").text("Section 4")
       d3.select("#chapterLabel").text("ABOUT THE PROJECT")  
+      dotSel = 4
     }
-    d3.select("#chapterLabelContainer")
-      .style("width","240px")
-      .style("background","rgba(255,255,255,.7)")
+    if(getSize() == "desktop"){
+      d3.select("#chapterLabelContainer")
+        .style("width","240px")
+        .style("background","rgba(255,255,255,.7)")
+    }else{
+      d3.select("#chapterLabelContainer")
+        .style("width","100%")
+        .style("background","rgba(255,255,255,.7)")
+    }
   }else{
     if(ind == 9){
       d3.select("#chapterHeader").text("Section 2")
-      d3.select("#chapterLabel").text("THE SCENARIOS")        
+      d3.select("#chapterLabel").text("THE SCENARIOS")
+      dotSel = 2
     }else{
       d3.select("#chapterHeader").text("Section 1")
       d3.select("#chapterLabel").text("INTRODUCTION") 
+      dotSel = 1
     }
-    d3.select("#chapterLabelContainer")
-      .style("width","calc(50vw - 100px)")
-      .style("background","white")    
+    if(getSize() == "desktop" || ind == 9){
+      d3.select("#chapterLabelContainer")
+        .style("width","50vw")
+        .style("background","rgba(255,255,255,.7)")
+    }else{
+      d3.select("#chapterLabelContainer")
+        .style("width","240px")
+        .style("background","none")
+    }
   }
   d3.selectAll(".scrollNavEl").classed("active",false)
-  d3.select("#sn" + ind).classed("active", true)
+  d3.select("#sn" + dotSel).classed("active", true)
 
 }
 function animatePerson(){

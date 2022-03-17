@@ -5,8 +5,10 @@ function getSize(){
   else return "desktop"
 }
 function getIntroChartWidth(section){
-  var w = window.innerWidth - 560,
-      margins = getIntroChartMargins(section),
+  var w;
+  if(IS_MOBILE()) w = window.innerWidth - 80
+  else w = window.innerWidth - 420
+  var margins = getIntroChartMargins(section),
     width = w - margins.left - margins.right;
   return width
 }
@@ -20,7 +22,9 @@ function getIntroChartHeight(section, index){
 function getIntroChartMargins(section){
   var size = getSize()
   var mb = (section == "explore") ? 60 : 33;
-  var margin = {top: 20, right: (window.innerWidth - 1000)*.5, bottom: mb, left: 40}
+  var margin;
+  if(getSize() == "desktop") margin = {top: 20, right: (window.innerWidth - 1000)*.5, bottom: mb, left: 40}
+  else margin = {top: 70, right: 100, bottom: mb, left: 40}
 
   return margin;  
 }
@@ -34,7 +38,7 @@ function getExploreChartWidth(section){
   return width
 }
 function getExploreChartHeight(section, index){
-  var baseH = 900,
+  var baseH = window.innerHeight,
     margins = getExploreChartMargins(section),
   
     height = baseH - margins.top - margins.bottom;

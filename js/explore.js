@@ -6,8 +6,6 @@ function initHistogram(){
 const BIN_WIDTH = 100000;
 const UPPER_BOUND = 2000000;
 
-const DOT_R = 2;
-const DOT_PAD = 1;
 const MAX_DOTS_IN_GROUP = 80;
 const TOTAL_DOTS = 1501;
 const DOT_COLS = 5;
@@ -38,14 +36,23 @@ function getChartWidth(){
 
 }
 function getChartHeight(){
-    return window.innerHeight - 200;
+    return window.innerHeight - 280;
+}
+function getDotR(){
+    if(getSize() == "desktop" && getChartHeight() > 700) return 2.5
+    else return 1.7
+}
+function getDotPad(){
+    if(getSize() == "desktop" && getChartHeight() > 700) return .5
+    return .3
 }
 function getChartMargins(){
     return {"top" : 20, "bottom" : 80, "left": 100, "right" : 0}
 
 }
 function getGroupMargins(){
-    return {"top" : 0, "bottom" : 0, "left": 40, "right" : 20}
+    if(getSize() == "desktop") return {"top" : 0, "bottom" : 0, "left": 40, "right" : 20}
+    else return {"top" : 0, "bottom" : 0, "left": 20, "right" : 20}
 }
 function getActiveTopic(){
 
@@ -53,6 +60,31 @@ function getActiveTopic(){
 function setTopic(){
 
 }
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+    while (word = words.pop()) {
+      line.push(word)
+      tspan.text(line.join(" "))
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop()
+        tspan.text(line.join(" "))
+        line = [word]
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+      }
+    }
+  })
+}
+
+
 function showIntervention(topic, data){
     d3.selectAll(".dotOrigin").remove()
     if(topic != "earnings"){
@@ -225,6 +257,7 @@ function buildScales(data){
         .domain([maxBin, 1])
 
     xAxis = d3.axisBottom(z).tickSizeOuter(0).tickSizeInner(6);
+
     yAxis = d3.axisLeft(y).ticks(h / 40)
     .tickSizeInner(-w)
     .tickFormat(function(d){
@@ -269,7 +302,7 @@ function buildHistogram(data){
         .call(g => g.selectAll(".tick line")
             .attr("data-bin", d => d)
             .attr("x1", -margin.left)
-            .attr("x2", w - margin.left - margin.right)
+            .attr("x2", w - margin.right - 2*margin.left)
             .attr("stroke-width", 1 + (h-margin.top-margin.bottom)/(UPPER_BOUND/BIN_WIDTH) + 1)
             .attr("stroke-opacity", (d,i) => (i%2 == 1) ? 0.03 : 0))
             // .on('mouseover', (d,i) => highlightBin(d,i))
@@ -278,7 +311,10 @@ function buildHistogram(data){
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", `translate(0,${h - margin.bottom})`)
-        .call(xAxis);
+        .call(xAxis)
+            .selectAll(".tick text")
+      .call(wrap, z.bandwidth())
+
 
     var g = svg.selectAll("demographicG")
         .data(demographics)
@@ -293,20 +329,20 @@ function buildHistogram(data){
         .attr("class", d => `dot bin${d.earnings}`)
         .attr("cx", (d,i) => getDotPos("earnings", d, data).x )
         .attr("cy", (d,i) => getDotPos("earnings", d, data).y )
-        .attr("r", DOT_R)
+        .attr("r", getDotR())
         .style("fill", "#9d9d9d")
     
     svg.append("rect")
         .attr("x", z("White men+") + gw/2 - 54)
         .attr("y", h-margin.bottom + 23)
-        .attr("width", 80)
+        .attr("width", 40)
         .attr("height", 5)
         .attr("class", "menUnder " + getActiveScenario())
         .style("fill", "#a2d4ec")
     svg.append("rect")
         .attr("x", z("White women+") + gw/2 - 62)
         .attr("y", h-margin.bottom + 23)
-        .attr("width", 97)
+        .attr("width", 40)
         .attr("height", 5)
         .attr("class", "womenUnder " + getActiveScenario())
         .style("fill", "#a2d4ec")
@@ -380,8 +416,8 @@ function getDotPos(topic, datum, data){
     if(DOT_COLS%2 == 1){
         mid = Math.ceil(Math.min(DOT_COLS, totalDots)/2)
         if(rowNum == mid) dotY = y(group)
-        else if(rowNum < mid) dotY = y(group) - (2*(DOT_R+DOT_PAD) * (mid - rowNum))
-        else dotY = y(group) + (2*(DOT_R+DOT_PAD) * (rowNum - mid))
+        else if(rowNum < mid) dotY = y(group) - (2*(getDotR()+getDotPad()) * (mid - rowNum))
+        else dotY = y(group) + (2*(getDotR()+getDotPad()) * (rowNum - mid))
     }
 
     return {"x" : x(dotOrder), "y": dotY}

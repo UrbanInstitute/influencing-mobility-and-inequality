@@ -1,0 +1,54 @@
+/* Full desktop experience down to width of 1284px*/
+#selectScenarioMobile{
+    display: none;
+}
+
+@media (max-width: 1284px){
+    #chapterLabelContainer {
+        padding-top: 27px;
+        padding-left: 27px;
+    }
+    #scrollNavContainer{
+        left: 3px;
+    }
+}
+
+/*this is when cards appear*/
+@media (max-height: 665px), (max-width: 1170px){
+    #narrativeVizContainer.posFixed{
+        left: 80px !important;
+    }
+    #selectScenarioMobile{
+        display: block;
+        animation: carouselDown 35s linear infinite;
+    }
+    #selectScenarioLeft, #selectScenarioRight{
+        display: none;
+    }
+    .pickScenario.step{
+        left: calc(50% - 46vw);
+        width: 59vw;
+        position: relative;
+        box-shadow: none;
+        padding: 30px 54px;
+        background: none;
+    }
+    .giantStep{
+        width: 540px !important;
+        box-shadow: none !important;
+        font-size: 29px !important;
+        margin-left: -60px !important;
+    }
+    .step.lastStep{
+        /*display: none;*/
+        opacity: 0 !important;
+        margin-bottom: 0px;
+    }
+    img.stepPerson{
+        margin-left: calc(50vw - 310px);
+    }
+    footer .content, .endText{
+width: 80vw !important;
+    max-width: 715px;
+    }
+}

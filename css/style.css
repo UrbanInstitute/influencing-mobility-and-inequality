@@ -97,7 +97,10 @@ position: absolute;
     top: 580px;
   }
 }
-
+  .pickScenario.step, .step.lastStep{
+    min-height: 42vh;
+    height: 42vh;
+  }
 /****************************************************/
 /***************  INTRO NAV    **********************/
 /****************************************************/
@@ -118,23 +121,23 @@ position: absolute;
   font-style: italic;
 }
 #scrollNavContainer{
-  position: fixed;
-  width: 40px;
-  height: 77vh;
-  top: 11.5vh;
-  left: 43px;
-  z-index: 10;
+    position: fixed;
+    width: 40px;
+    height: 360px;
+    top: calc(50vh - 180px);
+    left: 43px;
+    z-index: 10;
 }
 #scrollNavBar{
-  height: calc(100% - 7vh);
-  position: absolute;
-  width: 2px;
-  background: #d2d2d2;
-  left: 20px;
-  top: 2.5vh;
+    height: 290px;
+    position: absolute;
+    width: 2px;
+    background: #d2d2d2;
+    left: 20px;
+    top: 24px;
 }
 .scrollNavEl{
-  height: 7vh;
+  height: 94px;
   display: block;
   width: 40px;
   z-index: 11;
@@ -147,9 +150,9 @@ position: absolute;
   width: 14px;
   height: 14px;
   background: #d2d2d2;
-  left: 13px;
+  left: 14px;
   position: relative;
-  top: calc(3.5vh - 7px);
+  top: 22px;
   border-radius: 100%;
 }
 /****************************************************/
@@ -185,6 +188,7 @@ position: absolute;
 }
 
 
+
 /************* CHARTS **************/
 
 #introAxisLabel{
@@ -200,6 +204,7 @@ position: absolute;
   left: 165px;
   animation: bobIntervention 2s infinite;
   opacity: 0;
+  display: none !important;
 }
 
 
@@ -375,6 +380,7 @@ position: absolute;
 }
 .overlayCard.card5{
   left: 400vw;
+  background: white;
 }
 .overlayCard.card6{
   left: 500vw;
@@ -558,7 +564,7 @@ position: absolute;
 .overlayChartTextContainer{
   position: absolute;
   left: 98px;
-  top: 30px;
+  top: 68px;
   font-weight: 700;
   font-size: 18px;
 }
@@ -613,7 +619,7 @@ margin-bottom: 30px;
   position: fixed;
   z-index: 22;
   left: 100vw;
-  top: 180px;
+  top: 250px;
 }
 #fixedChartContainer svg text{
   font-family: Lato;
@@ -631,6 +637,17 @@ margin-bottom: 30px;
   top: 20px;
   left: 20px;
   display: none;
+}
+.overlayEl.eyebrow{
+    position: fixed;
+    left: 21px;
+    top: 7px;
+    color: black;
+    font-style: italic;
+    font-size: 14px;
+}
+.overlayEl.eyebrow.inverted{
+    color: white;
 }
 .yaxisLabelContainer{
   position: relative;
@@ -650,6 +667,44 @@ margin-bottom: 30px;
   display: none;
   left: 140px;
   top: -15px;
+}
+.legendContainer{
+    position: absolute;
+    font-size: 14px;
+    font-weight: normal;
+    right: 100px;
+}
+.legendRow{
+    display: inline-block;
+    margin-left: 30px;
+    width: 170px;
+    position: relative;
+}
+.legendRow span{
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    border-radius: 100%;
+    position: absolute;
+    left: -12px;
+    top: 5px;
+}
+.legendRow.before{
+    top: -17px;
+    position: relative;
+    margin-right: -29px;
+}
+.legendRow.before span{
+    border: 1px solid black;
+}
+.legendRow.increase span{
+      border: 1px solid #1696d2;
+      background: #1696d2;
+
+}
+.legendRow.decrease span{
+      border: 1px solid #ca5800;
+      background: #ca5800;
 }
 .generalTT {
   position: absolute;
@@ -744,7 +799,14 @@ margin-bottom: 30px;
   margin-bottom: 35vh !important;
 }
 .step.lastStep{
-  min-height: 20vh;
+  /*min-height: 20vh;*/
+}
+.step.firstStep{
+  min-height: 0px;
+  height: 20px;
+}
+.step.secondStep{
+  opacity: 1 !important;
 }
 #temp_logos{
   width: 698px;
@@ -994,7 +1056,9 @@ footer p{
   margin: auto;
 }
 
-
+#isMobile, #isPhone{
+  display: none;
+}
 
 @media (max-width: 2000px) {
 
@@ -1036,14 +1100,15 @@ footer p{
     margin-bottom: 800px;
   }
   .lastStep, .firstStep{
-    opacity: 0 !important;
+    /*opacity: 0 !important;*/
   }
+
   #bottomContent, #exploreBarContentWrapper {
     width: calc(100% - 40px) !important;
     padding: 20px !important;
   }
   .step.lastStep{
-    margin-bottom: 0px;
+    /*margin-bottom: 0px;*/
   }
 
   #narrativeVizContainer{
