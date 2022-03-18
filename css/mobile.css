@@ -17,7 +17,10 @@
 }
 
 /*this is when cards appear*/
-@media (max-height: 665px), (max-width: 1170px){
+@media (max-width: 1170px){
+    #headerTitle{
+        width: 100%;
+    }
     #narrativeVizContainer.posFixed{
         left: 80px !important;
     }
@@ -50,8 +53,190 @@
     img.stepPerson{
         margin-left: calc(50vw - 310px);
     }
+    .legendContainer{
+        width: 220px;
+        top: 168px;
+        left: -110px;
+    }
+    .legendRow{
+        height: 24px;
+    }
+    .legendRow.increase{
+        top: -18px;
+    }
+    .legendRow.decrease{
+        top: -13px;
+    }
+    #rightNav{
+        right: 65px;
+    }
+    .overlayNavArrow div{
+        width: 65px;
+    }
+    .overlayNavArrow img {
+        height: 65px;
+        top: 19px;
+        left: 10px;
+    }
+    #rightNav img {
+        left: 17px;
+    }
+    .overlayChartTextContainer h2 {
+        font-size: 30px;
+    }
+    .overlayChartTextContainer{
+        width: calc(100vw - 200px);
+    }
+    .overlayTextContainer h2{
+        font-size: 30px;
+    }
+
     footer .content, .endText{
-width: 80vw !important;
-    max-width: 715px;
+        width: 80vw !important;
+        max-width: 715px;
+    }
+}
+@media (max-width: 1000px){
+    .overlayTextContainer{
+        width: calc(100vw - 200px);
+        left: 100px;
+    }
+}
+@media (max-width: 768px){
+    #headerTitle{
+        font-size: 36px;
+    }
+    #headerSub{
+        font-size: 18px;
+        width: 90vw;
+    }
+    #headerGif{
+        width: 90vw;
+        max-width: 400px;
+    }
+    .wrapper.headerwrapper{
+        margin-top: 13%;
+    }
+    .container{
+        margin-top: 180px;
+    }
+    #narrativeVizContainer.posFixed{
+        left: 20px !important;
+    }
+    #selectScenarioMobile{
+        display: none;
+    }
+    .step{
+        font-size: 20px;
+    }
+    #chapterLabelContainer{
+        width: 100% !important;
+        background: rgba(255,255,255,.7) !important;
+    }
+    #chapterLabel{
+        font-size: 24px;
+    }
+    .giantStep{
+        width: 100vw !important;
+        margin-left: -50px !important;
+        font-size: 24px !important;
+    }
+    .step{
+        padding: 20px;
+    }
+    .pickScenario.step{
+        width: 100vw;
+    }
+    .pickScenario.step h2{
+        font-size: 30px;
+    }
+    .ui-selectmenu-text, .ui-button .ui-icon{
+        display: inline-block;
+    }
+    .ui-selectmenu-text{
+        font-size: 20px;
+        margin-right: 34px;
+    }
+    #closeOverlay {
+        position: fixed;
+        right: 7px;
+        top: 8px;
+    }
+    .overlayNavArrow div {
+        width: 48px;
+        height: 60px;
+    }
+    #rightNav{
+        right: 48px;
+    }
+    .overlayNavArrow img {
+        height: 42px;
+        top: 11px;
+        left: 11px;
+    }
+    #rightNav img{
+        left: 13px;
+    }
+    #overlayNavBar {
+        width: 98vw;
+        left: 1vw;
+    }
+    .overlayCard h1 {
+        width: 100%;
+        font-size: 49px;
+        margin-top: 5vh;
+    }
+    .card1Subhead {
+        font-size: 30px;
+        width: calc(100% - 110px);
+    }
+    .overlayTextContainer {
+        width: calc(100vw - 140px);
+        left: 69px;
+        top: 70px;
+        font-size: 15px;
+    }
+    .overlayTextContainer h2{
+        margin-bottom: 10px !important;
+    }
+    .overlayChartTextContainer {
+        width: calc(100vw - 40px);
+        left: 20px;
+    }
+    .overlayChartTextContainer h2 {
+        font-size: 20px;
+        margin-bottom: 4px;
+    }
+    .overlayChartTextContainer p {
+        /* display: none; */
+        font-size: 12px;
+        width: 100%;
+        font-weight: 400;
+        font-style: italic;
+        line-height: 1.3;
+    }
+    .legendContainer {
+        width: 220px;
+        top: unset;
+        left: -110px;
+        bottom: 0px;
+        position: fixed;
+        width: 430px;
+        left: 0px;
+        font-size: 12px;
+        opacity: 0;
+    }
+    #overlayNavBar{
+        display: none !important;
+    }
+    .legendRow.before{
+        left: 35px;
+    }
+    .legendRow.decrease{
+        left: -20px;
+        top: -18px;
+    }
+    .yaxisLabelContainer{
+        left: 40px;
     }
 }

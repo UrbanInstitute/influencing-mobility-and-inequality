@@ -157,18 +157,18 @@ function showScenario(scenario, cardNum, trigger){
         d3.select("#fixedChartContainer")
         .transition()
         .duration(1400)
-        .style("left", "90px")
+        .style("left", (IS_PHONE()) ? "50px" : "90px")
     }
     else if(cardNum == 6){
         d3.select("#fixedChartContainer")
         .transition()
         .duration(1400)
-        .style("left", "100vw")
+        .style("left", "1000vw")
     }else{
          d3.select("#fixedChartContainer")
         .transition()
         .duration(function(){ return (trigger == "menu") ? 0 : 500})
-        .style("left", "-100vw")       
+        .style("left", "-1000vw")       
     }
 
 

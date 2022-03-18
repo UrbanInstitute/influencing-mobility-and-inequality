@@ -28,7 +28,10 @@ var svg = d3.select("#fixedChartContainer")
     .append("svg")
 
 function getGroupWidth(){
-    return (window.innerWidth-100)/6;
+    if(IS_PHONE()){
+        return (window.innerWidth-160)
+    }
+    else return (window.innerWidth-100)/6;
 
 }
 function getChartWidth(){
@@ -514,6 +517,37 @@ d3.select("#whiteInline")
     .on("mouseout", function(){
         d3.select(".generalTT.whiteInline").style("display","none")
     })
+d3.select("#social-twitter")
+    .on("mouseover", function(){
+        d3.select(this).attr("src","images/twitterHover.png")
+    })
+    .on("mouseout", function(){
+        d3.select(this).attr("src","images/twitter.png")
+    })
+d3.select("#social-fb")
+    .on("mouseover", function(){
+        d3.select(this).attr("src","images/fbHover.png")
+    })
+    .on("mouseout", function(){
+        d3.select(this).attr("src","images/fb.png")
+    })
+d3.select("#social-email")
+    .on("mouseover", function(){
+        d3.select(this).attr("src","images/emailHover.png")
+    })
+    .on("mouseout", function(){
+        d3.select(this).attr("src","images/email.png")
+    })
+d3.select("#social-reddit")
+    .on("mouseover", function(){
+        d3.select(this).attr("src","images/redditHover.png")
+    })
+    .on("mouseout", function(){
+        d3.select(this).attr("src","images/reddit.png")
+    })
+
+
+
 }
 var EXPLORE_DATA;
 function init(data){
@@ -543,9 +577,11 @@ function buildExploreChart(scenario){
 }
 function animateExploreChart(scenario){
 // showIntervention(scenario, EXPLORE_DATA)
+d3.select(".legendContainer").transition().style("opacity",1)
 dispatch.call("showIntervention")
 }
 function resetExploreChart(scenario){
+d3.select(".legendContainer").transition().style("opacity",0)
 dispatch.call("resetIntervention")   
 }
 

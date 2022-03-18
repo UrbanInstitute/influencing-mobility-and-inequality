@@ -617,12 +617,15 @@ margin-bottom: 30px;
 .ui-button .ui-icon{
   background-image: url(../images/menuDown.png) !important;
   background-size: cover;
-  width: 29px;
-  /* height: 30px; */
+  width: 31px;
+   height: 18px; 
   display: inline-block;
   background-position: 0 0;
   margin-left: 10px;
   top: 7px;
+}
+.ui-button.inverted .ui-icon{
+  background-image: url(../images/menuDownWhite.png) !important;
 }
 .overlaySelectMenu.inverted{
     color: #fff !important;
@@ -713,10 +716,13 @@ position: absolute;
     left: -12px;
     top: 5px;
 }
-.legendRow.before{
+.legendRow.before, .legendRow.none{
     top: -17px;
     position: relative;
-    margin-right: -29px;
+    margin-right: -17px;
+}
+.legendRow.none{
+  margin-right: -55px;
 }
 .legendRow.before span{
     border: 1px solid black;
@@ -730,6 +736,11 @@ position: absolute;
       border: 1px solid #ca5800;
       background: #ca5800;
 }
+.legendRow.none span{
+    border: 1px solid #9d9d9d;
+    background: #9d9d9d; 
+}
+
 .generalTT {
   position: absolute;
   /*background: #696969;*/
@@ -1100,7 +1111,7 @@ footer p{
     width: 100%;
   }
 }
-@media (max-height: 665px), (max-width: 1170px){
+@media (max-width: 1170px){
   .container{
     margin-left: auto;
     width: 100%;
@@ -1241,7 +1252,7 @@ footer p{
     padding: 0px;
   }
   #sections{
-    width: 300px;
+    width: 70vw;
     /*left: -20px;*/
   }
 }

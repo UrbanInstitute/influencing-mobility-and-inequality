@@ -7,6 +7,7 @@ function getSize(){
 function getIntroChartWidth(section){
   var w;
   if(IS_MOBILE()) w = window.innerWidth - 80
+  else if(IS_PHONE()) w = window.innerWidth
   else w = window.innerWidth - 520
   var margins = getIntroChartMargins(section),
     width = w - margins.left - margins.right;
@@ -24,7 +25,8 @@ function getIntroChartMargins(section){
   var mb = (section == "explore") ? 60 : 33;
   var margin;
   if(getSize() == "desktop") margin = {top: 20, right: (window.innerWidth - 1000)*.5, bottom: mb, left: 40}
-  else margin = {top: 70, right: 100, bottom: mb, left: 40}
+  else if (getSize() == "mobile") margin = {top: 70, right: 100, bottom: mb, left: 40}
+  else margin = {top: 70, right: 50, bottom: mb, left: 15}
 
   return margin;  
 }

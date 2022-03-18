@@ -164,7 +164,7 @@ border-right-color: #222;
     /*width:990px;*/
     margin:0 auto;
     /*padding-top: 110px;*/
-    border-top:1px solid #eee;
+    /*border-top:1px solid #eee;*/
 }
 
 .content{
@@ -523,7 +523,7 @@ footer h3, footer h4{
       margin-bottom: 30px;
     }
    /*.wrapper {padding-top:80px;}*/
-   .headerimage{ height:250px;}
+   /*.headerimage{ height:250px;}*/
     h1{font-size: 45px;padding-top: 100px;}
     .overhalf{width:100%;}
 
