@@ -1211,7 +1211,6 @@ d3.selectAll(".swarmArc").each(function(){
       animatePerson()
     }else{
       showNavDot(i + 1)
-      console.log(i)
       activateFunctions[i]("scroll");
     }
     });
@@ -1221,6 +1220,7 @@ d3.selectAll(".swarmArc").each(function(){
 };
 
 function showNavDot(ind){
+  console.log(ind)
   var dotSel;
   if(ind >= 10){
     if(ind == 10){
@@ -1235,7 +1235,7 @@ function showNavDot(ind){
     }
     if(getSize() == "desktop"){
       d3.select("#chapterLabelContainer")
-        .style("width","240px")
+        .style("width","100vw")
         .style("background","rgba(255,255,255,.7)")
     }else{
       d3.select("#chapterLabelContainer")
@@ -1252,13 +1252,25 @@ function showNavDot(ind){
       d3.select("#chapterLabel").text("INTRODUCTION") 
       dotSel = 1
     }
-    if(getSize() == "desktop" || ind == 9){
+    if(getSize() == "desktop" && ind == 5){
+      console.log("Asdf")
       d3.select("#chapterLabelContainer")
-        .style("width","50vw")
+        .style("width","100vw")
+        .style("background","rgba(255,255,255,.7)")
+    }
+    else if(getSize() == "desktop" || ind == 9){
+      var clw;
+      if (ind == 9){
+        if(window.innerWidth < 1284) clw = "510px"
+        else clw = (window.innerWidth - 660)  + "px"
+      }
+      else{ clw = "50vw" }
+      d3.select("#chapterLabelContainer")
+        .style("width",clw)
         .style("background","rgba(255,255,255,.7)")
     }else{
       d3.select("#chapterLabelContainer")
-        .style("width","240px")
+        .style("width","330px")
         .style("background","none")
     }
   }

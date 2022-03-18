@@ -448,13 +448,15 @@ $("select.foo")
 
         change: function( event, garb ) {
             // console.log(event, data, this.value)
-        var topic = this.value,
-            cardNum = getActiveCardNum()
-        if(cardNum == 5){
-            showIntervention(topic, data)
-        }else{
-            showScenario(topic, getActiveCardNum())
-        }
+        var topic = this.value
+        showScenario(topic, 1)
+
+            // cardNum = getActiveCardNum()
+            // if(cardNum == 5){
+            //     showIntervention(topic, data)
+            // }else{
+            //     showScenario(topic, getActiveCardNum())
+            // }
         }
  })
 

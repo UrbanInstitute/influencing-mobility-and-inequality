@@ -7,7 +7,7 @@ function getSize(){
 function getIntroChartWidth(section){
   var w;
   if(IS_MOBILE()) w = window.innerWidth - 80
-  else w = window.innerWidth - 420
+  else w = window.innerWidth - 520
   var margins = getIntroChartMargins(section),
     width = w - margins.left - margins.right;
   return width

@@ -11,6 +11,9 @@
     #scrollNavContainer{
         left: 3px;
     }
+      .pickScenario.step{
+        width: 400px;
+      }
 }
 
 /*this is when cards appear*/

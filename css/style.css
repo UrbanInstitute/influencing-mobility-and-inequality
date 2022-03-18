@@ -1,5 +1,6 @@
 body{
   font-family: "Lato";
+  overflow-x: hidden;
 }
 
 
@@ -41,10 +42,11 @@ body{
     font-weight: 300;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 32px;
 }
 #downArrowContainer{
 position: absolute;
-    top: 580px;
+    top: calc(100vh - 200px);
     animation: bob 5s infinite;
     left: calc(50% - 36px);
     font-weight: 300;
@@ -88,18 +90,32 @@ position: absolute;
 }
 @keyframes bob {
   0% {
-    top: 580px;
+    top: calc(100vh - 220px);;
   }
   50% {
-    top: 600px;
+    top: calc(100vh - 240px);;
   }
   100%{
-    top: 580px;
+    top: calc(100vh - 220px);;
   }
 }
   .pickScenario.step, .step.lastStep{
     min-height: 42vh;
     height: 42vh;
+  }
+
+  .pickScenario.step h2{
+    font-size: 36px;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 22px;
+  }
+  .pickScenario.step p{
+    font-size: 20px;
+    font-weight: normal;
+  }
+  #orRead{
+    margin-top: 24px;
   }
 /****************************************************/
 /***************  INTRO NAV    **********************/
@@ -115,6 +131,10 @@ position: absolute;
     z-index: 10;
     width: calc(50vw - 100px);
     opacity: 1;
+}
+#chapterLabel{
+      font-size: 30px;
+    font-weight: 100;
 }
 #chapterHeader{
   font-size: 14px;
@@ -565,6 +585,7 @@ position: absolute;
   position: absolute;
   left: 98px;
   top: 68px;
+  height: 143px;
   font-weight: 700;
   font-size: 18px;
 }
@@ -650,7 +671,9 @@ margin-bottom: 30px;
     color: white;
 }
 .yaxisLabelContainer{
-  position: relative;
+position: absolute;
+    top: 143px;
+    width: 130px;
 }
 .yaxisLabel{
   font-size: 16px;
@@ -669,10 +692,11 @@ margin-bottom: 30px;
   top: -15px;
 }
 .legendContainer{
-    position: absolute;
-    font-size: 14px;
-    font-weight: normal;
-    right: 100px;
+  position: absolute;
+  font-size: 14px;
+  font-weight: normal;
+  right: 100px;
+  top: 143px;
 }
 .legendRow{
     display: inline-block;
@@ -708,18 +732,21 @@ margin-bottom: 30px;
 }
 .generalTT {
   position: absolute;
-  background: #696969;
-  font-size: 16px;
+  /*background: #696969;*/
+  /*font-size: 16px;*/
   width: 180px;
   z-index: 100;
   font-weight: normal;
   font-style: italic;
-  padding: 13px;
+  padding: 20px;
   pointer-events: none;
-  color: white;
+  background: #f5f5f5;
+  border: #d2d2d2 solid 1px;
+  font-size: 14px;
+  color: #353535;
 }
 .generalTT:after {
-  right: 100%;
+/*  right: 100%;
   top: 50%;
   border: solid transparent;
   content: "";
@@ -730,7 +757,7 @@ margin-bottom: 30px;
   border-color: rgba(210, 210, 210, 0);
   border-right-color: #696969;
   border-width: 12px;
-  margin-top: -12px;
+  margin-top: -12px;*/
 }
 .whiteTt{
     display: none;
@@ -774,17 +801,17 @@ margin-bottom: 30px;
   border-bottom: 5px solid #1696d2;
 }
 .generalTT.lifetimeInline{
-  top: -38px;
-  position: absolute;
-  left: 143px;
+top: 42px;
+    position: absolute;
+    left: 0px;
   display: none;
 }
 .generalTT.whiteInline{
   position: absolute;
   display: none;
-  width: 440px;
-  left: 62px;
-  top: -75px;
+width: 323px;
+    left: -116px;
+    top: 42px;
 }
 
 /****************************************************/
@@ -907,7 +934,7 @@ p{
 #sections {
   position: relative;
   display: inline-block;
-  width: 400px;
+  width: 500px;
   top: 0px;
   z-index: 2;
   padding-bottom: 20px;
@@ -922,9 +949,11 @@ p{
   margin-bottom: 10vh;
   min-height: 80vh;
   font-family: "Lato";
-  font-size: 18px;
-  line-height: 23px;
-  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+
+  line-height: 1.37;
+  color: #353535;
 }
 .giantStep{
   margin-bottom: 30vh;
