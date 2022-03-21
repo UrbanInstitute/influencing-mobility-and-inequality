@@ -8,7 +8,7 @@
 */
 function scroller() {
 
-  var container = d3.select('body');
+  var container = d3.select('.container');
   // event dispatcher
   // var dispatch = d3.dispatch('active','resized');
 
@@ -156,7 +156,6 @@ let FIXED = false;
         }else{
           if(!FIXED){
             FIXED = true;
-            // animatePerson()
           }
 
         d3.select("#narrativeVizContainer")
@@ -243,21 +242,31 @@ let FIXED = false;
       // window.onscroll = function() { 
         // }; 
 
-  if(IS_PHONE()){
-    if(scrollTop >= d3.select("footer").node().offsetTop){
-      showNavDot(11)
+    if(IS_PHONE()){
+      if(scrollTop >= d3.select("footer").node().offsetTop){
+        showNavDot(11)
+      }
     }
-  }
 
     visPosition()
     var pos;
     if(getSize() == "desktop") pos = window.pageYOffset - containerStart  - window.innerHeight/2 + 60;
     else pos = window.pageYOffset - containerStart  + window.innerHeight/2;
     fixVis();
+    // console.log(scrollTop)
     var sectionIndex = d3.bisect(sectionPositions, pos) ;
+    if(sectionIndex == 0){
+      if(d3.select(".secondStep").node().getBoundingClientRect().top < (window.innerHeight*.5 - 60)){
+        sectionIndex = 0
+      }else{
+        sectionIndex = -1
+      }
+    }
+    // console.log(pos)
     // sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
-    if(IS_PHONE() || IS_MOBILE()) sectionIndex -= 1;
+    if((IS_PHONE() || IS_MOBILE()) && sectionIndex != -1)  sectionIndex -= 1;
     if (currentIndex !== sectionIndex) {
+      // console.log(sectionIndex)
       // @v4 you now `.call` the dispatch callback
       dispatch.call('active', this, sectionIndex);
       currentIndex = sectionIndex;

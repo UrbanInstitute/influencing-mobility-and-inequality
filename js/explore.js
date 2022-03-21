@@ -637,13 +637,6 @@ d3.select("#social-email")
     .on("mouseout", function(){
         d3.select(this).attr("src","images/email.png")
     })
-d3.select("#social-reddit")
-    .on("mouseover", function(){
-        d3.select(this).attr("src","images/redditHover.png")
-    })
-    .on("mouseout", function(){
-        d3.select(this).attr("src","images/reddit.png")
-    })
 d3.select("#sn1").on("click", function(){
     scrollToSelector(".container")
 })

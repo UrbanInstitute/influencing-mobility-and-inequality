@@ -1226,6 +1226,7 @@ d3.selectAll(".swarmArc").each(function(){
   * @param index - index of the activated section
   */
   chart.activate = function (index) {
+    console.log(index)
     activeIndex = index;
     var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
