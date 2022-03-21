@@ -1138,7 +1138,7 @@ footer p{
   }
   .step {
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: rgb(136, 136, 136) 4px 4px 16px;
+    box-shadow: rgb(210 210 210 / 90%) 4px 4px 12px 1px;
     padding: 30px;
     z-index: 3;
     min-height: 100px;

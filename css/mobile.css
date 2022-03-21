@@ -151,6 +151,9 @@
         width: 100vw;
         top: 50vh;
     }
+    .pickScenario.step p {
+        font-size: 18px;
+    }
     .pickScenario.step h2{
         font-size: 30px;
     }
