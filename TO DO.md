@@ -1,8 +1,15 @@
-Intro timeline
-Intro social rollover
-Intro axis label
-Intro simple intervention
-Intro hundreds of dots...
-Upper left section progress
-Style scenario selection
-add inline hyperlinks
+- Jerry need link to pdf
+- Sam
+
+
+
+
+- chart white tooltips
+- chart y tooltip
+- clickable dot menu thing x2
+- logos
+- gif
+- scenarios landing img
+- scenarios bg img
+- social links
+- x-browser

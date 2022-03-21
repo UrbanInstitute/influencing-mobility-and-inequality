@@ -26,7 +26,7 @@ function getIntroChartMargins(section){
   var margin;
   if(getSize() == "desktop") margin = {top: 20, right: (window.innerWidth - 1000)*.5, bottom: mb, left: 40}
   else if (getSize() == "mobile") margin = {top: 70, right: 100, bottom: mb, left: 40}
-  else margin = {top: 70, right: 50, bottom: mb, left: 15}
+  else margin = {top: 70, right: 90, bottom: mb, left: 15}
 
   return margin;  
 }

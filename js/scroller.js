@@ -30,7 +30,8 @@ function scroller() {
     d3.select("#narrativeVizContainer")
       .style("left", function(){
         if(IS_PHONE()){
-          return ( (window.innerWidth - PHONE_VIS_WIDTH - PHONE_MARGIN.left - PHONE_MARGIN.right)*.5 ) + "px"
+          // return ( (window.innerWidth - PHONE_VIS_WIDTH - PHONE_MARGIN.left - PHONE_MARGIN.right)*.5 ) + "px"
+          return "0px"
         }
         if(IS_MOBILE()){
           return ( (window.innerWidth - VIS_WIDTH - MARGIN.left - MARGIN.right - 40)*.5 ) + "px"
@@ -242,7 +243,11 @@ let FIXED = false;
       // window.onscroll = function() { 
         // }; 
 
-
+  if(IS_PHONE()){
+    if(scrollTop >= d3.select("footer").node().offsetTop){
+      showNavDot(11)
+    }
+  }
 
     visPosition()
     var pos;

@@ -1,7 +1,8 @@
-
+var phoneChartInd = 0;
 
 
 function initHistogram(){
+
 ///////////////////////////////////////////////////
 const BIN_WIDTH = 100000;
 const UPPER_BOUND = 2000000;
@@ -261,7 +262,8 @@ function buildScales(data){
 
     xAxis = d3.axisBottom(z).tickSizeOuter(0).tickSizeInner(6);
 
-    yAxis = d3.axisLeft(y).ticks(h / 40)
+    yAxis = d3.axisLeft(y)
+    .ticks(h / 40)
     .tickSizeInner(-w)
     .tickFormat(function(d){
         // return d
@@ -295,6 +297,16 @@ function buildHistogram(data){
     svg.attr("width", w)
         .attr("height", h)
 
+    if(IS_PHONE()){
+            svg.append("rect")
+        .attr("x",0)
+        .attr("y",0)
+        .attr("width",margin.left-2)
+        .attr("height",h-margin.top-margin.bottom)
+        .attr("fill","#fff")
+    }
+
+
     svg.append("g")
         .attr("transform", `translate(${margin.left},0)`)
         .attr("class", "y axis")
@@ -324,6 +336,7 @@ function buildHistogram(data){
         .enter()
         .append("g")
         .attr("transform", d => `translate(${z(d)},0)`)
+        .attr("class", "exploreG")
 
     g.selectAll(".dot")
         .data(D => data.filter(d => d.demographic == D))
@@ -340,46 +353,78 @@ function buildHistogram(data){
         .attr("y", h-margin.bottom + 23)
         .attr("width", 40)
         .attr("height", 5)
-        .attr("class", "menUnder " + getActiveScenario())
+        .attr("class", "menUnder axisRect " + getActiveScenario())
         .style("fill", "#a2d4ec")
+        .attr("transform","translate(0,0)")
     svg.append("rect")
         .attr("x", z("White women+") + gw/2 - 62)
         .attr("y", h-margin.bottom + 23)
         .attr("width", 40)
         .attr("height", 5)
-        .attr("class", "womenUnder " + getActiveScenario())
+        .attr("class", "womenUnder axisRect " + getActiveScenario())
         .style("fill", "#a2d4ec")
+        .attr("transform","translate(0,0)")
 
     svg.append("rect")
+        .attr("class","axisRect")
         .attr("x", margin.left)
         .attr("y", h-margin.bottom)
         .attr("width", gw)
         .attr("height", 20)
+        .attr("transform","translate(0,0)")
         .style("fill", "rgba(0,0,0,0)")
         .style("cursor","pointer")
         .on("mouseover", function(){
-            d3.select(".whiteTt").style("display", "block").classed("men", true)
+
+            d3.select(".whiteTt")
+                .style("display", "block")
+                .classed("men", true)
+                .style("left", function(){
+                    return (d3.select(".menUnder").node().getBoundingClientRect().left - 160) + "px"
+                })
+
             d3.selectAll(".menUnder").style("fill","#1696d2")
         })
         .on("mouseout", function(){
-            d3.select(".whiteTt").style("display", "none").classed("men", false)
+            d3.select(".whiteTt")
+            .style("display", "none").classed("men", false)
             d3.selectAll(".menUnder").style("fill","#a2d4ec")
         })
     svg.append("rect")
+        .attr("class","axisRect")
         .attr("x", margin.left + gw)
         .attr("y", h-margin.bottom)
         .attr("width", gw)
         .attr("height", 20)
+        .attr("transform","translate(0,0)")
         .style("fill", "rgba(0,0,0,0)")
         .style("cursor","pointer")
         .on("mouseover", function(){
-            d3.select(".whiteTt").style("display", "block").classed("women", true)
+            d3.select(".whiteTt")
+                .style("display", "block")
+                .classed("women", true)
+                .style("left", function(){
+                    return (d3.select(".womenUnder").node().getBoundingClientRect().left - 160) + "px"
+                })
             d3.selectAll(".womenUnder").style("fill","#1696d2")
         })
         .on("mouseout", function(){
             d3.select(".whiteTt").style("display", "none").classed("women", false)
             d3.selectAll(".womenUnder").style("fill","#a2d4ec")
         })
+
+
+    if(IS_PHONE()){
+            svg.append("rect")
+        .attr("x",0)
+        .attr("y",0)
+        .attr("width",margin.left-2)
+        .attr("height",h-margin.top-margin.bottom)
+        .attr("fill","#fff")
+        svg.node().appendChild(svg.select(".y.axis").node())
+    }
+
+
 }
 
 function highlightBin(d, a, b){
@@ -432,7 +477,7 @@ $("#pickTopic")
   classes: {
     "ui-selectmenu-button": "mainSelectMenu"
   },
-        change: function( event, data ) {
+        select: function( event, data ) {
             // console.log(event, data, this.value)
         var topic = this.value
         showScenario(topic, 1)
@@ -453,7 +498,7 @@ $("select.foo")
             // console.log(event, data, this.value)
         var topic = this.value
         showScenario(topic, 1)
-
+        phoneChartInd = 0;
             // cardNum = getActiveCardNum()
             // if(cardNum == 5){
             //     showIntervention(topic, data)
@@ -490,7 +535,61 @@ d3.selectAll(".overlayNavArrow")
         var scenario = getActiveScenario(),
             increment = (d3.select(this).attr("id") == "leftNav") ? -1 : 1;
             cardNum = +getActiveCardNum()+increment
-        showScenario(scenario, cardNum, "navArrow")
+        if(IS_PHONE() && getActiveCardNum() == 5){
+            if(phoneChartInd == 0 && increment == -1){
+                showScenario(scenario, 4, "navArrow")
+            }
+            else if(phoneChartInd == 5 && increment == 1){
+                showScenario(scenario, 6, "navArrow")
+            }
+            else{
+                phoneChartInd += increment;
+                d3.selectAll(".exploreG")
+                    .transition()
+                    .attr("transform", function(){
+                        var trx = +d3.select(this).attr("transform").split(",")[0].replace("translate(","")
+                        return "translate(" + (trx - increment*z.bandwidth()) + ",0)"
+
+                    })
+                d3.selectAll(".x.axis g.tick")
+                    .transition()
+                    .attr("transform", function(){
+                        var trx = +d3.select(this).attr("transform").split(",")[0].replace("translate(","")
+                        return "translate(" + (trx - increment*z.bandwidth()) + ",0)"
+
+                    })
+
+                d3.selectAll(".axisRect")
+                    .transition()
+                    .attr("transform", function(){
+                        var trx = +d3.select(this).attr("transform").split(",")[0].replace("translate(","")
+                        return "translate(" + (trx - increment*z.bandwidth()) + ",0)"
+
+                    })
+
+            }
+
+        }else{
+            if(IS_PHONE() && getActiveCardNum() == 6 && increment == -1){
+                showScenario(scenario, cardNum, "navArrow")
+            }else{
+                phoneChartInd = 0;
+                d3.selectAll(".exploreG")
+                    .transition()
+                    .attr("transform", d => `translate(${z(d)},0)`)
+                d3.selectAll(".x.axis")
+                    .call(xAxis)
+                    .selectAll(".tick text")
+                    .call(wrap, z.bandwidth())
+                d3.selectAll(".axisRect")
+                    .transition()
+                    .attr("transform", "translate(0,0)")
+                showScenario(scenario, cardNum, "navArrow")
+            }
+
+        }
+
+
 
     })
 d3.select("#closeOverlay")
@@ -545,6 +644,25 @@ d3.select("#social-reddit")
     .on("mouseout", function(){
         d3.select(this).attr("src","images/reddit.png")
     })
+d3.select("#sn1").on("click", function(){
+    scrollToSelector(".container")
+})
+d3.select("#sn2").on("click", function(){
+    scrollToSelector(".pickScenario.step")
+})
+d3.select("#sn3").on("click", function(){
+    scrollToSelector(".endText")
+})
+d3.select("#sn4").on("click", function(){
+    scrollToSelector("footer")
+})
+
+
+function scrollToSelector(selector){
+    var offset = (selector == ".pickScenario.step") ? 700 : -150;
+    var top = d3.select(selector).node().offsetTop
+    $("html, body").animate({ scrollTop: top + offset })
+}
 
 
 
@@ -577,11 +695,12 @@ function buildExploreChart(scenario){
 }
 function animateExploreChart(scenario){
 // showIntervention(scenario, EXPLORE_DATA)
-d3.select(".legendContainer").transition().style("opacity",1)
+d3.select(".overlayCard." + scenario + " .legendContainer").transition().style("opacity",1)
 dispatch.call("showIntervention")
 }
 function resetExploreChart(scenario){
-d3.select(".legendContainer").transition().style("opacity",0)
+
+d3.selectAll(".legendContainer").transition().style("opacity",0)
 dispatch.call("resetIntervention")   
 }
 

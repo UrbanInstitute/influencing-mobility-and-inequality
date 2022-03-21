@@ -8,6 +8,7 @@ function bindGlobalData(introData, twoDotData, exploreData){
 }
 
 function closeOverlay(){
+    phoneChartInd = 0;
     d3.select("#allOverlays")
         .transition()
         .duration(500)
@@ -22,10 +23,11 @@ function closeOverlay(){
 
 }
 function showScenario(scenario, cardNum, trigger){
+    console.log("asd")
     d3.select(".foo").node().value = scenario
     $(".foo").selectmenu("refresh")
 
-
+// console.log(cardNum)
     buildExploreChart(scenario);
     if(+cardNum == 5) animateExploreChart(scenario);
     else resetExploreChart()
@@ -58,6 +60,27 @@ function showScenario(scenario, cardNum, trigger){
                     .style("opacity",1)
                 d3.select(".pickScenario.step").node().scrollIntoView()
             })
+
+            d3.select("#rightNav")
+                .style("pointer-events", "visible")
+            d3.select("#leftNav")
+                .style("pointer-events", "none")
+            d3.select("#rightNav div")
+                .transition()
+                .duration(1400)
+                .style("opacity",.75)
+            d3.select("#rightNav img")
+                .transition()
+                .duration(1400)
+                .style("opacity",1)
+            d3.select("#leftNav div")
+                .transition()
+                .duration(1400)
+                .style("opacity",0)
+            d3.select("#leftNav img")
+                .transition()
+                .duration(1400)
+                .style("opacity",0)
 
     }else{
         d3.select("#overlayImage")

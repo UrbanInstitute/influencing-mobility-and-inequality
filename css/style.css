@@ -57,6 +57,7 @@ position: absolute;
     font-weight: 400;
 }
 #socialContainer{
+  width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto;
   margin-top: 21px;
@@ -341,6 +342,7 @@ position: absolute;
   font-weight: 700;
   text-transform: uppercase;
   padding: 12px 16px;
+  width: -moz-fit-content;
   width: fit-content;
   border: 2px solid black;
   position: absolute;
@@ -604,6 +606,7 @@ position: absolute;
     font-weight: 300;
     text-transform: uppercase;
     border-bottom: 3px solid #fdbf11;
+    width: -moz-fit-content !important;
     width: fit-content !important;
     padding: 0px;
     padding-bottom: 7px;
@@ -633,6 +636,7 @@ margin-bottom: 30px;
 .ui-selectmenu-text{
   padding: 0px;
   margin: 0px;
+  width: -moz-fit-content !important;
   width: fit-content !important;
 }
 /****************************************************/
@@ -691,8 +695,8 @@ position: absolute;
 }
 .yaxisTt.generalTT{
   display: none;
-  left: 140px;
-  top: -15px;
+  left: -28px;
+  top: 45px;
 }
 .legendContainer{
   position: absolute;
@@ -773,34 +777,19 @@ position: absolute;
 .whiteTt{
     display: none;
     position: fixed;
-    bottom: 120px;
+    bottom: 106px;
     width: 380px;
-    left: 200px;
     z-index: 100;
-    /* height: 100px; */
-    background: #696969;
-    color: white;
-    font-size: 14px;
     font-style: italic;
-    padding: 13px;
     pointer-events: none;
+    padding: 20px;
+    background: #f5f5f5;
+    border: #d2d2d2 solid 1px;
+    font-size: 14px;
+    color: #353535;
 }
-.whiteTt:after {
-  top: 100%;
-  left: 20%;
-  border: solid transparent;
-  content: "";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(210, 210, 210, 0);
-  border-top-color: #696969;
-  border-width: 12px;
-  margin-left: -12px;
-}
+
 .whiteTt.women:after{
-  left: 80%;
 }
 
 #liftetimeEarningsInline, #whiteInline{
@@ -1055,7 +1044,23 @@ footer p{
 .explore.medianTextG{
   display: none;
 }
-
+#logosContainers{
+  margin-top: 40px;
+}
+#logosContainers img{
+  display: inline-block;
+  height: 84px;
+  margin-right: 54px;
+  margin-bottom: 50px;
+}
+#urbanLogo{
+  margin-right: 0px;
+}
+#logosContainers img#sgLogo{
+  height: 70px;
+  position: relative;
+  top: -8px;
+}
 
 
 /********header (below urban menu)**********/

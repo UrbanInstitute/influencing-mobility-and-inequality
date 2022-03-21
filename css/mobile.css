@@ -95,6 +95,9 @@
         width: 80vw !important;
         max-width: 715px;
     }
+    #logosContainers img{
+        margin-right: 42px;
+    }
 }
 @media (max-width: 1000px){
     .overlayTextContainer{
@@ -146,6 +149,7 @@
     }
     .pickScenario.step{
         width: 100vw;
+        top: 50vh;
     }
     .pickScenario.step h2{
         font-size: 30px;
@@ -238,5 +242,35 @@
     }
     .yaxisLabelContainer{
         left: 40px;
+    }
+    .whiteTt{
+        left: 5vw !important;
+        width: 90vw !important;
+    }
+    .pathImg {
+        width: 90vw;
+        left: 34vw;
+        margin-left: 0px !important;
+        left: 0px;
+    }
+    #person {
+        width: 90vw;
+        left: 5vw;
+        margin-left: 0px;
+        top: calc(50vh - 65vw);
+    }
+    #narrativeVizContainer svg{
+        left: 20px !important;
+        position: absolute;
+    }
+    footer .content, .endText{
+        width: 70vw !important;
+        padding: 0px;
+    }
+
+}
+@media (max-height: 850px){
+    .y.axis .tick line{
+        stroke-opacity: 0 !important;
     }
 }

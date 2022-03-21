@@ -141,7 +141,28 @@ var scrollVis = function () {
       .style("opacity",0)
 
 
-    var personcx = (getSize() == "desktop") ? 221 : getIntroChartWidth()*.5 +21
+    if(IS_PHONE()){
+      svg.append("circle")
+        .attr("id", "personInnerCircle")
+        .attr("class", "stepPerson")
+        .attr("r", .3*window.innerWidth)
+        .attr("cx", .5*window.innerWidth - 27)
+        .attr("cy", .5*window.innerHeight - .235*window.innerWidth + 22)
+        .style("fill", "none")
+        .style("stroke", "#000")
+        .attr("stroke-width", "3px")
+      svg.append("circle")
+        .attr("id", "personOuterCircle")
+        .attr("class", "stepPerson")
+        .attr("r", .3*window.innerWidth)
+        .attr("cx", .5*window.innerWidth - 27)
+        .attr("cy", .5*window.innerHeight - .235*window.innerWidth + 22)
+        .style("fill", "none")
+        .style("stroke", "#ffffff")
+        .attr("stroke-width", "0px")
+
+    }else{
+          var personcx = (getSize() == "desktop") ? 221 : getIntroChartWidth()*.5 +21
     svg.append("circle")
       .attr("id", "personInnerCircle")
       .attr("class", "stepPerson")
@@ -150,7 +171,7 @@ var scrollVis = function () {
       .attr("cy", 311)
       .style("fill", "none")
       .style("stroke", "#000")
-      .style("stroke-width", 3)
+      .attr("stroke-width", "3px")
     svg.append("circle")
       .attr("id", "personOuterCircle")
       .attr("class", "stepPerson")
@@ -159,7 +180,9 @@ var scrollVis = function () {
       .attr("cy", 311)
       .style("fill", "none")
       .style("stroke", "#ffffff")
-      .style("stroke-width", 3)
+      .attr("stroke-width", "3px")
+
+    }
 
 
       dHigh = twoDotData[0]
@@ -173,14 +196,14 @@ var scrollVis = function () {
       .attr("class", d => "introAxis step0 ia" + d)
       .style("fill","none")
       .style("stroke","#9d9d9d")
-      .style("stroke-width",2)
+      .attr("stroke-width","2px")
       .attr("stroke-dasharray", d=> (d==4) ? "" : 12)
       .attr("x1", d => introX(d))
       .attr("x2", d => introX(d))
       .attr("y1", introY(100))
       .attr("y2", introY(100))
 
-
+    var introDotR = (IS_PHONE()) ? 8 : 13
     svg.selectAll(".dotInt")
       .data([1,2,3])
       .enter()
@@ -188,8 +211,8 @@ var scrollVis = function () {
       .attr("class",d => "dotInt step0 di" + d )
       .style("fill","#fdbf11")
       .style("stroke","#000")
-      .style("stroke-width","4px")
-      .attr("r",13)
+      .attr("stroke-width","4px")
+      .attr("r",introDotR)
       .attr("cx", introX(1) )
       .attr("cy", introY(dInt.e1) )
       .style("opacity",0)
@@ -201,7 +224,7 @@ var scrollVis = function () {
       .attr("class",d => "dotHigh step0 dh" + d )
       .style("fill","#1696d2")
       .style("stroke","none")
-      .attr("r",13)
+      .attr("r",introDotR)
       .attr("cx", introX(0) )
       .attr("cy", introY(dHigh.e0) )
       .style("opacity",0)
@@ -214,7 +237,7 @@ var scrollVis = function () {
       .attr("class",d => "dotLow step0 dl" + d )
       .style("fill","#fdbf11")
       .style("stroke","none")
-      .attr("r",13)
+      .attr("r",introDotR)
       .attr("cx", introX(0) )
       .attr("cy", introY(dLow.e0) )
       .style("opacity",0)
@@ -238,7 +261,7 @@ var scrollVis = function () {
       })
       .style("fill", "none")
       .style("stroke", "black")
-      .style("stroke-width", 2)
+      .attr("stroke-width", "2px")
       .style("opacity",0)
       .attr("marker-end","url(#arrowHead)")
 
@@ -261,7 +284,7 @@ var scrollVis = function () {
       })
       .style("fill", "none")
       .style("stroke", "black")
-      .style("stroke-width", 2)
+      .attr("stroke-width", "2px")
       .style("opacity",0)
       .attr("marker-end","url(#arrowHead)")
 
@@ -284,7 +307,7 @@ var scrollVis = function () {
       })
       .style("fill", "none")
       .style("stroke", "black")
-      .style("stroke-width", 2)
+      .attr("stroke-width", "2px")
       .style("opacity",0)
       .attr("marker-end","url(#arrowHead)")
 
@@ -298,7 +321,7 @@ var scrollVis = function () {
       .attr('cx', introX(-1))
       .attr('cy', d => introY(d.earnings0))
       .style("fill", d => (d.dotColor == "b") ? "#1696d2" : "#fdbf11")
-      .style("stroke-width",0)
+      .attr("stroke-width","0px")
       .style("stroke","#000000")
       .attr("r", SWARM_DOT_R)
 
@@ -331,7 +354,7 @@ endX, endY
 })
 .style("fill", "none")
 .attr("stroke", "#000000")
-.attr("stroke-width", 1)
+.attr("stroke-width", "1px")
 // .attr("marker-end","url(#arrowHead)")
 .style("opacity",0)
 // .attr("data-length",0)
@@ -342,8 +365,8 @@ d3.selectAll(".swarmArc").each(function(){
   d3.select(this)
   .transition()
   .duration(0)
-  .style("stroke-dasharray", l + " " + l)
-.style("stroke-dashoffset", l)
+  .attr("stroke-dasharray", l + " " + l)
+.attr("stroke-dashoffset", l)
 .attr("data-length",l)
 
 })
@@ -358,7 +381,7 @@ svg.selectAll(".startArcDot")
 // .transition()
 // .duration(INTRO_DUR_TWODOT)
 // .delay(INTRO_DEL_TWODOT)
-// .style("stroke-width",0)
+// .attr("stroke-width",0)
 // .style("stroke","#ff0000")
 .style("stroke", "none")
 .style("fill", "#fdbf11")
@@ -450,6 +473,7 @@ svg.selectAll(".startArcDot")
         introY = getIntroY()
 
     var s = 0.7
+    var scooth = (IS_PHONE()) ? 3 : 15;
     var selector = (isInt) ? ".arrowInt.arrow" + ind : ".introArrow.arrow" + ind
     d3.selectAll(selector)
       .transition()
@@ -500,7 +524,7 @@ svg.selectAll(".startArcDot")
         " " +
         p[1] +
         " L " +
-        (introX(+d + 0.7) - 13 - 15) + 
+        (introX(+d + 0.7) - 13 - scooth) + 
         " " +
         introY(dat["e" + (ind+1)])
         return d3.interpolatePath(previous, current);
@@ -525,11 +549,11 @@ svg.selectAll(".startArcDot")
           " " +
           p[1] +
           " L " +
-          (introX(+d + 0.7) - 13 - 15) + 
+          (introX(+d + 0.7) - 13 - scooth) + 
           " " +
           introY(dat["e" + (ind+1)]) +
           " L " +
-          (introX(+d + 1) - 13 - 15) + 
+          (introX(+d + 1) - 13 - scooth) + 
           " " +
           introY(dat["e" + (ind+1)])
 
@@ -783,7 +807,7 @@ svg.selectAll(".startArcDot")
     d3.selectAll("#introAxisLabel")
       .transition()
       .style("opacity",1)
-
+    var scooth = (IS_PHONE()) ? 3 : 15;
     for(var i = 0; i < 5; i++){
       var finalDotOpacity = (i < 2 ) ? 1 : .4
       var finalArrowOpacity = (i < 1) ? 1 : .3
@@ -806,11 +830,11 @@ svg.selectAll(".startArcDot")
             " " +
             p[1] +
             " L " +
-            (introX(+d + 0.7) - 13 - 15) + 
+            (introX(+d + 0.7) - 13 - scooth) + 
             " " +
             introY(dat["e" + (d+1)]) +
             " L " +
-            (introX(+d + 1) - 13 - 15) + 
+            (introX(+d + 1) - 13 - scooth) + 
             " " +
             introY(dat["e" + (d+1)])   
             return d3.interpolatePath(previous, current);
@@ -836,11 +860,11 @@ svg.selectAll(".startArcDot")
             " " +
             p[1] +
             " L " +
-            (introX(+d + 0.7) - 13 - 15) + 
+            (introX(+d + 0.7) - 13 - scooth) + 
             " " +
             introY(dat["e" + (d+1)]) +
             " L " +
-            (introX(+d + 1) - 13 - 15) + 
+            (introX(+d + 1) - 13 - scooth) + 
             " " +
             introY(dat["e" + (d+1)])   
             return d3.interpolatePath(previous, current);
@@ -962,7 +986,7 @@ svg.selectAll(".startArcDot")
       .duration(RESET_DURATION)
       .attr("cx", introX(-1))
       .attr("cy", d => introY(d.earnings0))
-      .style("stroke-width",0)
+      .attr("stroke-width","0px")
       .style("stroke","#000000")
       .attr("r",SWARM_DOT_R)
       .transition()
@@ -1013,8 +1037,8 @@ d3.selectAll(".swarmArc").each(function(){
   d3.select(this)
   .transition()
   .duration(RESET_DURATION)
-  .style("stroke-dasharray", l + " " + l)
-  .style("stroke-dashoffset", l)
+  .attr("stroke-dasharray", l + " " + l)
+  .attr("stroke-dashoffset", l)
 })
 
 
@@ -1059,7 +1083,7 @@ d3.selectAll(".startArcDot")
         .attr("cy", d => introY(d.earnings1))
         .transition()
         .duration(RESET_DURATION)
-        .style("stroke-width", d => (d.dotColor == "yI") ? 3 : 0)
+        .attr("stroke-width", d => (d.dotColor == "yI") ? "3px" : "0px")
         .transition()
         .duration(SWARM_DOT_DUR)
         // .ease(d3.easeLinear)
@@ -1107,7 +1131,7 @@ d3.selectAll(".startArcDot")
     // .ease(d3.easeLinear)
       .attr("cx", d => introX(4) + (2*SWARM_DOT_R*d.earnings4IntInd) + 10)
       .attr("cy", d => (d.dotColor == "yI") ?  introY(d.earnings4Int) : introY(d.earnings4))
-      .style("stroke-width", d => (d.dotColor == "yI") ? 3 : 0)
+      .attr("stroke-width", d => (d.dotColor == "yI") ? "3px" : "0px")
       // .style("fill", d => (d.dotColor == "yI") ? "#" : 0)
       .transition()
       // .delay()
@@ -1124,13 +1148,13 @@ d3.selectAll(".swarmArc").each(function(D,I){
   d3.select(this)
   .transition()
   // .duration()
-.style("stroke-dashoffset", l)
+.attr("stroke-dashoffset", l)
 .style("opacity",1)
 .transition()
 .ease(d3.easeLinear)
 .delay(function(d,i) {  return I*10 + 1200 })
 .duration(1000)
-.style("stroke-dashoffset", 0)
+.attr("stroke-dashoffset", 0)
 // .attrTween("stroke-dashoffset", function(d,i){
 //   // console.log(i)
 //   var arcLength = d3.select(this).attr("data-length")
@@ -1168,8 +1192,8 @@ d3.selectAll(".swarmArc").each(function(){
   d3.select(this)
   .transition()
   .duration(RESET_DURATION)
-  .style("stroke-dasharray", l + " " + l)
-  .style("stroke-dashoffset", l)
+  .attr("stroke-dasharray", l + " " + l)
+  .attr("stroke-dashoffset", l)
 })
 
 
@@ -1220,7 +1244,6 @@ d3.selectAll(".swarmArc").each(function(){
 };
 
 function showNavDot(ind){
-  console.log(ind)
   var dotSel;
   if(ind >= 10){
     if(ind == 10){
@@ -1287,29 +1310,58 @@ function animatePerson(){
     .style("opacity",0)
 
 
+
+if(IS_PHONE()){
   d3.select("#personInnerCircle")
     .transition()
     .duration(RESET_DURATION)
+    .attr("r", .3*window.innerWidth)
+    .attr("stroke-width", "3px")
+    .style("opacity",1)
+    .transition()
+    .duration(1200)
+    .attr("r",.015*window.innerWidth)
+    .attr("stroke-width",.015*window.innerWidth*2 + "px")
+  d3.select("#personOuterCircle")
+    .transition()
+    .duration(RESET_DURATION)
+    .attr("r", .3*window.innerWidth)
+    .attr("stroke-width", "0px")
+    .style("opacity",1)
+    .transition()
+    .duration(1200)
+      .attr("r",.32*window.innerWidth)
+      .attr("stroke-width", (.6*window.innerWidth) + "px")
+      .transition()
+      .duration(10)
+        .style("opacity",0)
+}else{
+    d3.select("#personInnerCircle")
+    .transition()
+    .duration(RESET_DURATION)
     .attr("r", 163)
-    .style("stroke-width", 3)
+    .attr("stroke-width", "3px")
     .style("opacity",1)
     .transition()
     .duration(1200)
     .attr("r",11.5)
-    .style("stroke-width",25)
+    .attr("stroke-width","23px")
   d3.select("#personOuterCircle")
     .transition()
     .duration(RESET_DURATION)
     .attr("r", 166)
-    .style("stroke-width", 3)
+    .attr("stroke-width", "3px")
     .style("opacity",1)
     .transition()
     .duration(1200)
       .attr("r",125)
-      .style("stroke-width", 200)
+      .attr("stroke-width", "200px")
       .transition()
       .duration(10)
         .style("opacity",0)
+}
+
+
   d3.select("#person")
     .transition()
     .duration(RESET_DURATION)
