@@ -24,9 +24,9 @@ def getChange(e, v):
     diff = float(v) - float(e)
     # print(diff)
 
-    if(diff > 0 and diff > 2):
+    if(diff > 0 and diff > 100):
         v = "1"
-    elif(diff < 0 and diff < -2):
+    elif(diff < 0 and diff < -100):
         v = "-1"
     else:
         v = "0"
