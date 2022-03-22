@@ -827,6 +827,7 @@ width: 323px;
 }
 .step.lastStep{
   /*min-height: 20vh;*/
+  pointer-events: none;
 }
 .step.firstStep{
   min-height: 0px;
